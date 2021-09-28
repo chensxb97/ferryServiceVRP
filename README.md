@@ -1,4 +1,4 @@
-**Modelling the scheduling and routing of ferry service operations as a Vehicle Routing Problem with Time Windows with Simultaneous Delivery and Pickup**
+# Optimised Scheduling and routing system ferry service operations
 
 **Development Roadmap**
 1. Basic VRPTW Implementation (Done)

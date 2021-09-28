@@ -1,4 +1,3 @@
-#Final Year Project# 
 **Modelling the scheduling and routing of ferry service operations as a VRPTW**
 
 **Development Roadmap**

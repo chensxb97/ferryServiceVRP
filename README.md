@@ -7,8 +7,3 @@
 1. VRPTW Implementation
 2. VRPTW-SDP Implementation
 
-
-#### VRPTW Implementation
-
-
-#### VRPTW-SDP

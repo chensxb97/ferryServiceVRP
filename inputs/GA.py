@@ -1,7 +1,6 @@
 import sys
 sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/site-packages')
 
-
 import argparse
 import datetime
 import io

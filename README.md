@@ -54,7 +54,7 @@ python linear_programming.py
 
 Genetic Algorithm
 ```python
-python ga.py
+python GA.py
 ```
 
 #### 3. Run scheduling system, which runs optimises the sets of routes for the following test case.

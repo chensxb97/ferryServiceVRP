@@ -14,8 +14,8 @@ import time
 
 from csv import DictWriter
 from deap import base, creator, tools
-from ga_tools import ind2route, print_route, eval_vrp, cx_partialy_matched, mut_inverse_indexes, draw_ga_solution
-from utils import compute_dist_matrix, separate_tasks, Location, Edge_List, Color
+from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
+from utils import Color, Edges, Locations, computeDistMatrix, computeTravelTimeMatrix, separateTasks
 
 MUT_PROB = 0.1
 CX_PROB = 0.85
@@ -23,13 +23,13 @@ GENERATION = 80
 POPULATION_SIZE = 100
 Capacity = 14
 
-Map_Graph = nx.Graph()
-Map_Graph.add_weighted_edges_from(Edge_List)
+MapGraph = nx.Graph()
+MapGraph.add_weighted_edges_from(Edges)
 
-def run_gavrp(df, unit_cost, init_cost,  ind_size, pop_size, \
+def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     cx_pb, mut_pb, n_gen, export_csv=False, customize_data=False):
-    fitness_history = []
-    gen_history = []
+    fitnessHist = []
+    genHistory = []
 
     creator.create('FitnessMax', base.Fitness, weights=(1.0,))
     creator.create('Individual', list, fitness=creator.FitnessMax)
@@ -40,11 +40,11 @@ def run_gavrp(df, unit_cost, init_cost,  ind_size, pop_size, \
     toolbox.register('individual', tools.initIterate, creator.Individual, toolbox.indexes)
     toolbox.register('population', tools.initRepeat, list, toolbox.individual)
     # Operator registering
-    toolbox.register('evaluate', eval_vrp, df=df, unit_cost=unit_cost, \
+    toolbox.register('evaluate', evalVRP, df=df, unit_cost=unit_cost, \
                      init_cost=init_cost)#, wait_cost=wait_cost, delay_cost=delay_cost
     toolbox.register('select', tools.selRoulette)
-    toolbox.register('mate', cx_partialy_matched)
-    toolbox.register('mutate', mut_inverse_indexes)
+    toolbox.register('mate', cxPartiallyMatched)
+    toolbox.register('mutate', mutInverseIndex)
     pop = toolbox.population(n=pop_size)
     # Results holders for exporting results to CSV file
     csv_data = []
@@ -54,7 +54,7 @@ def run_gavrp(df, unit_cost, init_cost,  ind_size, pop_size, \
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     print(f'  Evaluated {len(pop)} individuals')
-    dist_matrix =compute_dist_matrix(df, Map_Graph)
+    distMatrix =computeDistMatrix(df, MapGraph)
     # Begin the evolution
     for gen in range(n_gen):
         print(f'-- Generation {gen} --')
@@ -101,14 +101,14 @@ def run_gavrp(df, unit_cost, init_cost,  ind_size, pop_size, \
                 'std_fitness': std,
             }
             csv_data.append(csv_row)
-        fitness_history.append(1/mean)
-        gen_history.append(gen)
-    #plt.scatter(gen_history, fitness_history)
+        fitnessHist.append(1/mean)
+        genHistory.append(gen)
+    #plt.scatter(genHistory, fitnessHist)
     print('-- End of (successful) evolution --')
     best_ind = tools.selBest(pop, 1)[0]
     print(f'Best individual: {best_ind}')
     print(f'Fitness: {best_ind.fitness.values[0]}')
-    print_route(ind2route(best_ind, df, dist_matrix))
+    printRoute(ind2Route(best_ind, df, distMatrix))
     print(f'Total cost: {1 / (best_ind.fitness.values[0])}')
     return best_ind
 
@@ -117,36 +117,40 @@ def main():
     argparser.add_argument('--file', metavar='f', default='M1', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     args = argparser.parse_args()
-    img = plt.imread("Singapore-Anchorages-Chart.png")
+    # img = plt.imread("Singapore-Anchorages-Chart.png")
+    img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.jpg")
     fig, ax = plt.subplots()
     ax.imshow(img)
-    dir_name = os.path.dirname(os.path.realpath('__file__'))
+    # dirName = os.path.dirname(os.path.realpath('__file__'))
+    dirName = os.path.dirname(os.path.abspath('__file__'))
     file = args.file
-    file_name = os.path.join(dir_name, 'SampleDataset', file + '.csv')
-    Map_Graph = nx.Graph()
-    Map_Graph.add_weighted_edges_from(Edge_List)
-    df = pd.read_csv(file_name)
+    fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
+    MapGraph = nx.Graph()
+    MapGraph.add_weighted_edges_from(Edges)
+    df = pd.read_csv(fileName)
     initial_time = time.time()
-    df_MSP, fleetsize_MSP, df_West, fleetsize_West = separate_tasks(df, 5)
-    dist_matrix_1 =compute_dist_matrix(df_West, Map_Graph)
-    dist_matrix_2 =compute_dist_matrix(df_MSP, Map_Graph)
-    best_ind1 = run_gavrp(df_West, 1, 0, len(df_West)+1, POPULATION_SIZE,
+
+    df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df, 5)
+    distMatrix1 =computeDistMatrix(df_West, MapGraph)
+    distMatrix2 =computeDistMatrix(df_MSP, MapGraph)
+    best_ind1 = runGA(df_West, 1, 0, len(df_West)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
-    route1 = ind2route(best_ind1, df_West, dist_matrix_1)
-    draw_ga_solution(route1, df_West, ax)
+    route1 = ind2Route(best_ind1, df_West, distMatrix1)
+    drawGaSolution(route1, df_West, ax)
     mid_time = time.time()
-    best_ind2 = run_gavrp(df_MSP, 1, 0, len(df_MSP)+1, POPULATION_SIZE,
+    best_ind2 = runGA(df_MSP, 1, 0, len(df_MSP)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
-    route2 = ind2route(best_ind2, df_MSP, dist_matrix_2)
-    draw_ga_solution(route2, df_MSP, ax)
+    route2 = ind2Route(best_ind2, df_MSP, distMatrix2)
+    drawGaSolution(route2, df_MSP, ax)
     total_runtime = time.time()-initial_time
     print(mid_time-initial_time)
     print(time.time()-mid_time)
     print(total_runtime)
+
 #eval_vrptw([]df_West)(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=0):
     plt.show()
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:

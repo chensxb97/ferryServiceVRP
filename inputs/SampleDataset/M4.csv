@@ -1,0 +1,15 @@
+﻿Order_ID,Request_Type,Zone,Demand,Port
+1,1,Z34,5,West
+2,2,Z29,7,West
+3,2,Z28,5,West
+4,2,Z26,7,West
+5,1,Z25,4,West
+6,1,Z32,7,West
+7,2,Z22,5,West
+8,2,Z20,8,West
+9,1,Z19,9,West
+10,1,Z33,1,West
+11,1,Z08,4,MSP
+12,1,Z06,5,MSP
+13,2,Z03,6,MSP
+14,1,Z11,7,MSP

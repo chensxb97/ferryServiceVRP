@@ -27,4 +27,3 @@ def printSolution(solutionSet, df, ax, fleetsize):
         zone_e = df.iloc[solutionSet[i][1], 2]
         launch_id = str(solutionSet[i][2])
         ax.arrow(Locations[zone_s][0], Locations[zone_s][1], Locations[zone_e][0]-Locations[zone_s][0], Locations[zone_e][1]-Locations[zone_s][1], head_width=10, head_length=10, color = Color[launch_id])
-

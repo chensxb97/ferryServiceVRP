@@ -31,7 +31,7 @@ time_start = timer.time()
 # | 0        | 0                   | Port Name | 0      |
 # | N        | 1-pickup 2-delivery | Zone Name | Amount |
 ###########################################################
-def calulateRoute(numOfCustomers, numOfVehicles, df):
+def calculateRoute(numOfCustomers, numOfVehicles, df):
     print(df)
     velocity = 0.463 #knot
     
@@ -77,6 +77,10 @@ def calulateRoute(numOfCustomers, numOfVehicles, df):
 
     # Defining Constraints
 
+    # Starting Time constraint (ADD)
+
+    # Travelling time + Service Time equation(ADD)
+
     # All vehicles will start at the depot
     mdl.add_constraints(mdl.sum(x[0, j, v] for j in Cc) == 1 for v in numOfVehicles)
 
@@ -86,8 +90,8 @@ def calulateRoute(numOfCustomers, numOfVehicles, df):
     # All nodes will only be visited once by one vehicle
     mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for v in numOfVehicles if j != i) == 1 for j in C)
 
-    # Vehicle will not terminate route anywhere except the depot
-    mdl.add_constraints((mdl.sum(x[i, b, v] for i in Cc if i != b) - mdl.sum(x[b, j, v] for j in Cc if b != j)) == 0 for b in C for v in Num_of_vehicle)
+    # Vehicle will not terminate route anywhere except the depot (REMOVE)
+    mdl.add_constraints((mdl.sum(x[i, b, v] for i in Cc if i != b) - mdl.sum(x[b, j, v] for j in Cc if b != j)) == 0 for b in C for v in numOfVehicles)
 
     mdl.add_constraint(index[0] == 0)
     mdl.add_constraints(1 <= index[i] for i in C)
@@ -96,18 +100,19 @@ def calulateRoute(numOfCustomers, numOfVehicles, df):
 
     # Vehicle initial load is the total demand for delivery in the route
     mdl.add_constraints((load[0, v] == mdl.sum(x[i, j, v]*d[j] for j in C for i in Cc if i != j)) for v in numOfVehicles)
-
     mdl.add_constraints((load[j, v] >= load[i, v] - d[j] + p[j] - M * (1 - x[i, j, v])) for i in Cc for j in C for v in numOfVehicles if i != j)
 
-    # Total load does not exceed vehicle capacity
+    # Total load does not exceed vehicle capacity (CHANGE)
     mdl.add_constraints(load[j, v] <= Capacity for j in Cc for v in numOfVehicles)
 
     mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*ser[i] for i in Cc for j in C)<=120 for v in numOfVehicles)
     mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*ser[i] for i in C for j in Cc)<=120 for v in numOfVehicles)
 
+    # REMOVE (Not necessary)
     mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C)<=5 for v in numOfVehicles)
+
 # Objective Function
-# Minimize the total loss of revenue + cost
+# Minimize the total loss of revenue + cost (CHANGE)
     obj_function = mdl.sum(cost[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i !=j)
 
     # Set time limit

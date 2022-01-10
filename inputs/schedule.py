@@ -17,7 +17,7 @@ from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutI
 from GA import runGA
 from lpTools import printSolution
 # from scipy.spatial import distance_matrix
-from utils import Color, Edges, Locations, computeDistMatrix, computeTravelTimeMatrix, separateTasks
+from utils import Color, Edges, Locations, computeDistMatrix, computeTravelTimeMatrix, separateTasks, printMap
 
 MUT_PROB = 0.1
 CX_PROB = 0.85
@@ -257,8 +257,9 @@ def main():
     # Else, we print the solution found from LP
      
     for i in range(len(df)): # For each tour
-        # imgPath = os.path.join(dirName, 'Singapore-Anchorages-Chart.png') # CHANGE: Update to line below
-        imgPath = os.path.join(dirName, 'Port_Of_Singapore_Anchorages_Chartlet.jpg')
+        imgPath = os.path.join(dirName, 'Singapore-Anchorages-Chart.png') # CHANGE: Update to line below
+        # imgPath = os.path.join(dirName, 'Port_Of_Singapore_Anchorages_Chartlet.png')
+
         img = plt.imread(imgPath)
         fig, ax = plt.subplots()
         ax.imshow(img)

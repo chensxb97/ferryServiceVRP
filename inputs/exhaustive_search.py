@@ -15,7 +15,7 @@ import time as timer
 
 from gaTools import ind2Route
 from itertools import chain, permutations
-from utils import Edges, computeDistMatrix, computeTravelTimeMatrix, separateTasks
+from utils import Edges, computeDistMatrix, separateTasks
 # from scipy.spatial import distance_matrix
 
 Capacity = 14
@@ -78,16 +78,17 @@ def main():
     fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
     fleet = int(args.fleetsize)
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
-    
+
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
-    distMatrix1 =computeDistMatrix(df_West, MapGraph)
-    distMatrix2 =computeDistMatrix(df_MSP, MapGraph)
+    # distMatrix1 =computeDistMatrix(df_West, MapGraph)
+    # distMatrix2 =computeDistMatrix(df_MSP, MapGraph)
+
     list1 = [i for i in range(1, df_West.shape[0]+fleetsize_West)]
     perm1 = permutations(list1)
     cost1 = 10000
     for i in list(perm1):
         #print(i)
-        cost = evaluate(i,df_West)
+        cost = evaluate(i,df_West) # CHANGE: evaluate
         if cost < cost1:
             cost1 = cost
     print('minimum cost for West Coast Terminal Group:', cost1)
@@ -96,7 +97,7 @@ def main():
     cost2 = 10000
     for i in list(perm2):
         #print(i)
-        cost = evaluate(i,df_MSP) # perform exhaustive search
+        cost = evaluate(i,df_MSP)
         if cost < cost2:
             cost1 = cost
     print('minimum cost for Marina South Pier Group:', cost2)

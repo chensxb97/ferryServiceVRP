@@ -14,7 +14,7 @@ import time as timer
 
 from docplex.mp.model import Model
 from lpTools import printSolution
-from utils import Color, Edges, Locations, computeDistMatrix, computeTravelTimeMatrix, separateTasks
+from utils import Color, Edges, Locations, computeDistMatrix, separateTasks
 # from scipy.spatial import distance_matrix
 
 # the big 'M'
@@ -33,8 +33,7 @@ time_start = timer.time()
 ###########################################################
 def calculateRoute(numOfCustomers, numOfVehicles, df):
     print(df)
-    velocity = 0.463 #knot
-    
+
     # create enumarator of 1 - N
     C = [i for i in range(1, numOfCustomers + 1)]
     # create enumarator of 0 - N
@@ -44,16 +43,17 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
     # get distance matrix
     distMatrix = computeDistMatrix(df, MapGraph)
-    
+    velocity = 0.463 #knot
+
     mdl = Model('VRP')
     # create variables
     p = [0]
     d = [0]
-    ser = [0]
-    
-    # pickup & delivery volume
+    sT = [0]
+
+    # pickup & delivery volume & service time
     for i in range(1, numOfCustomers+1):
-        ser.append(df.iloc[i, 3])
+        sT.append(df.iloc[i, 3])
         if df.iloc[i,1] == 2:
             d.append(df.iloc[i,3])
             p.append(0)
@@ -65,6 +65,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     Load = [(i, v) for i in Cc for v in numOfVehicles]
     Index = [i for i in Cc]
     X = [(i, j, v) for i in Cc for j in Cc for v in numOfVehicles]
+    T = [(i, v) for i in Cc for v in numOfVehicles] # NEW
 
     # Calculate distance and time
     cost = {(i, j): distMatrix[i][j] for i in Cc for j in Cc}
@@ -72,14 +73,17 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
     # Creating variables
     x = mdl.binary_var_dict(X, name='x')
+    arrT = mdl.binary_var_dict(T, name='t') # NEW
     load = mdl.integer_var_dict(Load, name='load')
     index = mdl.integer_var_dict(Index, name='index')
 
     # Defining Constraints
 
-    # Starting Time constraint (ADD)
+    # Starting Time constraint(NEW)
+    mdl.add_constraints(arrT[0, v] == 0 for v in numOfVehicles)
 
-    # Travelling time + Service Time equation(ADD)
+    # Travelling time + Service Time equation(NEW)
+    mdl.add_constraints(arrT[j, v] == x[i, j, v]*(arrT(i,v) + sT[i] + time[i,j]) for i in Cc for j in Cc for v in numOfVehicles)
 
     # All vehicles will start at the depot
     mdl.add_constraints(mdl.sum(x[0, j, v] for j in Cc) == 1 for v in numOfVehicles)
@@ -90,26 +94,28 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     # All nodes will only be visited once by one vehicle
     mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for v in numOfVehicles if j != i) == 1 for j in C)
 
-    # Vehicle will not terminate route anywhere except the depot (REMOVE)
+    # Vehicle must exit the node it visited, no stopping at nodes
     mdl.add_constraints((mdl.sum(x[i, b, v] for i in Cc if i != b) - mdl.sum(x[b, j, v] for j in Cc if b != j)) == 0 for b in C for v in numOfVehicles)
 
-    mdl.add_constraint(index[0] == 0)
-    mdl.add_constraints(1 <= index[i] for i in C)
-    mdl.add_constraints(numOfCustomers + 1 >= index[i] for i in C)
-    mdl.add_constraints(index[i]-index[j]+1<=(numOfCustomers)*(1-x[i, j, v]) for i in C for j in C for v in numOfVehicles if i != j)
+    # Subtour Elimination constraint (Not necessary)
+    # mdl.add_constraint(index[0] == 0)
+    # mdl.add_constraints(1 <= index[i] for i in C)
+    # mdl.add_constraints(numOfCustomers + 1 >= index[i] for i in C)
+    # mdl.add_constraints(index[i]-index[j]+1<=(numOfCustomers)*(1-x[i, j, v]) for i in C for j in C for v in numOfVehicles if i != j)
 
     # Vehicle initial load is the total demand for delivery in the route
     mdl.add_constraints((load[0, v] == mdl.sum(x[i, j, v]*d[j] for j in C for i in Cc if i != j)) for v in numOfVehicles)
     mdl.add_constraints((load[j, v] >= load[i, v] - d[j] + p[j] - M * (1 - x[i, j, v])) for i in Cc for j in C for v in numOfVehicles if i != j)
 
-    # Total load does not exceed vehicle capacity (CHANGE)
+    # Total load does not exceed vehicle capacity
     mdl.add_constraints(load[j, v] <= Capacity for j in Cc for v in numOfVehicles)
 
-    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*ser[i] for i in Cc for j in C)<=120 for v in numOfVehicles)
-    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*ser[i] for i in C for j in Cc)<=120 for v in numOfVehicles)
+    # Total tour duration is strictly less than 2.5hrs(NEW)
+    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*sT[i] for i in Cc for j in C)<=150 for v in numOfVehicles)
+    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*sT[i] for i in C for j in Cc)<=150 for v in numOfVehicles)
 
     # REMOVE (Not necessary)
-    mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C)<=5 for v in numOfVehicles)
+    # mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C)<=5 for v in numOfVehicles)
 
 # Objective Function
 # Minimize the total loss of revenue + cost (CHANGE)
@@ -147,21 +153,20 @@ def main():
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='starting time of optimization, stated in minutes; default at 9AM (540)')
     args = argparser.parse_args()
-    # img = plt.imread("Singapore-Anchorages-Chart.png")
-    img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.jpg")
-    fig, ax = plt.subplots()
-    ax.imshow(img)
     # dirName = os.path.dirname(os.path.realpath('__file__'))
-    dirName = os.path.dirname(os.path.abspath('__file__'))
+    dirName = os.path.dirname(os.path.abspath('__file__')) # Path to directory
     file = args.file
     fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
-    fleet = int(args.fleetsize)
-
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
+    fleet = int(args.fleetsize)
+    # img = plt.imread("Singapore-Anchorages-Chart.png")
+    img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
+    fig, ax = plt.subplots()
+    ax.imshow(img)
 
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
     
-    route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, 3, df_West)
+    route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, 3, df_West) # CHANGE: calculateRoute
     printSolution(solutionSet_West, df_West, ax, 3)
     route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, 3, df_MSP)
     printSolution(solutionSet_MSP, df_MSP, ax, 3)

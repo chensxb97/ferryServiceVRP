@@ -38,7 +38,8 @@ f = open('result.csv', 'w+')
 f.write('L1,,L2,,L3,,L4,,L5\n')
 
 #organize the optimized result into a timetable format
-def route2Timetable(df, fleetsize, solutionSet, start_time, distMatrix):
+def route2Timetable(df, fleetsize, solutionSet, start_time):
+    distMatrix = computeDistMatrix(df, MapGraph)
     route_set=[]
     for i in range(fleetsize):
         temp_list = []
@@ -226,7 +227,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='order copy', help='file name of the order book that required to be processed')
+    argparser.add_argument('--file', metavar='f', default='order_copy', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='starting time of optimization, stated in minutes; default at 9AM (540)') #0900 = 60*9 = 540
     args = argparser.parse_args()
@@ -273,36 +274,36 @@ def main():
     for i in range(len(df_tours)): # For each tour
         fig, ax = plt.subplots()
         ax.imshow(img)
-        
+
         df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df_tours[i], fleet)
-        distMatrix1 =computeDistMatrix(df_West, MapGraph) # CHANGE: Update to lines below
-        distMatrix2 =computeDistMatrix(df_MSP, MapGraph) # CHANGE: Update to lines below
+        # distMatrix1 =computeDistMatrix(df_West, MapGraph) # CHANGE: Update to lines below
+        # distMatrix2 =computeDistMatrix(df_MSP, MapGraph) # CHANGE: Update to lines below
         # travelTimeMatrix1 = computeTravelTimeMatrix(df_West,MapGraph)
         # travelTimeMatrix2 = computeTravelTimeMatrix(df_MSP, MapGraph)
 
-        route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, fleetsize_West, df_West) # CHANGE: LP Model
+        route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, fleetsize_West, df_West) # CHANGE: calculateRoute
         if route1 == None: # No solution found
             while solution1_GA != None: # Perform GA
-                solution1_GA = runGA(df_West, 1, 0, len(df_West)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False) # CHANGE: GA Algorithm 
-                drawGaSolution(ind2Route(solution1_GA, df_West, distMatrix1), df_West, ax)
+                solution1_GA = runGA(df_West, 1, 0, len(df_West)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False) # CHANGE: runGA
+                drawGaSolution(ind2Route(solution1_GA, df_West), df_West, ax)
         else: # Print LP Solution
-            printSolution(solutionSet_West, df_West, ax, fleetsize_West) # INVESTIGATE 
-            table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West, 540+150*i, distMatrix1) # INVESTIGATE 
+            printSolution(solutionSet_West, df_West, ax, fleetsize_West) # Change printSolution
+            table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West, 540+150*i) # Change: route2Timetable
 
         route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
         if route2 == None: # No solution found
             while solution2_GA != None: # Perform GA
                 solution2_GA = runGA(df_MSP, 1, 0, len(df_MSP)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
-                drawGaSolution(ind2Route(solution2_GA, df_MSP, distMatrix2), df_MSP, ax)
+                drawGaSolution(ind2Route(solution2_GA, df_MSP), df_MSP, ax)
         else:
             printSolution(solutionSet_MSP, df_MSP, ax, fleetsize_MSP)
-            table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP, 540+150*i, distMatrix2)
+            table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP, 540+150*i)
         plt.show()
 
 # consolidate timetable
         for i in range(len(table_MSP)):
             table_West.append(table_MSP[i])
-        printTable(table_West) # INVESTIGATE
+        printTable(table_West) # Change printTable
             
 # save info to csv file as timetable
     f.close()

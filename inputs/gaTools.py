@@ -13,7 +13,7 @@ import random
 import time
 
 from deap import base, creator, tools
-from utils import Color, Edges, Locations, computeDistMatrix, computeTravelTimeMatrix
+from utils import Color, Edges, Locations, computeDistMatrix
 
 MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
@@ -51,7 +51,7 @@ def drawGaSolution(route, df, ax):
 def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=0):
     total_cost = 0
     distMatrix =computeDistMatrix(df, MapGraph)
-    route = ind2Route(individual, df, distMatrix)
+    route = ind2Route(individual, df)
     total_cost = 0
     Capacity = 14
     for subRoute in route:
@@ -97,7 +97,7 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=
         fitness = 0.000000001
     return (fitness, )
 
-def ind2Route(individual, df, distMatrix):
+def ind2Route(individual, df):
     #print(individual)
     route = []
     # Initialize a sub-route

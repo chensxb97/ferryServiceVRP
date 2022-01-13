@@ -15,7 +15,7 @@ import time
 from csv import DictWriter
 from deap import base, creator, tools
 from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
-from utils import Color, Edges, Locations, computeDistMatrix, computeTravelTimeMatrix, separateTasks
+from utils import Color, Edges, Locations, computeDistMatrix, separateTasks
 
 MUT_PROB = 0.1
 CX_PROB = 0.85
@@ -108,7 +108,8 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     best_ind = tools.selBest(pop, 1)[0]
     print(f'Best individual: {best_ind}')
     print(f'Fitness: {best_ind.fitness.values[0]}')
-    printRoute(ind2Route(best_ind, df, distMatrix))
+    # printRoute(ind2Route(best_ind, df, distMatrix))
+    printRoute(ind2Route(best_ind, df))
     print(f'Total cost: {1 / (best_ind.fitness.values[0])}')
     return best_ind
 
@@ -117,31 +118,39 @@ def main():
     argparser.add_argument('--file', metavar='f', default='M1', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     args = argparser.parse_args()
-    # img = plt.imread("Singapore-Anchorages-Chart.png")
-    img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.jpg")
-    fig, ax = plt.subplots()
-    ax.imshow(img)
     # dirName = os.path.dirname(os.path.realpath('__file__'))
-    dirName = os.path.dirname(os.path.abspath('__file__'))
+    dirName = os.path.dirname(os.path.abspath('__file__')) # Path to directory
     file = args.file
     fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
+    order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
+    fleet = int(args.fleetsize)
+
     MapGraph = nx.Graph()
     MapGraph.add_weighted_edges_from(Edges)
-    df = pd.read_csv(fileName)
+    # img = plt.imread("Singapore-Anchorages-Chart.png")
+    img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
+    fig, ax = plt.subplots()
+    ax.imshow(img)
+
     initial_time = time.time()
 
-    df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df, 5)
-    distMatrix1 =computeDistMatrix(df_West, MapGraph)
-    distMatrix2 =computeDistMatrix(df_MSP, MapGraph)
+    df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
+    # distMatrix1 =computeDistMatrix(df_West, MapGraph)
+    # distMatrix2 =computeDistMatrix(df_MSP, MapGraph)
     best_ind1 = runGA(df_West, 1, 0, len(df_West)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
-    route1 = ind2Route(best_ind1, df_West, distMatrix1)
+    # route1 = ind2Route(best_ind1, df_West, distMatrix1)
+    route1 = ind2Route(best_ind1, df_West)
     drawGaSolution(route1, df_West, ax)
+
     mid_time = time.time()
+
     best_ind2 = runGA(df_MSP, 1, 0, len(df_MSP)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
-    route2 = ind2Route(best_ind2, df_MSP, distMatrix2)
+    # route2 = ind2Route(best_ind2, df_MSP, distMatrix2)
+    route2 = ind2Route(best_ind2, df_MSP)
     drawGaSolution(route2, df_MSP, ax)
+
     total_runtime = time.time()-initial_time
     print(mid_time-initial_time)
     print(time.time()-mid_time)

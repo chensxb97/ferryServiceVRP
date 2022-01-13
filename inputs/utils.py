@@ -88,16 +88,14 @@ def computeDistMatrix(df, map):
             elif j<numOfCustomers and i >=numOfCustomers:
                 distMatrix[i][j] = nx.dijkstra_path_length(map, df['Zone'][0], df['Zone'][j]) # From pier to zone
     return distMatrix
-
-def computeTravelTimeMatrix(df,map):
-    distMatrix = computeDistMatrix(df,map)
-    travelTimeMatrix = (distMatrix/7.71)/60  
-    # Travel speed = 15 knots = approx 7.71 m/s -> Divide by 60 to represent time in minutes
-    return travelTimeMatrix
-
-def separateTasks(df_tour, numOfVehicles):
-    tourStartEnd = df_tour[0]
-    df = df_tour[1]
+    
+def separateTasks(order_df, numOfVehicles):
+    if type(order_df) == 'list':
+        tourStartEnd = order_df[0]
+        df = order_df[1]
+    else:
+        tourStartEnd = (540,690)
+        df = order_df
     df_MSP = df[df['Port'] == 'MSP']
     df_West = df[df['Port'] == 'West']
     len_df_MSP = len(df_MSP)
@@ -116,7 +114,7 @@ def separateTasks(df_tour, numOfVehicles):
     df_MSP = df_MSP.reset_index(drop=True)
     df_West = pd.concat([data2, df_West])
     df_West = df_West.reset_index(drop=True)
-    
+
     return df_MSP, fleetsize_MSP, df_West, fleetsize_West
     
 def printMap(ax):

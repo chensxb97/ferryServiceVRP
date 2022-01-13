@@ -34,6 +34,7 @@ time_start = timer.time()
 def calculateRoute(numOfCustomers, numOfVehicles, df):
     print(df)
 
+    mdl = Model('VRP')
     # create enumarator of 1 - N
     C = [i for i in range(1, numOfCustomers + 1)]
     # create enumarator of 0 - N
@@ -45,15 +46,18 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     distMatrix = computeDistMatrix(df, MapGraph)
     velocity = 0.463 #knot
 
-    mdl = Model('VRP')
-    # create variables
+    # calculate distance and time
+    cost = {(i, j): distMatrix[i][j] for i in Cc for j in Cc}
+    time = {(i, j): distMatrix[i][j]/velocity for i in Cc for j in Cc}
+
+    # calculate service times, time windows, pickup and delivery volume
+    servTime = [0]
+    timeWindows = [(None,None)]
     p = [0]
     d = [0]
-    sT = [0]
-
-    # pickup & delivery volume & service time
     for i in range(1, numOfCustomers+1):
-        sT.append(df.iloc[i, 3])
+        servTime.append(df.iloc[i, 3])
+        timeWindows.append((df.iloc[i,4],df.iloc[i,5]))
         if df.iloc[i,1] == 2:
             d.append(df.iloc[i,3])
             p.append(0)
@@ -61,29 +65,25 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
             d.append(0)
             p.append(df.iloc[i,3])
 
-    # Variable set
+    # decision variables set
     Load = [(i, v) for i in Cc for v in numOfVehicles]
     Index = [i for i in Cc]
     X = [(i, j, v) for i in Cc for j in Cc for v in numOfVehicles]
     T = [(i, v) for i in Cc for v in numOfVehicles] # NEW
 
-    # Calculate distance and time
-    cost = {(i, j): distMatrix[i][j] for i in Cc for j in Cc}
-    time = {(i, j): distMatrix[i][j]/velocity for i in Cc for j in Cc}
-
-    # Creating variables
+    # load decision variables
     x = mdl.binary_var_dict(X, name='x')
-    arrT = mdl.binary_var_dict(T, name='t') # NEW
+    arrTime = mdl.binary_var_dict(T, name='t') # NEW
     load = mdl.integer_var_dict(Load, name='load')
-    index = mdl.integer_var_dict(Index, name='index')
+    # index = mdl.integer_var_dict(Index, name='index')
 
-    # Defining Constraints
+    # defining constraints
 
     # Starting Time constraint(NEW)
-    mdl.add_constraints(arrT[0, v] == 0 for v in numOfVehicles)
+    mdl.add_constraints(arrTime[0, v] == 0 for v in numOfVehicles)
 
     # Travelling time + Service Time equation(NEW)
-    mdl.add_constraints(arrT[j, v] == x[i, j, v]*(arrT(i,v) + sT[i] + time[i,j]) for i in Cc for j in Cc for v in numOfVehicles)
+    mdl.add_constraints(arrTime[j, v] == x[i, j, v]*(arrTime(i,v) + servTime[i] + time[i,j]) for i in Cc for j in Cc for v in numOfVehicles if i!=j)
 
     # All vehicles will start at the depot
     mdl.add_constraints(mdl.sum(x[0, j, v] for j in Cc) == 1 for v in numOfVehicles)
@@ -111,15 +111,15 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     mdl.add_constraints(load[j, v] <= Capacity for j in Cc for v in numOfVehicles)
 
     # Total tour duration is strictly less than 2.5hrs(NEW)
-    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*sT[i] for i in Cc for j in C)<=150 for v in numOfVehicles)
-    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*sT[i] for i in C for j in Cc)<=150 for v in numOfVehicles)
+    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*servTime[i] for i in Cc for j in C)<=150 for v in numOfVehicles)
+    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*servTime[i] for i in C for j in Cc)<=150 for v in numOfVehicles)
 
     # REMOVE (Not necessary)
-    # mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C)<=5 for v in numOfVehicles)
+    # mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C) <= 5 for v in numOfVehicles)
 
 # Objective Function
 # Minimize the total loss of revenue + cost (CHANGE)
-    obj_function = mdl.sum(cost[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i !=j)
+    obj_function = mdl.sum(cost[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i!=j)
 
     # Set time limit
     mdl.parameters.timelimit.set(60)

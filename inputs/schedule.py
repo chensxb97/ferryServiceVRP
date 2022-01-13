@@ -226,7 +226,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='order', help='file name of the order book that required to be processed')
+    argparser.add_argument('--file', metavar='f', default='order copy', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='starting time of optimization, stated in minutes; default at 9AM (540)') #0900 = 60*9 = 540
     args = argparser.parse_args()
@@ -235,40 +235,51 @@ def main():
     dirName = os.path.dirname(os.path.abspath(__file__)) # Path to directory
     file = args.file
     fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
+    imgPath = os.path.join(dirName, 'Port_Of_Singapore_Anchorages_Chartlet.png') # Path to Singapore Anchorage Map
+    img = plt.imread(imgPath)
     fleet = int(args.fleetsize)
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
+    order_df = order_df.sort_values(by=['Start_Time','End_Time'])
     port = []
     for i in range(len(order_df)):
-        order_df.iloc[i,0]=int(order_df.iloc[i,0][11:13])
-        if int(order_df.iloc[i,2][1:3])>16:
+        print(order_df.iloc[i,0][11:13])
+        order_df.iloc[i,0]=int(order_df.iloc[i,0][11:13]) # truncate orderId to last 2 digits
+        if int(order_df.iloc[i,2][1:3])>16: # Index [1:3] refers to the zone number
             port.append('West')
         else:
-            port.append('MSP')
-    # CHANGE: Zones 1-16 belong to Marina South Pier, while Zones 17-30 belong to West Coast Pier 
-
+            port.append('MSP') # CHANGE: Zones 1-16 belong to Marina South Pier, while Zones 17-30 belong to West Coast Pier 
     order_df['Port']=port
-    df1, df2 = [x for _, x in order_df.groupby(order_df['Time'] >= 690)] # Grouping the dataset by df1(time < 690) and df2(time >= 690)
-    df=[df1.drop(['Time'], axis=1), df2.drop(['Time'], axis=1)] # Removing the time column and merging the datasets, creating a merged dataset that is sorted by time
+
+    # df1, df2 = [x for _, x in order_df.groupby(order_df['Time'] >= 690)] # Grouping the dataset by df1(time < 690) and df2(time >= 690)
+    # print(df1)
+    # print(df2)
+    # df=[df1.drop(['Time'], axis=1), df2.drop(['Time'], axis=1)] # Removing the time column and merging the datasets, creating a merged dataset that is sorted by time
     # This example illustrates only two tours. from 540-690 and from 690-840.
+    # print(df) 
+
+    # Split the orders according to tours, also ignores orders with unfeasible time windows
+    tours = [(540,690), (690,840), (840,990), (990,1140)] # 0900-1130, 1130-1400, 1400-1630, 1630-1900
+    df_tours = []
+    i=1
+    for tour in tours:
+        df = order_df[(order_df['Start_Time'] >= tour[0]) & (order_df['End_Time'] <= tour[1])]
+        if not df.empty:
+            df_tours.append((tour,df)) # Columns: Order Id, Request Type, Zone, Demand, Start_Time, End_Time)
 
     # Methodology
     # Solve by LP using calculate_route function for both clusters
     # If no solution is found for both clusters, run GA
     # Else, we print the solution found from LP
-     
-    for i in range(len(df)): # For each tour
-        imgPath = os.path.join(dirName, 'Singapore-Anchorages-Chart.png') # CHANGE: Update to line below
-        # imgPath = os.path.join(dirName, 'Port_Of_Singapore_Anchorages_Chartlet.png')
-
-        img = plt.imread(imgPath)
+    for i in range(len(df_tours)): # For each tour
         fig, ax = plt.subplots()
         ax.imshow(img)
-        df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df[i], fleet)
+        
+        df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df_tours[i], fleet)
         distMatrix1 =computeDistMatrix(df_West, MapGraph) # CHANGE: Update to lines below
         distMatrix2 =computeDistMatrix(df_MSP, MapGraph) # CHANGE: Update to lines below
         # travelTimeMatrix1 = computeTravelTimeMatrix(df_West,MapGraph)
         # travelTimeMatrix2 = computeTravelTimeMatrix(df_MSP, MapGraph)
-        
+
         route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, fleetsize_West, df_West) # CHANGE: LP Model
         if route1 == None: # No solution found
             while solution1_GA != None: # Perform GA

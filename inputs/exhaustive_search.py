@@ -96,7 +96,7 @@ def main():
     cost2 = 10000
     for i in list(perm2):
         #print(i)
-        cost = evaluate(i,df_MSP)
+        cost = evaluate(i,df_MSP) # perform exhaustive search
         if cost < cost2:
             cost1 = cost
     print('minimum cost for Marina South Pier Group:', cost2)

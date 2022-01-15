@@ -15,7 +15,6 @@ import time as timer
 from docplex.mp.model import Model
 from lpTools import printSolution
 from utils import Color, Edges, Locations, computeDistMatrix, separateTasks
-# from scipy.spatial import distance_matrix
 
 # the big 'M'
 M = 10000
@@ -34,7 +33,9 @@ time_start = timer.time()
 def calculateRoute(numOfCustomers, numOfVehicles, df):
     print(df)
 
+    # Initialisation
     mdl = Model('VRP')
+
     # create enumarator of 1 - N
     C = [i for i in range(1, numOfCustomers + 1)]
     # create enumarator of 0 - N
@@ -45,17 +46,19 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     # get distance matrix
     distMatrix = computeDistMatrix(df, MapGraph)
     velocity = 0.463 #knot
+    earlyCost = 1
+    lateCost = 1
 
     # calculate distance and time
-    cost = {(i, j): distMatrix[i][j] for i in Cc for j in Cc}
-    time = {(i, j): distMatrix[i][j]/velocity for i in Cc for j in Cc}
+    travDist = {(i, j): distMatrix[i][j] for i in Cc for j in Cc}
+    travTime = {(i, j): distMatrix[i][j]/velocity for i in Cc for j in Cc}
 
     # calculate service times, time windows, pickup and delivery volume
     servTime = [0]
     timeWindows = [(None,None)]
     p = [0]
     d = [0]
-    for i in range(1, numOfCustomers+1):
+    for i in range(1, numOfCustomers+1): # Change this (Make sure that each record contains both pickup + delivery)
         servTime.append(df.iloc[i, 3])
         timeWindows.append((df.iloc[i,4],df.iloc[i,5]))
         if df.iloc[i,1] == 2:
@@ -67,9 +70,9 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
     # decision variables set
     Load = [(i, v) for i in Cc for v in numOfVehicles]
-    Index = [i for i in Cc]
     X = [(i, j, v) for i in Cc for j in Cc for v in numOfVehicles]
     T = [(i, v) for i in Cc for v in numOfVehicles] # NEW
+    # Index = [i for i in Cc]
 
     # load decision variables
     x = mdl.binary_var_dict(X, name='x')
@@ -83,7 +86,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     mdl.add_constraints(arrTime[0, v] == 0 for v in numOfVehicles)
 
     # Travelling time + Service Time equation(NEW)
-    mdl.add_constraints(arrTime[j, v] == x[i, j, v]*(arrTime(i,v) + servTime[i] + time[i,j]) for i in Cc for j in Cc for v in numOfVehicles if i!=j)
+    mdl.add_constraints(arrTime[j, v] == x[i, j, v]*(arrTime(i,v) + servTime[i] + travTime[i,j]) for i in Cc for j in Cc for v in numOfVehicles if i!=j)
 
     # All vehicles will start at the depot
     mdl.add_constraints(mdl.sum(x[0, j, v] for j in Cc) == 1 for v in numOfVehicles)
@@ -110,16 +113,16 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     # Total load does not exceed vehicle capacity
     mdl.add_constraints(load[j, v] <= Capacity for j in Cc for v in numOfVehicles)
 
-    # Total tour duration is strictly less than 2.5hrs(NEW)
-    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*servTime[i] for i in Cc for j in C)<=150 for v in numOfVehicles)
-    mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*servTime[i] for i in C for j in Cc)<=150 for v in numOfVehicles)
+    # Total tour duration is strictly less than 2.5hrs
+    mdl.add_constraints(mdl.sum(x[i, j, v]*travTime[i, j] + x[i, j, v]*servTime[i] for i in Cc for j in C)<=150 for v in numOfVehicles)
+    mdl.add_constraints(mdl.sum(x[i, j, v]*travTime[i, j] + x[i, j, v]*servTime[i] for i in C for j in Cc)<=150 for v in numOfVehicles)
 
     # REMOVE (Not necessary)
     # mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C) <= 5 for v in numOfVehicles)
 
 # Objective Function
-# Minimize the total loss of revenue + cost (CHANGE)
-    obj_function = mdl.sum(cost[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i!=j)
+# Minimize the total fuel and penalty cost (CHANGE)
+    obj_function = mdl.sum(travDist[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i!=j) + mdl.sum((p[i,v] + d[i,v])*max(earlyCost*(timeWindows[i][0]-arrTime[i,v]),0,lateCost*(arrTime[i]-timeWindows[i][1])) for i in C for v in numOfVehicles)
 
     # Set time limit
     mdl.parameters.timelimit.set(60)

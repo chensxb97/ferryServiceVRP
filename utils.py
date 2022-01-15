@@ -53,7 +53,7 @@ West Jurong <- 34 <- 33 <- 32 <- 31 <- 30 <- 29 ...
 32 <- 31 <- (30<-29<-28) <- 27
 
 '''
-# New Locations and Edges dictionaries!!!
+# New Locations and Edges dictionaries!
 Locations = {"Z01" : [2710, 940], "Z02" : [2772, 1030], "Z03" : [2778, 1103], "Z04" : [2783, 1159], "Z05" : [2448, 1229], "Z06" : [2422, 1175], "Z07" : [2400, 1148], "Z08" : [2270, 1140], "Z09" : [2224, 1185], "Z10" : [2165, 1240], "Z11" : [2178, 1300], "Z12" : [2057, 1433], "Z13" : [1993, 1386], "Z14" : [1853, 1342], "Z15" : [1870, 1465], "Z16" : [1757, 1425], "Z17" : [1520, 1590], "Z18" : [1477, 1480], "Z19" : [1395, 1472], "Z20" : [1357, 1498], "Z21" : [1432, 1540], "Z22" : [1156, 1750], "Z23" : [1115, 1703], "Z24" : [1072, 1584], "Z25" : [973, 1575], "Z26" : [1005, 1871], "Z27" : [960, 1835], "Z28" : [867, 1747], "Z29" : [739, 1689], "Z30" : [643, 1585], "Port West" : [1211, 1200], "Port MSP" : [1740, 1325]}
 
 Edges = [('Port West', 'East Jurong', 3.6), ('East Jurong', 'West Jurong', 4.4), ('West Jurong', 'Z30', 7),
@@ -89,6 +89,10 @@ def computeDistMatrix(df, map):
                 distMatrix[i][j] = nx.dijkstra_path_length(map, df['Zone'][0], df['Zone'][j]) # From pier to zone
     return distMatrix
     
+def printMap(ax):
+    for zone, pts in Locations.items():
+        ax.scatter(pts[0],pts[1], marker='o')
+
 def separateTasks(order_df, numOfVehicles):
     if type(order_df) == 'list':
         tourStartEnd = order_df[0]
@@ -117,6 +121,5 @@ def separateTasks(order_df, numOfVehicles):
 
     return df_MSP, fleetsize_MSP, df_West, fleetsize_West
     
-def printMap(ax):
-    for zone, pts in Locations.items():
-        ax.scatter(pts[0],pts[1], marker='o')
+
+

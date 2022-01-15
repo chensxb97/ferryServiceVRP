@@ -14,7 +14,7 @@ import time
 
 from csv import DictWriter
 from deap import base, creator, tools
-from utils import Color, Edges, Locations, computeDistMatrix, separateTasks
+from utils import Color, Edges, Locations
 
 MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)

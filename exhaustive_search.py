@@ -16,7 +16,6 @@ import time as timer
 from gaTools import ind2Route
 from itertools import chain, permutations
 from utils import Edges, computeDistMatrix, separateTasks
-# from scipy.spatial import distance_matrix
 
 Capacity = 14
 MapGraph = nx.Graph()

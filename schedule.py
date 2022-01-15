@@ -17,7 +17,7 @@ from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutI
 from GA import runGA
 from lpTools import printSolution
 # from scipy.spatial import distance_matrix
-from utils import Color, Edges, Locations, computeDistMatrix, computeTravelTimeMatrix, separateTasks, printMap
+from utils import Color, Edges, Locations, computeDistMatrix, separateTasks
 
 MUT_PROB = 0.1
 CX_PROB = 0.85

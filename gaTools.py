@@ -101,7 +101,7 @@ def ind2Route(individual, df):
     #print(individual)
     route = []
     # Initialize a sub-route
-    subroute = []
+    subRoute = []
     for customer_id in individual:
         if customer_id < df.shape[0] :
             # Add to current sub-route

@@ -21,54 +21,78 @@ Capacity = 14
 MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
 
+# Computes cost for the given permutation of zones
 def evaluate(individual, df):
+
+    # Initialise cost counter and inputs
     total_cost = 0
+    earlyCost = 1
+    lateCost = 1
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
-    total_cost = 0
+
+     # Each subRoute is a route that is served by a launch
     for subRoute in route:
-        #sub_route_time_cost = 0
         subRoute_distance = 0
-        elapsed_time = 0
+        subRoute_time = 540 # Start of tour
+        subRoute_penalty_cost = 0
         lastCustomer_id = 0
         initial_load = 0
-        service_time = 0
+
         for i in range(len(subRoute)):
             if df.iloc[i, 1]==2:
-                initial_load += df.iloc[i, 3]
+                initial_load += df.iloc[i, 3] # Add delivery load to initial load
         subRoute_load = initial_load
+        
+        # Customer_id = Zone
         for customer_id in subRoute:
-            # Calculate section distance
+            # Calculate travelling distance between zones
             distance = distMatrix[lastCustomer_id][customer_id]
+
             # Update sub-route distance
-            subRoute_distance = subRoute_distance + distance
+            subRoute_distance += distance
+
+            # Time windows
+            ready_time = df.iloc[customer_id, 4]
+            due_time = df.iloc[customer_id, 5]
+
+            # Update load after pickup or delivery
             if df.iloc[customer_id, 1]==1:
                 subRoute_load += df.iloc[customer_id, 3]
             else:
                 subRoute_load -= df.iloc[customer_id, 3]
-            service_time+=df.iloc[customer_id, 3]
-            if subRoute_load> Capacity:
-                #fitness = 0
-                subRoute_distance =10000
-                subRoute_cost = 10000
+
+            # Update subRoute time and compute penalty costs
+            subRoute_time += distance/0.463
+            subRoute_penalty_cost += max(earlyCost*(ready_time-subRoute_time),0,lateCost*(subRoute_time-due_time))
+
+            # Update subRoute time after serving customer
+            subRoute_time += df.iloc[customer_id, 3]
+
+            # Capacity constraint
+            if subRoute_load> Capacity: 
+                subRoute_distance = 10000
+            
             # Update last customer ID
             lastCustomer_id = customer_id
-        # Calculate transport cost
-        subRoute_distance = subRoute_distance + distMatrix[lastCustomer_id][0]
-        # Obtain sub-route cost
-        subRoute_cost = subRoute_distance #sub_route_time_cost +
-        subRoute_time_cost = subRoute_cost/0.463+service_time
+
+        # Total distance and time computed after returning to the depot
+        return_distance = distMatrix[lastCustomer_id][0]
+        subRoute_distance += return_distance
+        subRoute_time += return_distance/0.463
+
         # Update total cost
-        total_cost = total_cost + subRoute_distance
-        if subRoute_time_cost > 120:
+        total_cost = total_cost + subRoute_distance + subRoute_penalty_cost
+
+        # Tour duration balance constraint
+        if subRoute_time > 690: # End of tour
             total_cost += 10000
-    if len(route) > 5:
-        total_cost = 10000
+
     return total_cost
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='example', help='file name of the order book that required to be processed')
+    argparser.add_argument('--file', metavar='f', default='L1', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath(__file__))
@@ -86,11 +110,10 @@ def main():
     perm1 = permutations(list1)
     cost1 = 10000
     for i in list(perm1):
-        #print(i)
-        cost = evaluate(i,df_West) # CHANGE: evaluate
+        cost = evaluate(i,df_West)
         if cost < cost1:
             cost1 = cost
-    print('minimum cost for West:', cost1)
+    print('Minimum cost for West tour:', cost1)
 
     # Evaluate minimum cost for MSP 
     list2 = [i for i in range(1, df_MSP.shape[0]+fleetsize_MSP)]
@@ -100,8 +123,8 @@ def main():
         #print(i)
         cost = evaluate(i,df_MSP)
         if cost < cost2:
-            cost1 = cost
-    print('minimum cost for MSP:', cost2)
+            cost2 = cost
+    print('Minimum cost for MSP tour:', cost2)
 
 if __name__ == '__main__':
 

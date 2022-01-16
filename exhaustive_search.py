@@ -24,7 +24,7 @@ MapGraph.add_weighted_edges_from(Edges)
 def evaluate(individual, df):
     total_cost = 0
     distMatrix =computeDistMatrix(df, MapGraph)
-    route = ind2Route(individual, df, distMatrix)
+    route = ind2Route(individual, df)
     total_cost = 0
     for subRoute in route:
         #sub_route_time_cost = 0

@@ -19,7 +19,7 @@ from utils import Color, Edges, Locations
 MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
 
-# draw solution on Map
+# Draw solution on map
 def printSolution(solutionSet, df, ax, fleetsize):
     for i in range(len(solutionSet)):
         ax.scatter(Locations[df.iloc[solutionSet[i][0], 2]][0], Locations[df.iloc[solutionSet[i][0], 2]][1], marker='o')

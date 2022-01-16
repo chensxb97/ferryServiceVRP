@@ -118,45 +118,44 @@ def main():
     argparser.add_argument('--file', metavar='f', default='M1', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     args = argparser.parse_args()
-    # dirName = os.path.dirname(os.path.realpath('__file__'))
-    dirName = os.path.dirname(os.path.abspath('__file__')) # Path to directory
+    dirName = os.path.dirname(os.path.abspath('__file__'))
     file = args.file
     fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
-    order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     fleet = int(args.fleetsize)
+    order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
+    order_df = order_df.sort_values(by=['Start_TW','End_TW'])
 
-    MapGraph = nx.Graph()
-    MapGraph.add_weighted_edges_from(Edges)
-    # img = plt.imread("Singapore-Anchorages-Chart.png")
+    # Visualisation map
     img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
     fig, ax = plt.subplots()
     ax.imshow(img)
 
     initial_time = time.time()
 
+    # Pre-optimisation step
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
-    # distMatrix1 =computeDistMatrix(df_West, MapGraph)
-    # distMatrix2 =computeDistMatrix(df_MSP, MapGraph)
+
+    # Run GA for West
     best_ind1 = runGA(df_West, 1, 0, len(df_West)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
-    # route1 = ind2Route(best_ind1, df_West, distMatrix1)
     route1 = ind2Route(best_ind1, df_West)
     drawGaSolution(route1, df_West, ax)
 
+    # Checkpoint
     mid_time = time.time()
-
+    
+    # Run GA for MSP
     best_ind2 = runGA(df_MSP, 1, 0, len(df_MSP)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
-    # route2 = ind2Route(best_ind2, df_MSP, distMatrix2)
     route2 = ind2Route(best_ind2, df_MSP)
     drawGaSolution(route2, df_MSP, ax)
 
+    # Total Runtime
     total_runtime = time.time()-initial_time
     print(mid_time-initial_time)
     print(time.time()-mid_time)
     print(total_runtime)
 
-#eval_vrptw([]df_West)(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=0):
     plt.show()
 
 if __name__ == '__main__':

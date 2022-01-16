@@ -163,7 +163,7 @@ def main():
     file = args.file
     fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
-    order_df = order_df.sort_values(by=['Start_Time','End_Time'])
+    order_df = order_df.sort_values(by=['Start_TW','End_TW'])
     fleet = int(args.fleetsize)
     
     # Visualisation map

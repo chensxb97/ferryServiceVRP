@@ -71,17 +71,17 @@ def main():
     argparser.add_argument('--file', metavar='f', default='example', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     args = argparser.parse_args()
-    # dir_name = os.path.dirname(os.path.realpath('__file__')) 
-    dirName = os.path.dirname(os.path.abspath(__file__)) # Path to directory
+    dirName = os.path.dirname(os.path.abspath(__file__))
     file = args.file
     fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
     fleet = int(args.fleetsize)
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
+    order_df = order_df.sort_values(by=['Start_TW','End_TW'])
 
+    # Pre-optimistion step
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
-    # distMatrix1 =computeDistMatrix(df_West, MapGraph)
-    # distMatrix2 =computeDistMatrix(df_MSP, MapGraph)
 
+    # Evalutate minimum cost for West
     list1 = [i for i in range(1, df_West.shape[0]+fleetsize_West)]
     perm1 = permutations(list1)
     cost1 = 10000
@@ -90,7 +90,9 @@ def main():
         cost = evaluate(i,df_West) # CHANGE: evaluate
         if cost < cost1:
             cost1 = cost
-    print('minimum cost for West Coast Terminal Group:', cost1)
+    print('minimum cost for West:', cost1)
+
+    # Evaluate minimum cost for MSP 
     list2 = [i for i in range(1, df_MSP.shape[0]+fleetsize_MSP)]
     perm2 = permutations(list2)
     cost2 = 10000
@@ -99,7 +101,7 @@ def main():
         cost = evaluate(i,df_MSP)
         if cost < cost2:
             cost1 = cost
-    print('minimum cost for Marina South Pier Group:', cost2)
+    print('minimum cost for MSP:', cost2)
 
 if __name__ == '__main__':
 

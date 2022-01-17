@@ -16,7 +16,6 @@ from csv import DictWriter
 from deap import base, creator, tools
 from utils import Color, Locations
 
-# Draw solution on map
 def drawSolution(solutionSet, df, ax, fleetsize):
     print('Drawing solution... ')
     for i in range(len(solutionSet)):

@@ -26,6 +26,7 @@ Capacity = 14
 MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
 
+# GA Algorithm
 def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     cx_pb, mut_pb, n_gen, export_csv=False, customize_data=False):
     

@@ -29,11 +29,11 @@ time_start = timer.time()
 f = open('outputs/result_schedule.csv', 'w+')
 f.write('L1,,L2,,L3,,L4,,L5\n')
 
-########################################################################################################
-#---------------------------------df format-------------------------------------------------------------
-# | Order ID         |     Request_Type    |    Zone   | Demand |    Start_TW   |    End_TW  |   Port    
-# | YYYY-MM-DD-ID    | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd | Port Name
-########################################################################################################
+##############################################################################################
+#---------------------------------df format---------------------------------------------------
+# | Order ID         |     Request_Type    |    Zone   | Demand |    Start_TW   |    End_TW  | 
+# | YYYY-MM-DD-ID    | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd |
+##############################################################################################
 
 # OLD VERSION
 # def calculateRoute(numOfCustomers, numOfVehicles, df): 
@@ -233,6 +233,7 @@ def main():
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])
 
+    # New 'Port' column
     port = []
     for i in range(len(order_df)):
         print(order_df.iloc[i,0][11:13])
@@ -243,13 +244,6 @@ def main():
             port.append('MSP') # Zones 1-16 belong to Marina South Pier, while Zones 17-30 belong to West Coast Pier 
     order_df['Port']=port
 
-    # df1, df2 = [x for _, x in order_df.groupby(order_df['Time'] >= 690)] # Grouping the dataset by df1(time < 690) and df2(time >= 690)
-    # print(df1)
-    # print(df2)
-    # df=[df1.drop(['Time'], axis=1), df2.drop(['Time'], axis=1)] # Removing the time column and merging the datasets, creating a merged dataset that is sorted by time
-    # This example illustrates only two tours. from 540-690 and from 690-840.
-    # print(df) 
-
     # Split the orders according to tours, also ignores orders with unfeasible time windows
     tours = [(540,690), (690,840), (840,990), (990,1140)] # 0900-1130, 1130-1400, 1400-1630, 1630-1900
     df_tours = []
@@ -258,14 +252,7 @@ def main():
         df = order_df[(order_df['Start_TW'] >= tour[0]) & (order_df['End_TW'] <= tour[1])]
         if not df.empty:
             df_tours.append((tour,df))
-            
-    # Column names: Order_ID, Request_Type, Zone, Demand, Start_TW, End_TW, Port
-
-    # Methodology
-    # Attempt to solve using LP model for both clusters
-    # If no solution is found using LP, run GA
-    # Print solution and tabulate results in a timetable
-
+    
     imgPath = os.path.join(dirName, 'Port_Of_Singapore_Anchorages_Chartlet.png')
     img = plt.imread(imgPath)
 
@@ -276,14 +263,18 @@ def main():
         # Pre-optimisation step
         df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df_tours[i], fleet)
 
-        route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, fleetsize_West, df_West) # Perform LP
-        if route1 == None: # No solution found
-            while solution1_GA != None: # Perform GA
+        # Perform LP
+        route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, fleetsize_West, df_West) 
+
+        # If no solution is found using LP, run GA
+        # After solution is drawn, we generate a timetable for each route
+        if route1 == None:
+            while solution1_GA != None:
                 solution1_GA = runGA(df_West, 1, 0, len(df_West)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
-                drawGaSolution(ind2Route(solution1_GA, df_West), df_West, ax) # Draw GA solution
+                drawGaSolution(ind2Route(solution1_GA, df_West), df_West, ax)
         else:
-            drawSolution(solutionSet_West, df_West, ax, fleetsize_West) # Draw solution
-            table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West, 540+150*i) # Generate Timetable
+            drawSolution(solutionSet_West, df_West, ax, fleetsize_West)
+            table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West, 540+150*i)
 
         route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
         if route2 == None:
@@ -294,7 +285,7 @@ def main():
             drawSolution(solutionSet_MSP, df_MSP, ax, fleetsize_MSP)
             table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP, 540+150*i)
         
-        plt.show() # Show routes
+        plt.show() 
 
         # Consolidate both West and MSP timetables
         for i in range(len(table_MSP)):

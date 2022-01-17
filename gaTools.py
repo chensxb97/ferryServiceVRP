@@ -19,6 +19,7 @@ Capacity = 14
 MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
 
+# PMX Technique
 def cxPartiallyMatched(ind1, ind2):
     size = min(len(ind1), len(ind2))
     cxPoint1, cxPoint2 = sorted(random.sample(range(size), 2))
@@ -33,7 +34,7 @@ def cxPartiallyMatched(ind1, ind2):
         if gene not in ind2:
             ind2.append(gene)
     return ind1, ind2
-
+    
 def drawGaSolution(route, df, ax):
     print('Drawing GA Solution... ')
     for i in range(len(route)):
@@ -50,6 +51,7 @@ def drawGaSolution(route, df, ax):
             launch_id = str(i+1)
             ax.arrow(Locations[zone_s][0], Locations[zone_s][1], Locations[zone_e][0]-Locations[zone_s][0], Locations[zone_e][1]-Locations[zone_s][1], head_width=10, head_length=10, color = Color[launch_id])
 
+# Exhaustive search algorithm
 def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=0):
 
     # Initialise cost counter and inputs
@@ -115,10 +117,16 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=
         # Tour duration balance constraint
         if subRoute_time > 690: # End time of tour
             total_cost += 100000000
-            
-    fitness = 1.0 / total_cost
+
+    # Maximum number of zones in a tour
+    if len(route) <= 5:
+        fitness = 1.0 / total_cost
+    else:
+        fitness = 0.000000001
+
     return (fitness, )
 
+# Generate route from individual
 def ind2Route(individual, df):
     route = [] # Contains subRoutes
     subRoute = [] # Part of route
@@ -133,11 +141,13 @@ def ind2Route(individual, df):
         route.append(subRoute)
     return route
 
+# Mutation function
 def mutInverseIndex(individual):
     start, stop = sorted(random.sample(range(len(individual)), 2))
     individual = individual[:start] + individual[stop:start-1:-1] + individual[stop+1:]
     return (individual, )
 
+# Print route
 def printRoute(route, merge=False):
     route_str = '0'
     subRoute_count = 0

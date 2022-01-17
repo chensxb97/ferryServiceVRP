@@ -75,7 +75,7 @@ MapGraph.add_weighted_edges_from(Edges)
 # Compute distance matrix
 def computeDistMatrix(df, map):
     numOfCustomers = df.shape[0]
-    distMatrix = np.zeros((numOfCustomers+2, numOfCustomers+2)) # distance matrix[point A][point B]
+    distMatrix = np.zeros((numOfCustomers+2, numOfCustomers+2)) # distMatrix[point A][point B]
     for i in range(numOfCustomers+2):
         for j in range(numOfCustomers+2):
             if i<numOfCustomers and j < numOfCustomers:

@@ -31,6 +31,8 @@ time_start = timer.time()
 # | 0        | 0                   | Port Name | 0      |     TourStart     TourEnd  | Port Name
 # | N        | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd | Port Name
 ################################################################################################
+
+# Linear Programming Model formulation
 def calculateRoute(numOfCustomers, numOfVehicles, df):
    
     # Initialisation
@@ -78,16 +80,13 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     Load = [(i, v) for i in Cc for v in numOfVehicles]
     X = [(i, j, v) for i in Cc for j in Cc for v in numOfVehicles]
     T = [(i, v) for i in Cc for v in numOfVehicles]
-    # Index = [i for i in Cc]
 
     # Load decision variables
     load = mdl.integer_var_dict(Load, name='load')
     x = mdl.binary_var_dict(X, name='x')
     t = mdl.integer_var_dict(T, name='t')
-    # index = mdl.integer_var_dict(Index, name='index')
 
     # Constraints
-
     # All launches depart the depot at time = 0
     mdl.add_constraints(t[0, v] == 0 for v in numOfVehicles)
 
@@ -119,11 +118,8 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     mdl.add_constraints(mdl.sum(x[i, j, v]*travTime[i, j] + x[i, j, v]*servTime[i] for i in Cc for j in C)<=150 for v in numOfVehicles)
     mdl.add_constraints(mdl.sum(x[i, j, v]*travTime[i, j] + x[i, j, v]*servTime[i] for i in C for j in Cc)<=150 for v in numOfVehicles)
 
-    # mdl.add_constraint(index[0] == 0)
-    # mdl.add_constraints(1 <= index[i] for i in C)
-    # mdl.add_constraints(numOfCustomers + 1 >= index[i] for i in C)
-    # mdl.add_constraints(index[i]-index[j]+1<=(numOfCustomers)*(1-x[i, j, v]) for i in C for j in C for v in numOfVehicles if i != j)
-    # mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C) <= 5 for v in numOfVehicles)
+    # Total number of nodes served per launch should be less than 5
+    mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C) <= 5 for v in numOfVehicles)
 
     # Objective function
     obj_function = mdl.sum(travDist[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i!=j) + mdl.sum((servTime[i])*mdl.max(earlyPenalty*(readyTime[i]-t[i,v]),0,latePenalty*(t[i,v]-dueTime[i])) for i in C for v in numOfVehicles)

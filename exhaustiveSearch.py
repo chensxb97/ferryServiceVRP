@@ -88,6 +88,10 @@ def evaluate(individual, df):
         if subRoute_time > 690: # End time of tour
             total_cost += 10000
 
+    # Maximum number of zones in a tour
+    if len(route) > 5:
+        total_cost = 10000
+        
     return total_cost
 
 def main():

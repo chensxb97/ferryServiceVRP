@@ -13,36 +13,27 @@ import pandas as pd
 import time as timer
 
 from docplex.mp.model import Model
-from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
+from gaTools import drawGaSolution, ind2Route
 from GA import runGA
 from lpModel import calculateRoute
-from lpTools import printSolution
-from utils import Color, Edges, Locations, computeDistMatrix, separateTasks
-
-# Define color codes
-Color = {'1': 'b', '2': 'c', '3': 'k', '4': 'm', '5': 'r'}
-
-# Big 'M'
-M = 10000
-
-MUT_PROB = 0.1
-CX_PROB = 0.85
-GENERATION = 80
-POPULATION_SIZE = 100
-Capacity = 14
+from lpTools import drawSolution
+from utils import Edges, computeDistMatrix, separateTasks
 
 MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
 
+# Start timer
 time_start = timer.time()
+
+# Results csv file
 f = open('outputs/result_schedule.csv', 'w+')
 f.write('L1,,L2,,L3,,L4,,L5\n')
 
-##############################################################################################
-#---------------------------------df format---------------------------------------------------
-# | Order ID         |     Request_Type    |    Zone   | Demand |  Start_TW   |   End_TW      
-# | YYYY-MM-DD-ID    | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd
-##############################################################################################
+########################################################################################################
+#---------------------------------df format-------------------------------------------------------------
+# | Order ID         |     Request_Type    |    Zone   | Demand |    Start_TW   |    End_TW  |   Port    
+# | YYYY-MM-DD-ID    | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd | Port Name
+########################################################################################################
 
 # OLD VERSION
 # def calculateRoute(numOfCustomers, numOfVehicles, df): 
@@ -289,9 +280,9 @@ def main():
         if route1 == None: # No solution found
             while solution1_GA != None: # Perform GA
                 solution1_GA = runGA(df_West, 1, 0, len(df_West)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
-                drawGaSolution(ind2Route(solution1_GA, df_West), df_West, ax) # Print GA Solution
+                drawGaSolution(ind2Route(solution1_GA, df_West), df_West, ax) # Draw GA solution
         else:
-            printSolution(solutionSet_West, df_West, ax, fleetsize_West) # Print LP Solution
+            drawSolution(solutionSet_West, df_West, ax, fleetsize_West) # Draw solution
             table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West, 540+150*i) # Generate Timetable
 
         route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
@@ -300,7 +291,7 @@ def main():
                 solution2_GA = runGA(df_MSP, 1, 0, len(df_MSP)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
                 drawGaSolution(ind2Route(solution2_GA, df_MSP), df_MSP, ax)
         else:
-            printSolution(solutionSet_MSP, df_MSP, ax, fleetsize_MSP)
+            drawSolution(solutionSet_MSP, df_MSP, ax, fleetsize_MSP)
             table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP, 540+150*i)
         
         plt.show() # Show routes

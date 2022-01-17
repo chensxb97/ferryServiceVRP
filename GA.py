@@ -15,7 +15,7 @@ import time
 from csv import DictWriter
 from deap import base, creator, tools
 from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
-from utils import Color, Edges, Locations, computeDistMatrix, separateTasks
+from utils import Edges, separateTasks
 
 MUT_PROB = 0.1
 CX_PROB = 0.85
@@ -28,11 +28,13 @@ MapGraph.add_weighted_edges_from(Edges)
 
 def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     cx_pb, mut_pb, n_gen, export_csv=False, customize_data=False):
+    
     fitnessHist = []
     genHistory = []
-
     creator.create('FitnessMax', base.Fitness, weights=(1.0,))
     creator.create('Individual', list, fitness=creator.FitnessMax)
+
+    # Registering GA variables
     toolbox = base.Toolbox()
     # Attribute generator
     toolbox.register('indexes', random.sample, range(1, ind_size + 1), ind_size)
@@ -41,27 +43,34 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     toolbox.register('population', tools.initRepeat, list, toolbox.individual)
     # Operator registering
     toolbox.register('evaluate', evalVRP, df=df, unit_cost=unit_cost, \
-                     init_cost=init_cost)#, wait_cost=wait_cost, delay_cost=delay_cost
+                     init_cost=init_cost)
     toolbox.register('select', tools.selRoulette)
     toolbox.register('mate', cxPartiallyMatched)
     toolbox.register('mutate', mutInverseIndex)
     pop = toolbox.population(n=pop_size)
-    # Results holders for exporting results to CSV file
+
+    # Storing results prior to exporting as csv files
     csv_data = []
+
     print('Start of evolution')
+
     # Evaluate the entire population
     fitnesses = list(map(toolbox.evaluate, pop))
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
+
     print(f'  Evaluated {len(pop)} individuals')
-    distMatrix =computeDistMatrix(df, MapGraph)
+
     # Begin the evolution
     for gen in range(n_gen):
         print(f'-- Generation {gen} --')
+
         # Select the next generation individuals
         offspring = toolbox.select(pop, len(pop))
+
         # Clone the selected individuals
         offspring = list(map(toolbox.clone, offspring))
+
         # Apply crossover and mutation on the offspring
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
             if random.random() < cx_pb:
@@ -72,14 +81,16 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
             if random.random() < mut_pb:
                 toolbox.mutate(mutant)
                 del mutant.fitness.values
+
         # Evaluate the individuals with an invalid fitness
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
         fitnesses = map(toolbox.evaluate, invalid_ind)
         for ind, fit in zip(invalid_ind, fitnesses):
             ind.fitness.values = fit
-        #print(f'  Evaluated {len(invalid_ind)} individuals')
+
         # The population is entirely replaced by the offspring
         pop[:] = offspring
+        
         # Gather all the fitnesses in one list and print the stats
         fits = [ind.fitness.values[0] for ind in pop]
         length = len(pop)
@@ -90,7 +101,8 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
         print(f'  Max {max(fits)}')
         print(f'  Avg {mean}')
         print(f'  Std {std}')
-        # Write data to holders for exporting results to CSV file
+
+        # Write results to csv variables prior to exporting as csv files
         if export_csv:
             csv_row = {
                 'generation': gen,
@@ -103,12 +115,12 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
             csv_data.append(csv_row)
         fitnessHist.append(1/mean)
         genHistory.append(gen)
+
     #plt.scatter(genHistory, fitnessHist)
     print('-- End of (successful) evolution --')
     best_ind = tools.selBest(pop, 1)[0]
     print(f'Best individual: {best_ind}')
     print(f'Fitness: {best_ind.fitness.values[0]}')
-    # printRoute(ind2Route(best_ind, df, distMatrix))
     printRoute(ind2Route(best_ind, df))
     print(f'Total cost: {1 / (best_ind.fitness.values[0])}')
     return best_ind
@@ -135,26 +147,29 @@ def main():
     # Pre-optimisation step
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
 
-    # Run GA for West
+    # Run GA for West Tour
     best_ind1 = runGA(df_West, 1, 0, len(df_West)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
     route1 = ind2Route(best_ind1, df_West)
-    drawGaSolution(route1, df_West, ax)
 
-    # Checkpoint
     mid_time = time.time()
     
-    # Run GA for MSP
+    # Run GA for MSP Tour
     best_ind2 = runGA(df_MSP, 1, 0, len(df_MSP)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
     route2 = ind2Route(best_ind2, df_MSP)
+
+    final_time = time.time()
+
+    # Visualise solutions
+    drawGaSolution(route1, df_West, ax)
     drawGaSolution(route2, df_MSP, ax)
 
-    # Total Runtime
-    total_runtime = time.time()-initial_time
-    print(mid_time-initial_time)
-    print(time.time()-mid_time)
-    print(total_runtime)
+    # Runtimes
+    total_runtime = final_time -initial_time
+    print('Time taken to run GA for West Tour: ', mid_time - initial_time)
+    print('Time taken to run GA for MSP Tour: ', final_time - mid_time)
+    print('Total runtime: ', total_runtime)
 
     plt.show()
 

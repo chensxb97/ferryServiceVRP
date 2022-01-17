@@ -13,8 +13,8 @@ import pandas as pd
 import time as timer
 
 from docplex.mp.model import Model
-from lpTools import printSolution
-from utils import Color, Edges, Locations, computeDistMatrix, separateTasks
+from lpTools import drawSolution
+from utils import Edges, computeDistMatrix, separateTasks
 
 # Big 'M'
 M = 10000
@@ -25,12 +25,12 @@ MapGraph.add_weighted_edges_from(Edges)
 
 time_start = timer.time()
 
-######################################################################################
-#-------------------------df format---------------------------------------------------
-# | Order ID |     Request_Type    |    Zone   | Demand |    Start_TW   |   End_TW 
-# | 0        | 0                   | Port Name | 0      |     TourStart     TourEnd
-# | N        | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd
-######################################################################################
+################################################################################################
+#-------------------------df format-------------------------------------------------------------
+# | Order ID |     Request_Type    |    Zone   | Demand |    Start_TW   |   End_TW   |   Port
+# | 0        | 0                   | Port Name | 0      |     TourStart     TourEnd  | Port Name
+# | N        | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd | Port Name
+################################################################################################
 def calculateRoute(numOfCustomers, numOfVehicles, df):
    
     # Initialisation
@@ -54,19 +54,19 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     travTime = {(i, j): distMatrix[i][j]/velocity for i in Cc for j in Cc}
 
     # Constants for computing penalty costs
-    earlyPenalty = 100
-    latePenalty = 100
+    earlyPenalty = 10
+    latePenalty = 10
 
     # Calculate service times, time windows, pickup and delivery volumes
     p = [0]
     d = [0]
-    servTime = [0]
     readyTime = [0]
+    servTime = [0]
     dueTime = [0]
     for i in range(1, numOfCustomers+1):
-        servTime.append(df.iloc[i, 3]) # Service Time of request
-        readyTime.append(df.iloc[i,4]) # Start of Time window
-        dueTime.append(df.iloc[i,5]) # End of Time Window
+        servTime.append(df.iloc[i, 3]) # Service time of request
+        readyTime.append(df.iloc[i,4]) # Start of time window
+        dueTime.append(df.iloc[i,5]) # End of time window
         if df.iloc[i,1] == 1: # Pickup
             p.append(df.iloc[i,3])
             d.append(0)
@@ -104,7 +104,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     mdl.add_constraints((mdl.sum(x[i, b, v] for i in Cc if i != b) - mdl.sum(x[b, j, v] for j in Cc if b != j)) == 0 for b in C for v in numOfVehicles)
 
     # Launch's initial load equals to the total demand for delivery in the route
-    mdl.add_constraints((load[0, v] == mdl.sum(x[i, j, v]*d[j] for j in C for i in Cc if i != j)) for v in numOfVehicles)
+    mdl.add_constraints((load[0, v] == mdl.sum(x[i, j, v]*d[j] for i in Cc for j in C if i != j)) for v in numOfVehicles)
 
     # Launch's load balance constraint between nodes i and j
     mdl.add_constraints((load[j, v] >= load[i, v] - d[j] + p[j] - M * (1 - x[i, j, v])) for i in Cc for j in C for v in numOfVehicles if i != j)
@@ -146,8 +146,6 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
         for k in numOfVehicles:
             if x[0, 0, k].solution_value == 0:
                 actualVehicle_usage+=1
-        # print(set)
-        # print(obj_function.solution_value)
         return route, set, actualVehicle_usage, obj_function.solution_value
     else:
         print('no feasible solution')
@@ -179,19 +177,28 @@ def main():
     route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, 3, df_MSP)
 
     # Results
-    print('Port West')
-    print(df_West)
-    print('Solution set: ')
-    print(solutionSet_West)
-    print('Obj function cost: ', cost1)
-    printSolution(solutionSet_West, df_West, ax, 3)
+    if route1 == None:
+        print('No solution found for West')
+    else:
+        print('Port West')
+        print(df_West)
+        print('Solution set: ')
+        print(solutionSet_West)
+        print('Obj function cost: ', cost1)
+        drawSolution(solutionSet_West, df_West, ax, 3)
+
     print('\n')
-    print('Port MSP')
-    print(df_MSP)
-    print('Solution set: ')
-    print(solutionSet_MSP)
-    print('Obj function cost: ', cost2)
-    printSolution(solutionSet_MSP, df_MSP, ax, 3)
+
+    if route2 == None:
+        print('No solution found for MSP')
+    else:
+        print('Port MSP')
+        print(df_MSP)
+        print('Solution set: ')
+        print(solutionSet_MSP)
+        print('Obj function cost: ', cost2)
+        drawSolution(solutionSet_MSP, df_MSP, ax, 3)
+    
     plt.show()
 
     print('end')

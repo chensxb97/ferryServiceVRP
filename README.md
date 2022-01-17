@@ -37,19 +37,19 @@ pip install -r requirements.txt
 Change line 2 for the following python scripts to your CPLEX directory: 'yourCplexhome/python/VERSION/PLATFORM'
 
 - schedule.py
-- linear_programming.py
-- exhaustive_search.py
+- lpModel.py
+- exhaustiveSearch.py
 
 #### 2. Test python scripts
 
 Exhaustive search
 ```python
-python exhaustive_search.py
+python exhaustiveSearch.py
 ```
 
 Classic Linear Programming Model
 ```python
-python linear_programming.py
+python lpModel.py
 ```
 
 Genetic Algorithm

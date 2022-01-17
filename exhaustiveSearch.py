@@ -31,10 +31,10 @@ def evaluate(individual, df):
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
 
-     # Each subRoute is a route that is served by a launch
+    # Each subRoute is a route that is served by a launch
     for subRoute in route:
         subRoute_distance = 0
-        subRoute_time = 540 # Start of tour
+        subRoute_time = 540 # Start time of tour
         subRoute_penalty_cost = 0
         lastCustomer_id = 0
         initial_load = 0
@@ -42,50 +42,50 @@ def evaluate(individual, df):
         for i in range(len(subRoute)):
             if df.iloc[i, 1]==2:
                 initial_load += df.iloc[i, 3] # Add delivery load to initial load
-        subRoute_load = initial_load
+        subRoute_load = initial_load # Total delivery load
         
-        # Customer_id = Zone
+        # Customer_id: Zone
         for customer_id in subRoute:
             # Calculate travelling distance between zones
             distance = distMatrix[lastCustomer_id][customer_id]
 
-            # Update sub-route distance
+            # Update sub-route distance and time
             subRoute_distance += distance
+            subRoute_time += distance/0.463
 
             # Time windows
             ready_time = df.iloc[customer_id, 4]
             due_time = df.iloc[customer_id, 5]
 
-            # Update load after pickup or delivery
-            if df.iloc[customer_id, 1]==1:
-                subRoute_load += df.iloc[customer_id, 3]
-            else:
-                subRoute_load -= df.iloc[customer_id, 3]
-
-            # Update subRoute time and compute penalty costs
-            subRoute_time += distance/0.463
+            # Compute penalty costs upon arrival
             subRoute_penalty_cost += max(earlyCost*(ready_time-subRoute_time),0,lateCost*(subRoute_time-due_time))
+
+            # Update load
+            if df.iloc[customer_id, 1]==1:
+                subRoute_load += df.iloc[customer_id, 3] # pickup
+            else:
+                subRoute_load -= df.iloc[customer_id, 3] # delivery
 
             # Update subRoute time after serving customer
             subRoute_time += df.iloc[customer_id, 3]
 
             # Capacity constraint
-            if subRoute_load> Capacity: 
+            if subRoute_load > Capacity: 
                 subRoute_distance = 10000
             
             # Update last customer ID
             lastCustomer_id = customer_id
 
         # Total distance and time computed after returning to the depot
-        return_distance = distMatrix[lastCustomer_id][0]
-        subRoute_distance += return_distance
-        subRoute_time += return_distance/0.463
+        returnToDepot = distMatrix[lastCustomer_id][0]
+        subRoute_distance += returnToDepot
+        subRoute_time += returnToDepot/0.463
 
         # Update total cost
         total_cost = total_cost + subRoute_distance + subRoute_penalty_cost
 
         # Tour duration balance constraint
-        if subRoute_time > 690: # End of tour
+        if subRoute_time > 690: # End time of tour
             total_cost += 10000
 
     return total_cost

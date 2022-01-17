@@ -15,6 +15,7 @@ import time
 from deap import base, creator, tools
 from utils import Color, Edges, Locations, computeDistMatrix
 
+Capacity = 14
 MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
 
@@ -34,84 +35,101 @@ def cxPartiallyMatched(ind1, ind2):
     return ind1, ind2
 
 def drawGaSolution(route, df, ax):
+    print('Drawing GA Solution... ')
     for i in range(len(route)):
         subroute = route[i]
         subroute.append(0)
         subroute.insert(0,0)
-        print(subroute)
+        # print(subroute) # print each of the subRoutes that are served by each launch
         for j in range(len(subroute)-1):
             ax.scatter(Locations[df.iloc[subroute[j], 2]][0], Locations[df.iloc[subroute[j], 2]][1], marker='o')
             zone_s = df.iloc[subroute[j], 2]
-            print(zone_s)
+            # print(zone_s)
             zone_e = df.iloc[subroute[j+1], 2]
-            print(zone_e)
+            # print(zone_e)
             launch_id = str(i+1)
             ax.arrow(Locations[zone_s][0], Locations[zone_s][1], Locations[zone_e][0]-Locations[zone_s][0], Locations[zone_e][1]-Locations[zone_s][1], head_width=10, head_length=10, color = Color[launch_id])
 
 def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=0):
+
+    # Initialise cost counter and inputs
     total_cost = 0
+    earlyCost = 1
+    lateCost = 1
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
-    total_cost = 0
-    Capacity = 14
+
+    # Each subRoute is a route that is served by a launch
     for subRoute in route:
-        #sub_route_time_cost = 0
         subRoute_distance = 0
-        elapsed_time = 0
+        subRoute_time = 540 # Start time of tour
+        subRoute_penalty_cost = 0
         lastCustomer_id = 0
         initial_load = 0
-        service_time = 0
+
         for i in range(len(subRoute)):
             if df.iloc[i, 1]==2:
-                initial_load += df.iloc[i, 3]
-        subRoute_load = initial_load
+                initial_load += df.iloc[i, 3] # Add delivery load to initial load
+        subRoute_load = initial_load # Total delivery load
+        
+        # Customer_id: Zone
         for customer_id in subRoute:
-            # Calculate section distance
+            # Calculate travelling distance between zones
             distance = distMatrix[lastCustomer_id][customer_id]
-            # Update sub-route distance
-            subRoute_distance = subRoute_distance + distance
+
+            # Update sub-route distance and time
+            subRoute_distance += distance
+            subRoute_time += distance/0.463
+
+            # Time windows
+            ready_time = df.iloc[customer_id, 4]
+            due_time = df.iloc[customer_id, 5]
+
+            # Compute penalty costs upon arrival
+            subRoute_penalty_cost += max(earlyCost*(ready_time-subRoute_time),0,lateCost*(subRoute_time-due_time))
+
+            # Update load
             if df.iloc[customer_id, 1]==1:
-                subRoute_load += df.iloc[customer_id, 3]
+                subRoute_load += df.iloc[customer_id, 3] # pickup
             else:
-                subRoute_load -= df.iloc[customer_id, 3]
-            service_time+=df.iloc[customer_id, 3]
-            if subRoute_load> Capacity:
-                #fitness = 0
-                subRoute_distance =1000000
-                subRoute_cost = 1000000
+                subRoute_load -= df.iloc[customer_id, 3] # delivery
+
+            # Update subRoute time after serving customer
+            subRoute_time += df.iloc[customer_id, 3]
+
+            # Capacity constraint
+            if subRoute_load > Capacity: 
+                subRoute_distance = 1000000
+            
             # Update last customer ID
             lastCustomer_id = customer_id
-        # Calculate transport cost
-        subRoute_distance = subRoute_distance + distMatrix[lastCustomer_id][0]
-        #sub_route_transport_cost = init_cost + unit_cost * sub_route_distance
-        # Obtain sub-route cost
-        subRoute_cost = subRoute_distance #sub_route_time_cost +
-        subRoute_time_cost = subRoute_cost/0.463+service_time
+
+        # Total distance and time computed after returning to the depot
+        returnToDepot = distMatrix[lastCustomer_id][0]
+        subRoute_distance += returnToDepot
+        subRoute_time += returnToDepot/0.463
+
         # Update total cost
-        total_cost = total_cost + subRoute_distance
-        if subRoute_time_cost > 150:
+        total_cost = total_cost + subRoute_distance + subRoute_penalty_cost
+
+        # Tour duration balance constraint
+        if subRoute_time > 690: # End time of tour
             total_cost += 100000000
-    if len(route) <= 5:
-        fitness = 1.0 / total_cost
-    else:
-        fitness = 0.000000001
+            
+    fitness = 1.0 / total_cost
     return (fitness, )
 
 def ind2Route(individual, df):
-    #print(individual)
-    route = []
-    # Initialize a sub-route
-    subRoute = []
+    route = [] # Contains subRoutes
+    subRoute = [] # Part of route
     for customer_id in individual:
-        if customer_id < df.shape[0] :
-            # Add to current sub-route
+        if customer_id < df.shape[0] : # Add zone to current subRoute
             subRoute.append(customer_id)
         else:
-            if subRoute != []:
-            # Save current sub-route before return if not empty
+            if subRoute != []: # Save current subRoute before return if not empty
                 route.append(subRoute)
                 subRoute=[]
-    if subRoute !=[]:
+    if subRoute !=[]: # Save any remaining non-empty subRoute
         route.append(subRoute)
     return route
 

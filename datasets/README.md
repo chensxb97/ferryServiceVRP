@@ -7,13 +7,19 @@ This folder contains sample datasets that represent test cases for the optimisat
 Example of a dataset: *[L][H][1].csv*
 
 The first alphabet represents the type of time window.
+
 *Tight(T) -> 5 min time windows*
+
 *Moderate(M) -> 15 min time windows*
+
 *Large(L) -> 30 min time windows*
 
 The second alphabet represents the busyness of the orders.
+
 *Low(L) -> 3 orders per Depot*
+
 *Medium(M) -> 6 orders per Depot*
+
 *High(H) -> 9 orders per Depot*
 
 The digit is a unique label per dataset category.

@@ -6,15 +6,22 @@ This folder contains sample datasets that represent test cases for the optimisat
 
 Each dataset contains booking orders (rows), with the following column labels.
 
-## Columns
+Order_ID: Unique label per booking record
+
+Request_Type: (1) for Pickup, (2) for Delivery
+
+Zone: Unique number that represents each zone location, Z1 - Z30
+
+Demand: Number of passengers per request
+
+Start_TW: Start of time window
+
+End_TW: End of time window
+
+Port: Ferry Terminal
 
 | Order_ID  | Request_Type | Zone | Demand | Start_TW | End_TW | Port |
 | --------- | ------------ |----- | ------ |--------- | ------ | ---- |
-| Content Cell  | Content Cell  |Content Cell  | Content Cell  | Constant|
-| Content Cell  | Content Cell  |Content Cell  | Content Cell  | Constant|
-
-						
-
-
-## Example
+| 1  | 1 | 5 | 4 | 540  | 600  | West|
+| 2  | 2  | 26 | 2 | 600  | 650  | MSP |
 

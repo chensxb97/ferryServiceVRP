@@ -25,7 +25,7 @@ The second alphabet represents the busyness of the orders.
 The digit is a unique label per dataset category.
 There are 5 datasets per category, giving rise to 45 datasets.
 
-The example csv file represents a dataset that features a huge number of orders with large time windows.
+The example csv file represents a dataset that features a higher number of orders per depot with large time windows.
 
 ## Structure of a dataset
 

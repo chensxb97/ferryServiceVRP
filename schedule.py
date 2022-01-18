@@ -31,7 +31,7 @@ f.write('L1,,L2,,L3,,L4,,L5\n')
 
 ##############################################################################################
 #---------------------------------df format---------------------------------------------------
-# | Order ID         |     Request_Type    |    Zone   | Demand |    Start_TW   |    End_TW  | 
+# | Order_ID         |     Request_Type    |    Zone   | Demand |    Start_TW   |    End_TW  | 
 # | YYYY-MM-DD-ID    | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd |
 ##############################################################################################
 
@@ -164,9 +164,10 @@ def printTable(table):
             pass
 
 # Organise the results in a timetable
-def route2Timetable(df, fleetsize, solutionSet, start_time):
+def route2Timetable(df, fleetsize, solutionSet):
     distMatrix = computeDistMatrix(df, MapGraph)
     route_set=[]
+    start_time = df.iloc[0,4]
     for i in range(fleetsize):
         temp_list = []
         for j in range(len(solutionSet)):
@@ -228,7 +229,7 @@ def main():
     fig, ax = plt.subplots()
     dirName = os.path.dirname(os.path.abspath(__file__))
     file = args.file
-    fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
+    fileName = os.path.join(dirName, 'datasets', file + '.csv')
     fleet = int(args.fleetsize)
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])
@@ -274,7 +275,7 @@ def main():
                 drawGaSolution(ind2Route(solution1_GA, df_West), df_West, ax)
         else:
             drawSolution(solutionSet_West, df_West, ax, fleetsize_West)
-            table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West, 540+150*i)
+            table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West)
 
         route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
         if route2 == None:
@@ -283,7 +284,7 @@ def main():
                 drawGaSolution(ind2Route(solution2_GA, df_MSP), df_MSP, ax)
         else:
             drawSolution(solutionSet_MSP, df_MSP, ax, fleetsize_MSP)
-            table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP, 540+150*i)
+            table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP)
         
         plt.show() 
 

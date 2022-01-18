@@ -30,11 +30,13 @@ def evaluate(individual, df):
     lateCost = 1
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
-
+    tourStart = df.iloc[0,4]
+    tourEnd = df.iloc[0,5]
+    
     # Each subRoute is a route that is served by a launch
     for subRoute in route:
         subRoute_distance = 0
-        subRoute_time = 540 # Start time of tour
+        subRoute_time = tourStart # Start time of tour
         subRoute_penalty_cost = 0
         lastCustomer_id = 0
         initial_load = 0
@@ -85,7 +87,7 @@ def evaluate(individual, df):
         total_cost = total_cost + subRoute_distance + subRoute_penalty_cost
 
         # Tour duration balance constraint
-        if subRoute_time > 690: # End time of tour
+        if subRoute_time > tourEnd: # End time of tour
             total_cost += 10000
 
     # Maximum number of zones in a tour
@@ -101,7 +103,7 @@ def main():
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath(__file__))
     file = args.file
-    fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
+    fileName = os.path.join(dirName, 'datasets', file + '.csv')
     fleet = int(args.fleetsize)
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])

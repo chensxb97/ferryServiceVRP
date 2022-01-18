@@ -60,11 +60,13 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=
     lateCost = 1
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
+    tourStart = df.iloc[0, 4]
+    tourEnd = df.iloc[0,5] 
 
     # Each subRoute is a route that is served by a launch
     for subRoute in route:
         subRoute_distance = 0
-        subRoute_time = 540 # Start time of tour
+        subRoute_time = tourStart # Start time of tour
         subRoute_penalty_cost = 0
         lastCustomer_id = 0
         initial_load = 0
@@ -115,7 +117,7 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=
         total_cost = total_cost + subRoute_distance + subRoute_penalty_cost
 
         # Tour duration balance constraint
-        if subRoute_time > 690: # End time of tour
+        if subRoute_time > tourEnd: # End time of tour
             total_cost += 100000000
 
     # Maximum number of zones in a tour

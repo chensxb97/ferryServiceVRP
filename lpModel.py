@@ -27,7 +27,7 @@ time_start = timer.time()
 
 ################################################################################################
 #-------------------------df format-------------------------------------------------------------
-# | Order ID |     Request_Type    |    Zone   | Demand |    Start_TW   |   End_TW   |   Port
+# | Order_ID |     Request_Type    |    Zone   | Demand |    Start_TW   |   End_TW   |   Port
 # | 0        | 0                   | Port Name | 0      |     TourStart     TourEnd  | Port Name
 # | N        | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd | Port Name
 ################################################################################################
@@ -155,7 +155,7 @@ def main():
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath('__file__'))
     file = args.file
-    fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
+    fileName = os.path.join(dirName, 'datasets', file + '.csv')
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])
     fleet = int(args.fleetsize)

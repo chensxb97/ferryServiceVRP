@@ -128,12 +128,12 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='M1', help='file name of the order book that required to be processed')
+    argparser.add_argument('--file', metavar='f', default='L1', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath('__file__'))
     file = args.file
-    fileName = os.path.join(dirName, 'SampleDataset', file + '.csv')
+    fileName = os.path.join(dirName, 'datasets', file + '.csv')
     fleet = int(args.fleetsize)
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])

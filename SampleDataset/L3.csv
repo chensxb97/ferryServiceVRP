@@ -1,9 +1,0 @@
-﻿Order_ID,Request_Type,Zone,Demand,Port
-1,2,Z19,3,West
-2,1,Z33,3,West
-3,1,Z25,8,West
-4,1,Z21,6,West
-5,2,Z01,3,MSP
-6,2,Z05,1,MSP
-7,2,Z09,8,MSP
-8,2,Z11,3,MSP

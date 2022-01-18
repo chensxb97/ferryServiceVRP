@@ -2,6 +2,24 @@
 
 This folder contains sample datasets that represent test cases for the optimisation problem.
 
+## Category naming convention
+
+Example of a dataset: *[L][H][1].csv*
+
+The first alphabet represents the type of time window.
+*Tight(T) -> 5 min time windows*
+*Moderate(M) -> 15 min time windows*
+*Large(L) -> 30 min time windows*
+
+The second alphabet represents the busyness of the orders.
+*Low(L) -> 3 orders per Depot*
+*Medium(M) -> 6 orders per Depot*
+*High(H) -> 9 orders per Depot*
+
+The digit is a unique label per dataset category.
+There are 5 datasets per category, giving rise to 45 datasets.
+
+The example csv file represents a dataset that features a huge number of orders with large time windows.
 
 ## Structure of a dataset
 
@@ -12,19 +30,17 @@ This folder contains sample datasets that represent test cases for the optimisat
 
 Each dataset contains booking orders (rows), with the following column labels.
 
-*Order_ID: Unique label per booking record*
+Order_ID: *Unique label per booking record*
 
-*Request_Type: (1) for Pickup, (2) for Delivery*
+Request_Type: *(1) for Pickup, (2) for Delivery*
 
-*Zone: Unique number that represents each zone location, Z1 - Z30*
+Zone: *Unique number that represents each zone location, Z1 - Z30*
 
-*Demand: Number of passengers per request*
+Demand: *Number of passengers per request*
 
-*Start_TW: Start of time window, Eg. 540 represents 09:00, where 540 = 9 * 60 minutes*
+Start_TW: *Start of time window, Eg. 540 represents 09:00, where 540 = 9 * 60 minutes*
 
-*End_TW: End of time window*
+End_TW: *End of time window*
 
-*Port: Ferry Terminal*
-
-
+Port: *Ferry Terminal*
 

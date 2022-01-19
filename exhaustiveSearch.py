@@ -59,7 +59,7 @@ def evaluate(individual, df):
             ready_time = df.iloc[customer_id, 4]
             due_time = df.iloc[customer_id, 5]
 
-            # Compute penalty costs upon arrival
+            # Compute penalty costs
             subRoute_penalty_cost += max(earlyCost*(ready_time-subRoute_time),0,lateCost*(subRoute_time-due_time))
 
             # Update load
@@ -98,7 +98,7 @@ def evaluate(individual, df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='L1', help='file name of the order book that required to be processed')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath(__file__))

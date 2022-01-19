@@ -128,7 +128,7 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='L1', help='file name of the order book that required to be processed')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath('__file__'))

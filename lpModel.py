@@ -17,7 +17,7 @@ from lpTools import drawSolution
 from utils import Edges, computeDistMatrix, separateTasks
 
 # Big 'M'
-M = 10000
+M = 1000
 Capacity = 14
 
 MapGraph = nx.Graph()
@@ -56,8 +56,8 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     travTime = {(i, j): distMatrix[i][j]/velocity for i in Cc for j in Cc}
 
     # Constants for computing penalty costs
-    earlyPenalty = 10
-    latePenalty = 10
+    earlyPenalty = 1
+    latePenalty = 1
 
     # Calculate service times, time windows, pickup and delivery volumes
     p = [0]
@@ -149,7 +149,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='example', help='file name of the order book that required to be processed')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='file name of the order book that required to be processed')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='starting time of optimization, stated in minutes; default at 9AM (540)')
     args = argparser.parse_args()

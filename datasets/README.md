@@ -23,7 +23,7 @@ The second alphabet represents the type of time window.
 *Large(L) -> 30 min time windows*
 
 The digit is a unique label per dataset category.
-There are 4 datasets per category, hence, a total of 36 datasets for 9 different categories.
+There are 3 datasets per category, hence, a total of 27 datasets for 9 different categories.
 
 The example csv file represents a dataset that features a High number of orders per depot with Large time windows.
 

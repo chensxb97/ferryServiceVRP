@@ -39,7 +39,7 @@ Change line 2 for the following python scripts to your CPLEX directory: 'yourCpl
 - exhaustiveSearch.py
 - lpModel.py
 - schedule.py
-- 
+
 #### 2. Test python scripts
 
 Exhaustive search

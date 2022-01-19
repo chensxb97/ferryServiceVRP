@@ -36,10 +36,10 @@ pip install -r requirements.txt
 
 Change line 2 for the following python scripts to your CPLEX directory: 'yourCplexhome/python/VERSION/PLATFORM'
 
-- schedule.py
-- lpModel.py
 - exhaustiveSearch.py
-
+- lpModel.py
+- schedule.py
+- 
 #### 2. Test python scripts
 
 Exhaustive search

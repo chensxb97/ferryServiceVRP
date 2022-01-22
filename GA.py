@@ -2,17 +2,13 @@ import sys
 sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/site-packages')
 
 import argparse
-import datetime
-import io
 import matplotlib.pyplot as plt
 import networkx as nx
-import numpy as np
 import os
 import pandas as pd
 import random
 import time
 
-from csv import DictWriter
 from deap import base, creator, tools
 from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
 from utils import Edges, separateTasks
@@ -128,8 +124,8 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LT1', help='file name of the order book that required to be processed')
-    argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
+    argparser.add_argument('--file', metavar='f', default='MT1', help='File name of test case')
+    argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath('__file__'))
     file = args.file

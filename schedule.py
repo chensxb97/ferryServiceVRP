@@ -3,16 +3,12 @@ sys.path.append('C:/Program Files/IBM/ILOG/CPLEX_Studio201/cplex/python/3.7/x64_
 sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/site-packages')
 
 import argparse
-import datetime
-import docplex.mp
 import matplotlib.pyplot as plt
 import networkx as nx
-import numpy as np
 import os
 import pandas as pd
 import time as timer
 
-from docplex.mp.model import Model
 from gaTools import drawGaSolution, ind2Route
 from GA import runGA
 from lpModel import calculateRoute
@@ -34,112 +30,6 @@ f.write('L1,,L2,,L3,,L4,,L5\n')
 # | Order_ID         |     Request_Type    |    Zone   | Demand |    Start_TW   |    End_TW  | 
 # | YYYY-MM-DD-ID    | 1-pickup 2-delivery | Zone Name | Amount | TourStart <=  x <= TourEnd |
 ##############################################################################################
-
-# OLD VERSION
-# def calculateRoute(numOfCustomers, numOfVehicles, df): 
-#     print(df)
-#     velocity = 0.463 #knot
-    
-#     # create enumarator of 1 - N
-#     C = [i for i in range(1, numOfCustomers + 1)]
-#     # create enumarator of 0 - N
-#     Cc = [0] + C
-#     # create enumarator of 1 - V
-#     numOfVehicles = [i for i in range(1, numOfVehicles + 1)]
-    
-#     # get distance matrix
-#     distMatrix = computeDistMatrix(df, MapGraph)
-    
-#     mdl = Model('VRP')
-#     # create variables
-#     p = [0]
-#     d = [0]
-#     ser = [0]
-    
-#     # pickup & delivery volume
-#     for i in range(1, numOfCustomers+1):
-#         ser.append(df.iloc[i, 3])
-#         if df.iloc[i,1] == 2:
-#             d.append(df.iloc[i,3])
-#             p.append(0)
-#         else:
-#             d.append(0)
-#             p.append(df.iloc[i,3])
-
-#     # Variable set
-#     Load = [(i, v) for i in Cc for v in numOfVehicles]
-#     Index = [i for i in Cc]
-#     X = [(i, j, v) for i in Cc for j in Cc for v in numOfVehicles]
-
-#     # Calculate distance and time
-#     cost = {(i, j): distMatrix[i][j] for i in Cc for j in Cc}
-#     time = {(i, j): distMatrix[i][j]/velocity for i in Cc for j in Cc}
-    
-#     # Creating variables
-#     x = mdl.binary_var_dict(X, name='x')
-#     load = mdl.integer_var_dict(Load, name='load')
-#     index = mdl.integer_var_dict(Index, name='index')
-    
-#     # Defining Constraints
-    
-#     # All vehicles will start at the depot
-#     mdl.add_constraints(mdl.sum(x[0, j, v] for j in Cc) == 1 for v in numOfVehicles)
-    
-#     # All vehicles will return to depot
-#     mdl.add_constraints(mdl.sum(x[i, 0, v] for i in Cc) == 1 for v in numOfVehicles)
-    
-#     # All nodes will only be visited once by one vehicle
-#     mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for v in numOfVehicles if j != i) == 1 for j in C)
-    
-#     # Vehicle will not terminate route anywhere except the depot
-#     mdl.add_constraints((mdl.sum(x[i, b, v] for i in Cc if i != b) - mdl.sum(x[b, j, v] for j in Cc if b != j)) == 0 for b in C for v in numOfVehicles)
-    
-#     mdl.add_constraint(index[0] == 0)
-#     mdl.add_constraints(1 <= index[i] for i in C)
-#     mdl.add_constraints(numOfCustomers + 1 >= index[i] for i in C)
-#     mdl.add_constraints(index[i]-index[j]+1<=(numOfCustomers)*(1-x[i, j, v]) for i in C for j in C for v in numOfVehicles if i != j)
-    
-#     # Vehicle initial load is the total demand for delivery in the route
-#     mdl.add_constraints((load[0, v] == mdl.sum(x[i, j, v]*d[j] for j in C for i in Cc if i != j)) for v in numOfVehicles)
-    
-#     mdl.add_constraints((load[j, v] >= load[i, v] - d[j] + p[j] - M * (1 - x[i, j, v])) for i in Cc for j in C for v in numOfVehicles if i != j)
-    
-#     # Total load does not exceed vehicle capacity
-#     mdl.add_constraints(load[j, v] <= Capacity for j in Cc for v in numOfVehicles)
-    
-#     mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*ser[i] for i in Cc for j in C)<=120 for v in numOfVehicles)
-#     mdl.add_constraints(mdl.sum(x[i, j, v]*time[i, j] + x[i, j, v]*ser[i] for i in C for j in Cc)<=120 for v in numOfVehicles)
-    
-#     mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C)<=5 for v in numOfVehicles)
-#     # Objective Function
-#     # Minimize the total loss of revenue + cost
-#     obj_function = mdl.sum(cost[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i !=j)
-    
-#     # Set time limit
-#     mdl.parameters.timelimit.set(60)
-    
-#     # Solve
-#     mdl.minimize(obj_function)
-#     time_solve = timer.time()
-#     solution = mdl.solve(log_output=True)
-#     time_end = timer.time()
-#     # print(solution)
-#     running_time = round(time_end - time_solve, 2)
-#     elapsed_time = round(time_end - time_start, 2)
-    
-#     actualVehicle_usage = 0
-#     if solution != None:
-#         route = [x[i, j, k] for i in Cc for j in Cc for k in numOfVehicles if x[i, j, k].solution_value == 1]
-#         set = [[i, j, k] for i in Cc for j in Cc for k in numOfVehicles if x[i, j, k].solution_value == 1]
-#         for k in numOfVehicles:
-#             if x[0, 0, k].solution_value == 0:
-#                 actualVehicle_usage+=1
-#         print(set)
-#         print(obj_function.solution_value)
-#         return route, set, actualVehicle_usage, obj_function.solution_value
-#     else:
-#         print('no feasible solution')
-#         return None, None, None, None
 
 # Convert minutes to time
 def minutes2Time(minutes):
@@ -163,7 +53,7 @@ def printTable(table):
         except IndexError or KeyError or TypeError:
             pass
 
-# Organise the results in a timetable
+# Organise routes in a timetable
 def route2Timetable(df, fleetsize, solutionSet):
     distMatrix = computeDistMatrix(df, MapGraph)
     route_set=[]
@@ -222,9 +112,9 @@ def route2Timetable(df, fleetsize, solutionSet):
     
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='order', help='file name of the order book that required to be processed')
-    argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
-    argparser.add_argument('--time', metavar = 't', default='540', help='starting time of optimization, stated in minutes; default at 9AM (540)') #0900 = 60*9 = 540
+    argparser.add_argument('--file', metavar='f', default='order', help='File name of the order book')
+    argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
+    argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)') #0900 = 60*9 = 540
     args = argparser.parse_args()
     fig, ax = plt.subplots()
     dirName = os.path.dirname(os.path.abspath(__file__))
@@ -239,10 +129,10 @@ def main():
     for i in range(len(order_df)):
         print(order_df.iloc[i,0][11:13])
         order_df.iloc[i,0]=int(order_df.iloc[i,0][11:13]) # Truncate orderId to last 2 digits
-        if int(order_df.iloc[i,2][1:3])>16: # Index [1:3] refers to the zone number
-            port.append('West')
+        if int(order_df.iloc[i,2][1:3])<=16: # Index [1:3] refers to the zone number
+            port.append('MSP')
         else:
-            port.append('MSP') # Zones 1-16 belong to Marina South Pier, while Zones 17-30 belong to West Coast Pier 
+            port.append('West') # Zones 1-16 belong to Marina South Pier, while Zones 17-30 belong to West Coast Pier 
     order_df['Port']=port
 
     # Split the orders according to tours, also ignores orders with unfeasible time windows
@@ -251,8 +141,8 @@ def main():
     i=1
     for tour in tours:
         df = order_df[(order_df['Start_TW'] >= tour[0]) & (order_df['End_TW'] <= tour[1])]
-        if not df.empty:
-            df_tours.append((tour,df))
+        if not df.empty: # Store tour
+            df_tours.append((tour,df)) 
     
     imgPath = os.path.join(dirName, 'Port_Of_Singapore_Anchorages_Chartlet.png')
     img = plt.imread(imgPath)
@@ -274,7 +164,7 @@ def main():
                 solution1_GA = runGA(df_West, 1, 0, len(df_West)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
                 drawGaSolution(ind2Route(solution1_GA, df_West), df_West, ax)
         else:
-            drawSolution(solutionSet_West, df_West, ax, fleetsize_West)
+            drawSolution(solutionSet_West, df_West, ax)
             table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West)
 
         route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
@@ -283,7 +173,7 @@ def main():
                 solution2_GA = runGA(df_MSP, 1, 0, len(df_MSP)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
                 drawGaSolution(ind2Route(solution2_GA, df_MSP), df_MSP, ax)
         else:
-            drawSolution(solutionSet_MSP, df_MSP, ax, fleetsize_MSP)
+            drawSolution(solutionSet_MSP, df_MSP, ax)
             table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP)
         
         plt.show() 

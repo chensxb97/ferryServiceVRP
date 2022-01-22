@@ -3,18 +3,12 @@ sys.path.append('C:/Program Files/IBM/ILOG/CPLEX_Studio201/cplex/python/3.7/x64_
 sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/site-packages')
 
 import argparse
-import datetime
-import docplex.mp
-from docplex.mp.model import Model
-import matplotlib.pyplot as plt
 import networkx as nx
-import numpy as np
 import os
 import pandas as pd
-import time as timer
 
 from gaTools import ind2Route
-from itertools import chain, permutations
+from itertools import permutations
 from utils import Edges, computeDistMatrix, separateTasks
 
 Capacity = 14
@@ -26,13 +20,13 @@ def evaluate(individual, df):
 
     # Initialise cost counter and inputs
     total_cost = 0
-    earlyCost = 1
-    lateCost = 1
+    wait_cost = 1
+    delay_cost = 1
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
     tourStart = df.iloc[0,4]
     tourEnd = df.iloc[0,5]
-    
+
     # Each subRoute is a route that is served by a launch
     for subRoute in route:
         subRoute_distance = 0
@@ -56,20 +50,22 @@ def evaluate(individual, df):
             subRoute_time += distance/0.463
 
             # Time windows
+            load = serv_time = df.iloc[customer_id,3]
             ready_time = df.iloc[customer_id, 4]
             due_time = df.iloc[customer_id, 5]
-
+            
             # Compute penalty costs
-            subRoute_penalty_cost += max(earlyCost*(ready_time-subRoute_time),0,lateCost*(subRoute_time-due_time))
-
+            subRoute_penalty_cost += \
+                max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
+            
             # Update load
             if df.iloc[customer_id, 1]==1:
-                subRoute_load += df.iloc[customer_id, 3] # pickup
+                subRoute_load += load # pickup
             else:
-                subRoute_load -= df.iloc[customer_id, 3] # delivery
+                subRoute_load -= load # delivery
 
             # Update subRoute time after serving customer
-            subRoute_time += df.iloc[customer_id, 3]
+            subRoute_time += serv_time
 
             # Capacity constraint
             if subRoute_load > Capacity: 
@@ -98,8 +94,8 @@ def evaluate(individual, df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LT1', help='file name of the order book that required to be processed')
-    argparser.add_argument('--fleetsize', metavar='l', default='5', help='number of launches available')
+    argparser.add_argument('--file', metavar='f', default='MT1', help='File name of test case')
+    argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath(__file__))
     file = args.file
@@ -111,7 +107,7 @@ def main():
     # Pre-optimistion step
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
 
-    # Evalutate minimum cost for West
+    # Evaluate minimum cost for West
     list1 = [i for i in range(1, df_West.shape[0]+fleetsize_West)]
     perm1 = permutations(list1)
     cost1 = 10000
@@ -126,7 +122,6 @@ def main():
     perm2 = permutations(list2)
     cost2 = 10000
     for i in list(perm2):
-        #print(i)
         cost = evaluate(i,df_MSP)
         if cost < cost2:
             cost2 = cost

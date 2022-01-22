@@ -1,18 +1,9 @@
 import sys
 sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/site-packages')
 
-import argparse
-import datetime
-import io
-import matplotlib.pyplot as plt
 import networkx as nx
-import numpy as np
-import os
-import pandas as pd
 import random
-import time
 
-from deap import base, creator, tools
 from utils import Color, Edges, Locations, computeDistMatrix
 
 Capacity = 14
@@ -41,23 +32,20 @@ def drawGaSolution(route, df, ax):
         subroute = route[i]
         subroute.append(0)
         subroute.insert(0,0)
-        # print(subroute) # print each of the subRoutes that are served by each launch
         for j in range(len(subroute)-1):
             ax.scatter(Locations[df.iloc[subroute[j], 2]][0], Locations[df.iloc[subroute[j], 2]][1], marker='o')
             zone_s = df.iloc[subroute[j], 2]
-            # print(zone_s)
             zone_e = df.iloc[subroute[j+1], 2]
-            # print(zone_e)
             launch_id = str(i+1)
-            ax.arrow(Locations[zone_s][0], Locations[zone_s][1], Locations[zone_e][0]-Locations[zone_s][0], Locations[zone_e][1]-Locations[zone_s][1], head_width=10, head_length=10, color = Color[launch_id])
+            ax.arrow(Locations[zone_s][0], Locations[zone_s][1], \
+                Locations[zone_e][0]-Locations[zone_s][0], Locations[zone_e][1]-Locations[zone_s][1], \
+                    head_width=10, head_length=10, color = Color[launch_id])
 
-# Exhaustive search algorithm
-def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=0):
+# Evaluation algorithm
+def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=1, delay_cost=1):
 
     # Initialise cost counter and inputs
     total_cost = 0
-    earlyCost = 1
-    lateCost = 1
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
     tourStart = df.iloc[0, 4]
@@ -86,20 +74,21 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=
             subRoute_time += distance/0.463
 
             # Time windows
+            load = serv_time = df.iloc[customer_id,3]
             ready_time = df.iloc[customer_id, 4]
             due_time = df.iloc[customer_id, 5]
-
-            # Compute penalty costs upon arrival
-            subRoute_penalty_cost += max(earlyCost*(ready_time-subRoute_time),0,lateCost*(subRoute_time-due_time))
-
+            
+            # Compute penalty costs
+            subRoute_penalty_cost += max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
+            
             # Update load
             if df.iloc[customer_id, 1]==1:
-                subRoute_load += df.iloc[customer_id, 3] # pickup
+                subRoute_load += load # pickup
             else:
-                subRoute_load -= df.iloc[customer_id, 3] # delivery
+                subRoute_load -= load # delivery
 
             # Update subRoute time after serving customer
-            subRoute_time += df.iloc[customer_id, 3]
+            subRoute_time += serv_time
 
             # Capacity constraint
             if subRoute_load > Capacity: 
@@ -130,7 +119,7 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=0, delay_cost=
 
 # Generate route from individual
 def ind2Route(individual, df):
-    route = [] # Contains subRoutes
+    route = []
     subRoute = [] # Part of route
     for customer_id in individual:
         if customer_id < df.shape[0] : # Add zone to current subRoute

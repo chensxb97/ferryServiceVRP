@@ -116,13 +116,19 @@ def main():
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)') #0900 = 60*9 = 540
     args = argparser.parse_args()
-    fig, ax = plt.subplots()
+
     dirName = os.path.dirname(os.path.abspath(__file__))
     file = args.file
     fileName = os.path.join(dirName, 'datasets', file + '.csv')
-    fleet = int(args.fleetsize)
+    
+    outputsDir = os.path.join(dirName, 'outputs')
+    outputsPlotsDir = os.path.join(outputsDir, 'plots')
+    if not os.path.exists(outputsPlotsDir):
+        os.mkdir(outputsPlotsDir)
+
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])
+    fleet = int(args.fleetsize)
 
     # New 'Port' column
     port = []
@@ -155,7 +161,7 @@ def main():
         df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df_tours[i], fleet)
 
         # Perform LP
-        route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, fleetsize_West, df_West) 
+        route1, solutionSet_West, _, _, _, _ = calculateRoute(len(df_West)-1, fleetsize_West, df_West) 
 
         # If no solution is found using LP, run GA
         # After solution is drawn, we generate a timetable for each route
@@ -167,7 +173,7 @@ def main():
             drawSolution(solutionSet_West, df_West, ax)
             table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West)
 
-        route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
+        route2, solutionSet_MSP, _, _, _, _= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
         if route2 == None:
             while solution2_GA != None:
                 solution2_GA = runGA(df_MSP, 1, 0, len(df_MSP)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
@@ -177,6 +183,8 @@ def main():
             table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP)
         
         plt.show() 
+        outputPlot = os.path.join(outputsPlotsDir,file + '_' + str(i+1) + '_schedule.png')
+        fig.savefig(outputPlot)
 
         # Consolidate both West and MSP timetables
         for i in range(len(table_MSP)):

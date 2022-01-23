@@ -89,12 +89,20 @@ def evaluate(individual, df):
     # Maximum number of zones in a tour
     if len(route) > 5:
         total_cost = 10000
-        
-    return total_cost
 
+    return total_cost, route
+
+def printOptimalRoute(best_route):
+    for launch, launchRoute in enumerate(best_route,1):
+        routeStr = '0'
+        for zone in launchRoute:
+            routeStr+= ' - '
+            routeStr+= str(zone)
+        routeStr+= ' - 0'
+        print('Launch',launch, ':', routeStr)
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='MT1', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath(__file__))
@@ -108,27 +116,41 @@ def main():
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
 
     # Evaluate minimum cost for West
+    print('Port West')
     list1 = [i for i in range(1, df_West.shape[0]+fleetsize_West)]
     perm1 = permutations(list1)
     cost1 = 10000
-    for i in list(perm1):
-        cost = evaluate(i,df_West)
+    best_route1 = []
+    all_routes = list(perm1)
+    for i in all_routes:
+        cost, route = evaluate(i,df_West)
         if cost < cost1:
             cost1 = cost
-    print('Minimum cost for West tour:', cost1)
+            best_route1 = route
+    print('Optimal routes:')
+    printOptimalRoute(best_route1)
+    print('Minimum cost:', cost1)
+
+    print('\n')
 
     # Evaluate minimum cost for MSP 
+    print('Port MSP')
     list2 = [i for i in range(1, df_MSP.shape[0]+fleetsize_MSP)]
     perm2 = permutations(list2)
     cost2 = 10000
-    for i in list(perm2):
-        cost = evaluate(i,df_MSP)
+    best_route2 = []
+    all_routes = list(perm2)
+    for i in all_routes:
+        cost, route = evaluate(i,df_MSP)
         if cost < cost2:
             cost2 = cost
-    print('Minimum cost for MSP tour:', cost2)
+            best_route2 = route
+    print('Optimal routes: ')
+    printOptimalRoute(best_route2)
+    print('Minimum cost:', cost2)
+    
 
 if __name__ == '__main__':
-
     try:
         main()
     except KeyboardInterrupt:

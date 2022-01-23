@@ -11,6 +11,7 @@ import time
 
 from deap import base, creator, tools
 from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
+# from memory_profiler import profile
 from utils import Edges, separateTasks
 
 MUT_PROB = 0.1
@@ -23,6 +24,7 @@ MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
 
 # GA Algorithm
+# @profile # Track memory usage
 def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     cx_pb, mut_pb, n_gen, export_csv=False, customize_data=False):
     
@@ -116,20 +118,32 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     #plt.scatter(genHistory, fitnessHist)
     print('-- End of (successful) evolution --')
     best_ind = tools.selBest(pop, 1)[0]
+    summaryGA(best_ind,df)
+
+    return best_ind
+
+def summaryGA(best_ind,df):
+
     print(f'Best individual: {best_ind}')
     print(f'Fitness: {best_ind.fitness.values[0]}')
     printRoute(ind2Route(best_ind, df))
     print(f'Total cost: {1 / (best_ind.fitness.values[0])}')
-    return best_ind
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='MT1', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='LT2', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath('__file__'))
     file = args.file
     fileName = os.path.join(dirName, 'datasets', file + '.csv')
+
+    outputsDir = os.path.join(dirName, 'outputs')
+    outputsPlotsDir = os.path.join(outputsDir, 'plots', 'GA')
+    if not os.path.exists(outputsPlotsDir):
+        os.mkdir(outputsPlotsDir)
+    outputPlot = os.path.join(outputsPlotsDir, file+ '.png')
+
     fleet = int(args.fleetsize)
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])
@@ -147,28 +161,36 @@ def main():
     # Run GA for West Tour
     best_ind1 = runGA(df_West, 1, 0, len(df_West)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
-    route1 = ind2Route(best_ind1, df_West)
-
     mid_time = time.time()
     
     # Run GA for MSP Tour
     best_ind2 = runGA(df_MSP, 1, 0, len(df_MSP)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
-    route2 = ind2Route(best_ind2, df_MSP)
-
     final_time = time.time()
 
+    # Summary of results
+    print('\n')
+    print(file)
+    print('Port West')
+    summaryGA(best_ind1,df_West)
+    print('Time taken to run GA for West: ', mid_time - initial_time)
+    print('\nPort MSP')
+    summaryGA(best_ind2,df_MSP)
+    print('Time taken to run GA for MSP: ', final_time - mid_time)
+    print('\n')
+
     # Visualise solutions
+    route1 = ind2Route(best_ind1, df_West)
+    route2 = ind2Route(best_ind2, df_MSP)
     drawGaSolution(route1, df_West, ax)
     drawGaSolution(route2, df_MSP, ax)
 
-    # Runtimes
     total_runtime = final_time -initial_time
-    print('Time taken to run GA for West Tour: ', mid_time - initial_time)
-    print('Time taken to run GA for MSP Tour: ', final_time - mid_time)
+    
     print('Total runtime: ', total_runtime)
-
+    
     plt.show()
+    fig.savefig(outputPlot)
 
 if __name__ == '__main__':
     try:

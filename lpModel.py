@@ -10,7 +10,7 @@ import pandas as pd
 import time as timer
 
 from docplex.mp.model import Model
-from lpTools import drawSolution
+from lpTools import drawSolution, printRoutes
 from utils import Edges, computeDistMatrix, separateTasks
 
 # Big 'M'
@@ -141,10 +141,10 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
         for k in numOfVehicles:
             if x[0, 0, k].solution_value == 0:
                 actualVehicle_usage+=1
-        return route, set, actualVehicle_usage, obj_function.solution_value
+        return route, set, actualVehicle_usage, obj_function.solution_value, running_time, elapsed_time
     else:
         print('no feasible solution')
-        return None, None, None, None
+        return None, None, None, None, None, None
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
@@ -152,9 +152,17 @@ def main():
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)')
     args = argparser.parse_args()
+
     dirName = os.path.dirname(os.path.abspath('__file__'))
     file = args.file
     fileName = os.path.join(dirName, 'datasets', file + '.csv')
+
+    outputsDir = os.path.join(dirName, 'outputs')
+    outputsPlotsDir = os.path.join(outputsDir, 'plots', 'lpModel')
+    if not os.path.exists(outputsPlotsDir):
+        os.mkdir(outputsPlotsDir)
+    outputPlot = os.path.join(outputsPlotsDir,file+ '.png')
+    
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])
     fleet = int(args.fleetsize)
@@ -168,35 +176,40 @@ def main():
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
 
     # Run LP Model
-    route1, solutionSet_West, used_fleet_West, cost1 = calculateRoute(len(df_West)-1, fleetsize_West, df_West)
-    route2, solutionSet_MSP, used_fleet_MSP, cost2= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
+    route1, solutionSet_West, _, cost1, running_time1, _ = calculateRoute(len(df_West)-1, fleetsize_West, df_West)
+    route2, solutionSet_MSP, _, cost2, running_time2, elapsed_time = calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
 
     # Results
+    print('\n')
+    print(file)
+    print('Port West')
     if route1 == None:
-        print('No solution found for West Pier')
+        print('No solution found')
     else:
-        print('Dataset for Port West')
-        print(df_West)
+        # print(df_West)
         print('Solution set: ')
         print(solutionSet_West)
+        printRoutes(solutionSet_West)
         print('Objective function cost: ', cost1)
+        print('Time taken to solve: ', running_time1)
         drawSolution(solutionSet_West, df_West, ax)
 
-    print('\n')
-
+    print('\nPort MSP')
     if route2 == None:
-        print('No solution found for MSP')
+        print('No solution found')
     else:
-        print('Dataset for Port MSP:')
-        print(df_MSP)
+        # print(df_MSP)
         print('Solution set: ')
         print(solutionSet_MSP)
+        printRoutes(solutionSet_MSP)
         print('Objective function cost: ', cost2)
+        print('Time taken to solve: ', running_time2)
         drawSolution(solutionSet_MSP, df_MSP, ax)
-    
-    plt.show()
 
-    print('end')
+    print('\nTotal time taken: ', elapsed_time)
+
+    plt.show()
+    fig.savefig(outputPlot)
 
 if __name__ == '__main__':
 
@@ -206,13 +219,3 @@ if __name__ == '__main__':
         pass
     finally:
         print('\ndone.')
-
-
-
-
-
-
-
-
-
-

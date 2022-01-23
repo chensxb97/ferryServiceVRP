@@ -1,0 +1,33 @@
+LT1
+Port West
+Best individual: [2, 1, 4, 3, 5]
+Fitness: 0.003599331441676059
+Launch 1: 0 - 2 - 1 - 0
+Launch 2: 0 - 3 - 0
+Total cost: 277.8293736501081
+Time taken to run GA for West:  14.042838335037231
+
+Port MSP
+Best individual: [1, 4, 5, 2, 3]
+Fitness: 0.0025455561077952263
+Launch 1: 0 - 1 - 0
+Launch 2: 0 - 2 - 3 - 0
+Total cost: 392.8414686825059
+Time taken to run GA for MSP:  11.81505298614502
+
+LT2
+Port West
+Best individual: [1, 4, 5, 3, 2]
+Fitness: 0.0022964994008269415
+Launch 1: 0 - 1 - 0
+Launch 2: 0 - 3 - 2 - 0
+Total cost: 435.44535637148965
+Time taken to run GA for West:  12.10865306854248
+
+Port MSP
+Best individual: [1, 5, 2, 3, 4]
+Fitness: 0.004862740485097744
+Launch 1: 0 - 1 - 0
+Launch 2: 0 - 2 - 3 - 0
+Total cost: 205.64535637149046
+Time taken to run GA for MSP:  11.009531021118164

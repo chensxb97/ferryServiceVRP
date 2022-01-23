@@ -25,9 +25,9 @@ def cxPartiallyMatched(ind1, ind2):
         if gene not in ind2:
             ind2.append(gene)
     return ind1, ind2
-    
+
+# Visualise solution on anchorage map
 def drawGaSolution(route, df, ax):
-    print('Drawing GA Solution... ')
     for i in range(len(route)):
         subroute = route[i]
         subroute.append(0)
@@ -150,7 +150,7 @@ def printRoute(route, merge=False):
             route_str = f'{route_str} - {customer_id}'
         subRoute_str = f'{subRoute_str} - 0'
         if not merge:
-            print(f'  Vehicle {subRoute_count}\'s route: {subRoute_str}')
+            print(f'Launch {subRoute_count}: {subRoute_str}')
         route_str = f'{route_str} - 0'
     if merge:
         print(route_str)

@@ -4,7 +4,7 @@ This folder contains sample datasets that represent test cases for the optimisat
 
 ## Dataset naming convention
 
-Example of a dataset: *[H][L][1].csv*
+Example of a dataset: *HL1.csv*
 
 The first alphabet represents the busyness of the depots.
 
@@ -25,7 +25,7 @@ The second alphabet represents the type of time window.
 The digit is a unique label per dataset category.
 There are 3 datasets per category, hence, a total of 27 datasets for 9 different categories.
 
-The example csv file represents a dataset that features a High number of orders per depot with Large time windows.
+H1.csv is a dataset characterised with a High number of orders per depot with Large time windows.
 
 ## Structure of dataset
 
@@ -38,9 +38,9 @@ Each dataset contains booking orders (rows), with the following column labels.
 
 Order_ID: *Unique label per booking record*
 
-Request_Type: * Pickup(1), Delivery(2)*
+Request_Type: *Pickup(1), Delivery(2)*
 
-Zone: *Zone location(Z1 - Z30)*
+Zone: *location(Port West, Port MSP, Z1 - Z30)*
 
 Demand: *Number of passengers per request*
 

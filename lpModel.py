@@ -85,8 +85,8 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
     # Constraints
 
-    # All launches depart the depot at time = 0
-    mdl.add_constraints(t[0, v] == 0 for v in numOfVehicles)
+    # All launches depart the depot at tour depature time
+    mdl.add_constraints(t[0, v] == df.iloc[0,4] for v in numOfVehicles)
 
     # All launches must start at the depot
     mdl.add_constraints(mdl.sum(x[0, j, v] for j in Cc) == 1 for v in numOfVehicles)
@@ -111,7 +111,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
     # Launch's travelling time balance constraint between nodes i and j
     mdl.add_constraints(t[j,v] >= t[i,v] + servTime[i] + travTime[i,j] - M *(1 - x[i,j,v]) for i in Cc for j in C for v in numOfVehicles if i != j)
-
+    
     # Total tour duration is strictly less than 2.5hrs
     mdl.add_constraints(mdl.sum(x[i, j, v]*travTime[i, j] + x[i, j, v]*servTime[i] for i in Cc for j in C)<=150 for v in numOfVehicles)
     mdl.add_constraints(mdl.sum(x[i, j, v]*travTime[i, j] + x[i, j, v]*servTime[i] for i in C for j in Cc)<=150 for v in numOfVehicles)
@@ -178,7 +178,7 @@ def main():
     # Run LP Model
     route1, solutionSet_West, _, cost1, running_time1, _ = calculateRoute(len(df_West)-1, fleetsize_West, df_West)
     route2, solutionSet_MSP, _, cost2, running_time2, elapsed_time = calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
-
+    
     # Results
     print('\n')
     print(file)

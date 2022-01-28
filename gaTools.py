@@ -79,7 +79,13 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=1, delay_cost=
             due_time = df.iloc[customer_id, 5]
             
             # Compute penalty costs
-            subRoute_penalty_cost += max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
+            if ready_time > subRoute_time: # Launch is able to arrive at the ready time
+                subRoute_time = ready_time
+            else:
+                subRoute_penalty_cost += \
+                max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
+
+            # subRoute_penalty_cost += max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
             
             # Update load
             if df.iloc[customer_id, 1]==1:

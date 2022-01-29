@@ -1,0 +1,164 @@
+LT1
+Port West
+Optimal routes:
+Launch 1 : 0 - 2 - 1 - 0
+Launch 2 : 0 - 3 - 4 - 0
+Minimum cost: 185.6928725701946
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 2 - 1 - 0
+Launch 2 : 0 - 3 - 0
+Minimum cost: 383.70107991360766
+
+LT2
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 3 - 0
+Minimum cost: 224.2725701943847
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 4 - 0
+Launch 3 : 0 - 3 - 0
+Minimum cost: 97.39999999999999
+
+LT3
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 0
+Launch 3 : 0 - 3 - 0
+Minimum cost: 332.9736501079912
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 2 - 1 - 0
+Launch 2 : 0 - 3 - 0
+Minimum cost: 120.08660907127427
+
+LM1
+Port West
+Optimal routes:
+Launch 1 : 0 - 2 - 0
+Launch 2 : 0 - 3 - 0
+Launch 3 : 0 - 1 - 4 - 0
+Minimum cost: 319.0673866090709
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 2 - 3 - 0
+Launch 2 : 0 - 1 - 0
+Minimum cost: 117.58660907127427
+
+LM2
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 3 - 0
+Minimum cost: 146.85572354211675
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 1 - 4 - 0
+Launch 2 : 0 - 2 - 3 - 0
+Minimum cost: 119.47688984881242
+
+LM3
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 3 - 0
+Launch 2 : 0 - 2 - 0
+Minimum cost: 108.71619870410377
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 1 - 2 - 0
+Launch 2 : 0 - 3 - 0
+Minimum cost: 73.69999999999999
+
+LL1
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 2 - 0
+Launch 2 : 0 - 3 - 4 - 0
+Minimum cost: 133.2954643628509
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 1 - 2 - 0
+Launch 2 : 0 - 3 - 0
+Minimum cost: 79.2
+
+LL2
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 3 - 0
+Launch 2 : 0 - 2 - 0
+Minimum cost: 108.4
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 1 - 2 - 4 - 0
+Launch 2 : 0 - 3 - 0
+Minimum cost: 62.900000000000006
+
+LL3
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 2 - 0
+Launch 2 : 0 - 3 - 0
+Minimum cost: 97.7
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 2 - 3 - 0
+Launch 2 : 0 - 1 - 0
+Minimum cost: 185.53304535637116
+
+LR1
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 2 - 0
+Launch 2 : 0 - 3 - 4 - 0
+Minimum cost: 276.2069114470844
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 3 - 0
+Minimum cost: 253.35982721382283
+
+LR2
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 3 - 0
+Minimum cost: 176.85572354211675
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 1 - 3 - 4 - 0
+Launch 2 : 0 - 2 - 0
+Minimum cost: 94.6
+
+LR3
+Port West
+Optimal routes:
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 0
+Launch 3 : 0 - 3 - 0
+Minimum cost: 457.7287257019437
+
+Port MSP
+Optimal routes: 
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 3 - 0
+Minimum cost: 325.5330453563712
+
+
+
+
+

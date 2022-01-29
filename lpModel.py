@@ -116,7 +116,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     mdl.add_constraints(mdl.sum(x[i, j, v]*travTime[i, j] + x[i, j, v]*servTime[i] for i in Cc for j in C)<=150 for v in numOfVehicles)
     mdl.add_constraints(mdl.sum(x[i, j, v]*travTime[i, j] + x[i, j, v]*servTime[i] for i in C for j in Cc)<=150 for v in numOfVehicles)
 
-    # Total number of nodes served per launch should be less than 5
+    # Total number of nodes served per launch should be less than or equal to 5
     mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C) <= 5 for v in numOfVehicles)
 
     # Objective function
@@ -148,7 +148,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='HT4', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='HR2', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)')
     args = argparser.parse_args()

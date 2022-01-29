@@ -18,6 +18,7 @@ MUT_PROB = 0.1
 CX_PROB = 0.85
 GENERATION = 80
 POPULATION_SIZE = 100
+
 Capacity = 14
 
 MapGraph = nx.Graph()
@@ -25,7 +26,7 @@ MapGraph.add_weighted_edges_from(Edges)
 
 # GA Algorithm
 # @profile # Track memory usage
-def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
+def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
     cx_pb, mut_pb, n_gen, export_csv=False, customize_data=False):
     
     fitnessHist = []
@@ -41,7 +42,7 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     toolbox.register('individual', tools.initIterate, creator.Individual, toolbox.indexes)
     toolbox.register('population', tools.initRepeat, list, toolbox.individual)
     # Operator registering
-    toolbox.register('evaluate', evalVRP, df=df, unit_cost=unit_cost, \
+    toolbox.register('evaluate', evalVRP, df=df, fleetsize=fleetsize, unit_cost=unit_cost, \
                      init_cost=init_cost)
     toolbox.register('select', tools.selRoulette)
     toolbox.register('mate', cxPartiallyMatched)
@@ -123,7 +124,6 @@ def runGA(df, unit_cost, init_cost,  ind_size, pop_size, \
     return best_ind
 
 def summaryGA(best_ind,df):
-
     print(f'Best individual: {best_ind}')
     print(f'Fitness: {best_ind.fitness.values[0]}')
     printRoute(ind2Route(best_ind, df))
@@ -131,7 +131,7 @@ def summaryGA(best_ind,df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='HT1', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath('__file__'))
@@ -159,12 +159,12 @@ def main():
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
 
     # Run GA for West Tour
-    best_ind1 = runGA(df_West, 1, 0, len(df_West)+1, POPULATION_SIZE,
+    best_ind1 = runGA(df_West,fleetsize_West, 1, 0, len(df_West)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
     mid_time = time.time()
     
     # Run GA for MSP Tour
-    best_ind2 = runGA(df_MSP, 1, 0, len(df_MSP)+1, POPULATION_SIZE,
+    best_ind2 = runGA(df_MSP,fleetsize_MSP, 1, 0, len(df_MSP)+1, POPULATION_SIZE,
                     CX_PROB, MUT_PROB, GENERATION, export_csv=False, customize_data=False)
     final_time = time.time()
 
@@ -190,7 +190,7 @@ def main():
     print('Total runtime: ', total_runtime)
     
     plt.show()
-    fig.savefig(outputPlot)
+    # fig.savefig(outputPlot)
 
 if __name__ == '__main__':
     try:

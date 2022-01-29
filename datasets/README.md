@@ -8,11 +8,11 @@ Example of a dataset: *HL1.csv*
 
 The first alphabet represents the busyness of the depots.
 
-*Low(L) -> 3 orders per Depot*
+*Low(L) -> 3-4 orders per Depot*
 
-*Medium(M) -> 6 orders per Depot*
+*Medium(M) -> 5-6 orders per Depot*
 
-*High(H) -> 9 orders per Depot*
+*High(H) -> 8-9 orders per Depot*
 
 The second alphabet represents the type of time window.
 

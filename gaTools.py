@@ -1,3 +1,4 @@
+from signal import SIG_DFL
 import sys
 sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/site-packages')
 
@@ -42,14 +43,14 @@ def drawGaSolution(route, df, ax):
                     head_width=10, head_length=10, color = Color[launch_id])
 
 # Evaluation algorithm
-def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=1, delay_cost=1):
+def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, delay_cost=1):
 
     # Initialise cost counter and inputs
     total_cost = 0
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
     tourStart = df.iloc[0, 4]
-    tourEnd = df.iloc[0,5] 
+    tourEnd = df.iloc[0,5]
 
     # Each subRoute is a route that is served by a launch
     for subRoute in route:
@@ -98,7 +99,7 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=1, delay_cost=
 
             # Capacity constraint
             if subRoute_load > Capacity: 
-                subRoute_distance = 1000000
+                subRoute_distance += 1000000 # 7th digit
             
             # Update last customer ID
             lastCustomer_id = customer_id
@@ -113,13 +114,13 @@ def evalVRP(individual, df, unit_cost=1.0, init_cost=0, wait_cost=1, delay_cost=
 
         # Tour duration balance constraint
         if subRoute_time > tourEnd: # End time of tour
-            total_cost += 100000000
-
-    # Maximum number of zones in a tour
-    if len(route) <= 5:
+            total_cost += 10000000 # 8th digit
+    
+    # Maximum number of active launches cannot be more than assigned fleetsize
+    if len(route) <= fleetsize:
         fitness = 1.0 / total_cost
     else:
-        fitness = 0.000000001
+        fitness = 0.000000001 # 9th digit
 
     return (fitness, )
 

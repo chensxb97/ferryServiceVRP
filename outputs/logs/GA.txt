@@ -1,0 +1,705 @@
+LT1
+Port West
+Best individual: [2, 1, 5, 3, 4, 6]
+Fitness: 0.0053852363106827675
+Launch 1: 0 - 2 - 1 - 0
+Launch 2: 0 - 3 - 4 - 0
+Total cost: 185.6928725701946
+Time taken to run GA for West:  19.228772401809692
+Memory: 0.01MB
+
+Port MSP
+Best individual: [3, 5, 2, 1, 4]
+Fitness: 0.002606195427506108
+Launch 1: 0 - 3 - 0
+Launch 2: 0 - 2 - 1 - 0
+Total cost: 383.7010799136076
+Time taken to run GA for MSP:  12.403568983078003
+Memory: 0.01MB
+
+LT2
+Port West
+Best individual: [2, 3, 5, 1, 4]
+Fitness: 0.004458860034168538
+Launch 1: 0 - 2 - 3 - 0
+Launch 2: 0 - 1 - 0
+Total cost: 224.27257019438468
+Time taken to run GA for West:  11.795816421508789
+Memory: 0.01MB
+
+Port MSP
+Best individual: [2, 6, 1, 5, 3, 4]
+Fitness: 0.010266940451745381
+Launch 1: 0 - 2 - 0
+Launch 2: 0 - 1 - 0
+Launch 3: 0 - 3 - 4 - 0
+Total cost: 97.39999999999999
+Time taken to run GA for MSP:  13.923911809921265
+Memory: 0.01MB
+
+LT3
+Port West
+Best individual: [2, 4, 1, 5, 3]
+Fitness: 0.003003240645845929
+Launch 1: 0 - 2 - 0
+Launch 2: 0 - 1 - 0
+Launch 3: 0 - 3 - 0
+Total cost: 332.9736501079912
+Time taken to run GA for West:  13.45657992362976
+Memory: 0.01MB
+
+Port MSP
+Best individual: [2, 1, 4, 3, 5]
+Fitness: 0.00832732315229649
+Launch 1: 0 - 2 - 1 - 0
+Launch 2: 0 - 3 - 0
+Total cost: 120.08660907127427
+Time taken to run GA for MSP:  13.00805950164795
+Memory: 0.01MB
+
+LM1
+Port West
+Best individual: [1, 4, 6, 3, 5, 2]
+Fitness: 0.0031341341734347295
+Launch 1: 0 - 1 - 4 - 0
+Launch 2: 0 - 3 - 0
+Launch 3: 0 - 2 - 0
+Total cost: 319.067386609071
+Time taken to run GA for West:  22.809690237045288
+Memory: 0.01MB
+
+Port MSP
+Best individual: [4, 1, 5, 2, 3]
+Fitness: 0.008504369739872822
+Launch 1: 0 - 1 - 0
+Launch 2: 0 - 2 - 3 - 0
+Total cost: 117.58660907127427
+Time taken to run GA for MSP:  17.498842239379883
+Memory: 0.01MB
+
+LM2
+Port West
+Best individual: [5, 2, 3, 4, 1]
+Fitness: 0.006809404331545921
+Launch 1: 0 - 2 - 3 - 0
+Launch 2: 0 - 1 - 0
+Total cost: 146.85572354211675
+Time taken to run GA for West:  11.543882846832275
+Memory: 0.01MB
+
+Port MSP
+Best individual: [6, 1, 4, 5, 2, 3]
+Fitness: 0.008369819479444207
+Launch 1: 0 - 1 - 4 - 0
+Launch 2: 0 - 2 - 3 - 0
+Total cost: 119.47688984881242
+Time taken to run GA for MSP:  17.485906839370728
+Memory: 0.01MB
+
+LM3
+Port West
+Best individual: [5, 2, 4, 1, 3]
+Fitness: 0.00919826127035338
+Launch 1: 0 - 2 - 0
+Launch 2: 0 - 1 - 3 - 0
+Total cost: 108.71619870410377
+Time taken to run GA for West:  13.455071926116943
+Memory: 0.01MB
+
+Port MSP
+Best individual: [1, 2, 5, 3, 4]
+Fitness: 0.0135685210312076
+Launch 1: 0 - 1 - 2 - 0
+Launch 2: 0 - 3 - 0
+Total cost: 73.69999999999999
+Time taken to run GA for MSP:  13.540022134780884
+Memory: 0.01MB
+
+LL1
+Port West
+Best individual: [3, 6, 1, 2, 4, 5]
+Fitness: 0.007374748732913044
+Launch 1: 0 - 3 - 0
+Launch 2: 0 - 1 - 2 - 4 - 0
+Total cost: 135.59784017278614
+Time taken to run GA for West:  16.727755784988403
+Memory: 0.01MB
+
+Port MSP
+Best individual: [1, 2, 5, 4, 3]
+Fitness: 0.012626262626262626
+Launch 1: 0 - 1 - 2 - 0
+Launch 2: 0 - 3 - 0
+Total cost: 79.2
+Time taken to run GA for MSP:  10.406044960021973
+Memory: 0.01MB
+
+LL2
+Port West
+Best individual: [1, 3, 5, 4, 2]
+Fitness: 0.00922509225092251
+Launch 1: 0 - 1 - 3 - 0
+Launch 2: 0 - 2 - 0
+Total cost: 108.4
+Time taken to run GA for West:  11.293586254119873
+Memory: 0.01MB
+
+Port MSP
+Best individual: [1, 2, 4, 5, 3, 6]
+Fitness: 0.01589825119236884
+Launch 1: 0 - 1 - 2 - 4 - 0
+Launch 2: 0 - 3 - 0
+Total cost: 62.900000000000006
+Time taken to run GA for MSP:  17.093552112579346
+Memory: 0.01MB
+
+LL3
+Port West
+Best individual: [1, 2, 5, 4, 3]
+Fitness: 0.010235414534288638
+Launch 1: 0 - 1 - 2 - 0
+Launch 2: 0 - 3 - 0
+Total cost: 97.70000000000002
+Time taken to run GA for West:  10.830982685089111
+Memory: 0.01MB
+
+Port MSP
+Best individual: [1, 4, 2, 3, 5]
+Fitness: 0.005389875415881864
+Launch 1: 0 - 1 - 0
+Launch 2: 0 - 2 - 3 - 0
+Total cost: 185.5330453563712
+Time taken to run GA for MSP:  10.370458602905273
+Memory: 0.01MB
+
+LR1
+Port West
+Best individual: [3, 4, 5, 6, 1, 2]
+Fitness: 0.003620474211745348
+Launch 1: 0 - 3 - 4 - 0
+Launch 2: 0 - 1 - 2 - 0
+Total cost: 276.2069114470844
+Time taken to run GA for West:  23.949142694473267
+Memory: 0.01MB
+
+Port MSP
+Best individual: [1, 3, 5, 4, 2]
+Fitness: 0.0039469556440613245
+Launch 1: 0 - 1 - 3 - 0
+Launch 2: 0 - 2 - 0
+Total cost: 253.35982721382283
+Time taken to run GA for MSP:  10.774680137634277
+Memory: 0.01MB
+
+LR2
+Port West
+Best individual: [5, 2, 3, 4, 1]
+Fitness: 0.0056543264756815075
+Launch 1: 0 - 2 - 3 - 0
+Launch 2: 0 - 1 - 0
+Total cost: 176.85572354211675
+Time taken to run GA for West:  13.226291179656982
+Memory: 0.01MB
+
+Port MSP
+Best individual: [6, 2, 5, 1, 3, 4]
+Fitness: 0.010570824524312896
+Launch 1: 0 - 2 - 0
+Launch 2: 0 - 1 - 3 - 4 - 0
+Total cost: 94.6
+Time taken to run GA for MSP:  17.5706684589386
+Memory: 0.01MB
+
+LR3
+Port West
+Best individual: [3, 5, 1, 4, 2]
+Fitness: 0.002184700115699454
+Launch 1: 0 - 3 - 0
+Launch 2: 0 - 1 - 0
+Launch 3: 0 - 2 - 0
+Total cost: 457.7287257019437
+Time taken to run GA for West:  16.77061939239502
+Memory: 0.01MB
+
+Port MSP
+Best individual: [2, 3, 5, 1, 4]
+Fitness: 0.0030718847572149513
+Launch 1: 0 - 2 - 3 - 0
+Launch 2: 0 - 1 - 0
+Total cost: 325.5330453563712
+Time taken to run GA for MSP:  16.44678258895874
+Memory: 0.01MB
+
+MT1
+Port West
+Best individual: [3, 1, 8, 2, 6, 7, 5, 4]
+Fitness: 0.0019442916353466333
+Launch 1: 0 - 3 - 1 - 0
+Launch 2: 0 - 2 - 6 - 0
+Launch 3: 0 - 5 - 4 - 0
+Total cost: 514.3261339092875
+Time taken to run GA for West:  28.104087352752686
+Memory: 0.01MB
+
+Port MSP
+Best individual: [7, 1, 2, 6, 3, 4, 5]
+Fitness: 0.005012151490384355
+Launch 1: 0 - 1 - 2 - 0
+Launch 2: 0 - 3 - 4 - 5 - 0
+Total cost: 199.51511879049676
+Time taken to run GA for MSP:  17.90868353843689
+Memory: 0.01MB
+
+MT2
+Port West
+Best individual: [3, 5, 7, 2, 1, 4, 6]
+Fitness: 0.0020089731240182903
+Launch 1: 0 - 3 - 5 - 0
+Launch 2: 0 - 2 - 1 - 4 - 0
+Total cost: 497.7667386609079
+Time taken to run GA for West:  20.854019165039062
+Memory: 0.01MB
+
+Port MSP
+Best individual: [8, 1, 5, 6, 7, 3, 2, 4]
+Fitness: 0.002328645864767539
+Launch 1: 0 - 1 - 5 - 6 - 0
+Launch 2: 0 - 3 - 2 - 4 - 0
+Total cost: 429.43412526997815
+Time taken to run GA for MSP:  28.14399790763855
+Memory: 0.01MB
+
+MT3* (Has difference)
+Port West
+Best individual: [1, 8, 3, 5, 6, 7, 2, 4]
+Fitness: 9.999788901000649e-08
+Launch 1: 0 - 1 - 0
+Launch 2: 0 - 3 - 5 - 6 - 0
+Launch 3: 0 - 2 - 4 - 0
+Total cost: 10000211.103455724
+Time taken to run GA for West:  23.25403380393982
+Memory: 0.02MB
+
+Port MSP
+Best individual: [2, 5, 1, 6, 8, 7, 4, 3]
+Fitness: 9.999359005884794e-08
+Launch 1: 0 - 2 - 5 - 1 - 6 - 0
+Launch 2: 0 - 4 - 3 - 0
+Total cost: 10000641.035205185
+Time taken to run GA for MSP:  26.440929174423218
+Memory: 0.02MB
+
+MM1* (Has no difference)
+Port West
+Best individual: [7, 5, 2, 8, 4, 6, 1, 3]
+Fitness: 9.998659331383205e-08
+Launch 1: 0 - 5 - 2 - 0
+Launch 2: 0 - 4 - 6 - 1 - 3 - 0
+Total cost: 10001340.84838013
+Time taken to run GA for West:  26.562251091003418
+Memory: 0.02MB
+
+Port MSP
+Best individual: [4, 2, 5, 6, 7, 3, 1]
+Fitness: 0.003397900787168119
+Launch 1: 0 - 4 - 2 - 5 - 0
+Launch 2: 0 - 3 - 1 - 0
+Total cost: 294.29935205183574
+Time taken to run GA for MSP:  18.11434006690979
+Memory: 0.01MB
+
+MM2
+Port West
+Best individual: [7, 3, 1, 6, 2, 4, 5]
+Fitness: 0.00379928297765316
+Launch 1: 0 - 3 - 1 - 0
+Launch 2: 0 - 2 - 4 - 5 - 0
+Total cost: 263.2075593952483
+Time taken to run GA for West:  24.796211004257202
+Memory: 0.01MB
+
+Port MSP
+Best individual: [8, 1, 6, 4, 7, 2, 3, 5]
+Fitness: 0.007151573191640537
+Launch 1: 0 - 1 - 6 - 4 - 0
+Launch 2: 0 - 2 - 3 - 5 - 0
+Total cost: 139.82937365010798
+Time taken to run GA for MSP:  32.67111301422119
+Memory: 0.01MB
+
+MM3* (Has difference)
+Port West
+Best individual: [3, 2, 4, 6, 8, 1, 5, 7]
+Fitness: 0.007470284241895202
+Launch 1: 0 - 3 - 2 - 4 - 6 - 0
+Launch 2: 0 - 1 - 5 - 0
+Total cost: 133.8637149028082
+Time taken to run GA for West:  20.64618992805481
+Memory: 0.01MB
+
+Port MSP
+Best individual: [8, 5, 4, 1, 6, 2, 7, 3]
+Fitness: 9.998065468697996e-08
+Launch 1: 0 - 5 - 4 - 1 - 6 - 2 - 0
+Launch 2: 0 - 3 - 0
+Total cost: 10001934.905615551
+Time taken to run GA for MSP:  23.69310736656189
+Memory: 0.02MB
+
+ML1
+Port West
+Best individual: [1, 6, 7, 2, 3, 8, 5, 4]
+Fitness: 0.004793159137024311
+Launch 1: 0 - 1 - 6 - 0
+Launch 2: 0 - 2 - 3 - 0
+Launch 3: 0 - 5 - 4 - 0
+Total cost: 208.6306695464361
+Time taken to run GA for West:  26.767380237579346
+Memory: 0.01MB
+
+Port MSP
+Best individual: [7, 4, 3, 5, 6, 2, 1]
+Fitness: 0.007005428829079645
+Launch 1: 0 - 4 - 3 - 5 - 0
+Launch 2: 0 - 2 - 1 - 0
+Total cost: 142.7464362850971
+Time taken to run GA for MSP:  17.859497547149658
+Memory: 0.01MB
+
+ML2
+Port West
+Best individual: [2, 4, 3, 5, 7, 6, 1]
+Fitness: 0.0071267060610864935
+Launch 1: 0 - 2 - 4 - 3 - 5 - 0
+Launch 2: 0 - 1 - 0
+Total cost: 140.31727861771054
+Time taken to run GA for West:  24.499698162078857
+Memory: 0.01MB
+
+Port MSP
+Best individual: [2, 1, 4, 6, 8, 3, 5, 7]
+Fitness: 0.004601841332884081
+Launch 1: 0 - 2 - 1 - 4 - 6 - 0
+Launch 2: 0 - 3 - 5 - 0
+Total cost: 217.3043196544277
+Time taken to run GA for MSP:  31.485634565353394
+Memory: 0.01MB
+
+ML3* (Has difference)
+Port West
+Best individual: [2, 7, 5, 6, 8, 1, 3, 4]
+Fitness: 0.0054485010738136485
+Launch 1: 0 - 2 - 0
+Launch 2: 0 - 5 - 6 - 0
+Launch 3: 0 - 1 - 3 - 4 - 0
+Total cost: 183.53671706263526
+Time taken to run GA for West:  23.98916506767273`
+Memory: 0.01MB
+
+Port MSP
+Best individual: [7, 1, 3, 4, 2, 5, 6, 8]
+Fitness: 9.99948917944283e-08
+Launch 1: 0 - 1 - 3 - 4 - 2 - 5 - 6 - 0
+Total cost: 10000510.846652268
+Time taken to run GA for MSP:  23.378795623779297
+Memory: 0.02MB
+
+MR1*
+Port West
+Best individual: [8, 7, 2, 1, 3, 5, 4, 6]
+Fitness: 9.998815594078053e-08
+Launch 1: 0 - 2 - 1 - 3 - 5 - 4 - 6 - 0
+Total cost: 10001184.546220303
+Time taken to run GA for West:  27.36562705039978
+Memory: 0.02MB
+
+Port MSP
+Best individual: [2, 3, 5, 7, 6, 1, 4]
+Fitness: 0.0034333529101188295
+Launch 1: 0 - 2 - 3 - 5 - 0
+Launch 2: 0 - 1 - 4 - 0
+Total cost: 291.2604751619867
+Time taken to run GA for MSP:  18.3823025226593
+Memory: 0.01MB
+
+MR2
+Port West
+Best individual: [1, 7, 2, 3, 5, 4, 6]
+Fitness: 0.0023369828289808046
+Launch 1: 0 - 1 - 0
+Launch 2: 0 - 2 - 3 - 5 - 4 - 0
+Total cost: 427.90215982721446
+Time taken to run GA for West:  18.016467332839966
+Memory: 0.01MB
+
+Port MSP
+Best individual: [4, 5, 7, 1, 3, 2, 8, 6]
+Fitness: 0.003922522139375769
+Launch 1: 0 - 4 - 5 - 0
+Launch 2: 0 - 1 - 3 - 2 - 0
+Launch 3: 0 - 6 - 0
+Total cost: 254.93801295896324
+Time taken to run GA for MSP:  22.88984704017639
+Memory: 0.01MB
+
+MR3* 
+Port West
+Best individual: [4, 8, 1, 2, 7, 3, 5, 6]
+Fitness: 0.008920606601248885
+Launch 1: 0 - 4 - 0
+Launch 2: 0 - 1 - 2 - 0
+Launch 3: 0 - 3 - 5 - 6 - 0
+Total cost: 112.1
+Time taken to run GA for West:  20.494439840316772
+Memory: 0.01MB
+
+Port MSP
+Best individual: [4, 5, 7, 3, 6, 2, 1, 8]
+Fitness: 9.998667740366196e-08
+Launch 1: 0 - 4 - 5 - 0
+Launch 2: 0 - 3 - 6 - 2 - 1 - 0
+Total cost: 10001332.437149027
+Time taken to run GA for MSP:  23.686439275741577
+Memory: 0.02MB
+
+HT1
+Port West
+Best individual: [7, 10, 2, 11, 9, 3, 8, 4, 6, 5, 1]
+Fitness: 9.997613670024964e-08
+Launch 1: 0 - 7 - 0
+Launch 2: 0 - 2 - 0
+Launch 3: 0 - 9 - 3 - 8 - 4 - 6 - 5 - 1 - 0
+Total cost: 10002386.899568034
+Time taken to run GA for West:  62.65909481048584
+Memory: 0.02MB
+
+Port MSP
+Best individual: [5, 4, 6, 7, 2, 1, 9, 3, 8, 10]
+Fitness: 9.99852489235638e-08
+Launch 1: 0 - 5 - 4 - 6 - 7 - 2 - 1 - 0
+Launch 2: 0 - 3 - 8 - 0
+Total cost: 10001475.325269978
+Time taken to run GA for MSP:  45.41190719604492
+Memory: 0.02MB
+
+HT2
+Port West
+Best individual: [3, 4, 9, 8, 2, 6, 1, 5, 7, 10]
+Fitness: 9.997773230733794e-08
+Launch 1: 0 - 3 - 4 - 0
+Launch 2: 0 - 8 - 2 - 6 - 1 - 5 - 7 - 0
+Total cost: 10002227.265226781
+Time taken to run GA for West:  47.815815925598145
+Memory: 0.02MB
+
+Port MSP
+Best individual: [2, 1, 3, 5, 11, 4, 9, 10, 7, 6, 8]
+Fitness: 0.001743180230905491
+Launch 1: 0 - 2 - 1 - 3 - 5 - 0
+Launch 2: 0 - 4 - 9 - 0
+Launch 3: 0 - 7 - 6 - 8 - 0
+Total cost: 573.6641468682515
+Time taken to run GA for MSP:  46.76682782173157
+Memory: 0.02MB
+
+HT3
+Port West
+Best individual: [2, 9, 3, 5, 1, 4, 11, 8, 7, 10, 6]
+Fitness: 9.99819462534867e-08
+Launch 1: 0 - 2 - 9 - 3 - 5 - 1 - 4 - 0
+Launch 2: 0 - 8 - 7 - 0
+Launch 3: 0 - 6 - 0
+Total cost: 10001805.700647948
+Time taken to run GA for West:  43.08263349533081
+Memory: 0.02MB
+
+Port MSP
+Best individual: [3, 6, 2, 8, 1, 4, 7, 5, 10, 9, 11]
+Fitness: 9.997789753421808e-08
+Launch 1: 0 - 3 - 6 - 2 - 8 - 1 - 4 - 7 - 5 - 0
+Launch 2: 0 - 9 - 0
+Total cost: 10002210.735205185
+Time taken to run GA for MSP:  42.32433533668518
+Memory: 0.02MB
+
+HM1
+Port West
+Best individual: [2, 1, 8, 10, 11, 6, 4, 3, 5, 7, 9]
+Fitness: 9.998228690483191e-08
+Launch 1: 0 - 2 - 1 - 8 - 0
+Launch 2: 0 - 6 - 4 - 3 - 5 - 7 - 9 - 0
+Total cost: 10001771.623326134
+Time taken to run GA for West:  61.20254421234131
+Memory: 0.02MB
+
+Port MSP
+Best individual: [9, 2, 7, 10, 4, 1, 8, 6, 3, 5]
+Fitness: 9.998739229168736e-08
+Launch 1: 0 - 2 - 7 - 0
+Launch 2: 0 - 4 - 1 - 8 - 6 - 3 - 5 - 0
+Total cost: 10001260.929805616
+Time taken to run GA for MSP:  44.24900698661804
+Memory: 0.02MB
+
+HM2
+Port West
+Best individual: [7, 6, 2, 8, 5, 1, 9, 4, 3, 10]
+Fitness: 9.998111013481895e-08
+Launch 1: 0 - 7 - 6 - 2 - 8 - 5 - 1 - 0
+Launch 2: 0 - 4 - 3 - 0
+Total cost: 10001889.343412528
+Time taken to run GA for West:  36.2279999256134
+Memory: 0.02MB
+
+Port MSP
+Best individual: [6, 9, 3, 11, 1, 2, 8, 10, 4, 7, 5]
+Fitness: 0.0027834522262207215
+Launch 1: 0 - 6 - 9 - 3 - 0
+Launch 2: 0 - 1 - 2 - 8 - 0
+Launch 3: 0 - 4 - 7 - 5 - 0
+Total cost: 359.26609071274294
+Time taken to run GA for MSP:  37.10078454017639
+Memory: 0.02MB
+
+HM3
+Port West
+Best individual: [5, 6, 3, 8, 9, 10, 7, 4, 2, 11, 1]
+Fitness: 9.998816421743797e-08
+Launch 1: 0 - 5 - 6 - 3 - 8 - 9 - 0
+Launch 2: 0 - 7 - 4 - 2 - 0
+Launch 3: 0 - 1 - 0
+Total cost: 10001183.718358533
+Time taken to run GA for West:  43.246668338775635
+Memory: 0.02MB
+
+Port MSP
+Best individual: [10, 9, 6, 8, 2, 4, 5, 11, 3, 7, 1]
+Fitness: 9.997928299477625e-08
+Launch 1: 0 - 9 - 6 - 8 - 2 - 4 - 5 - 0
+Launch 2: 0 - 3 - 7 - 1 - 0
+Total cost: 10002072.129805615
+Time taken to run GA for MSP:  40.61063361167908
+Memory: 0.02MB
+
+HL1
+Port West
+Best individual: [4, 1, 11, 6, 5, 8, 9, 10, 3, 2, 7]
+Fitness: 9.999124322476164e-08
+Launch 1: 0 - 4 - 1 - 0
+Launch 2: 0 - 6 - 5 - 8 - 9 - 0
+Launch 3: 0 - 3 - 2 - 7 - 0
+Total cost: 10000875.754211664
+Time taken to run GA for West:  51.156559467315674
+Memory: 0.02MB
+
+Port MSP
+Best individual: [3, 1, 7, 6, 9, 10, 4, 8, 2, 5]
+Fitness: 9.999208884405596e-08
+Launch 1: 0 - 3 - 1 - 7 - 6 - 0
+Launch 2: 0 - 4 - 8 - 2 - 5 - 0
+Total cost: 10000791.178185744
+Time taken to run GA for MSP:  33.31651759147644
+Memory: 0.02MB
+
+HL2
+Port West
+Best individual: [2, 3, 8, 7, 4, 5, 6, 10, 9, 1]
+Fitness: 9.998639416461441e-08
+Launch 1: 0 - 2 - 3 - 8 - 7 - 4 - 5 - 6 - 0
+Launch 2: 0 - 1 - 0
+Total cost: 10001360.768682506
+Time taken to run GA for West:  40.09329414367676
+Memory: 0.02MB
+
+Port MSP
+Best individual: [6, 5, 8, 9, 11, 1, 10, 2, 3, 4, 7]
+Fitness: 0.008744428495882747
+Launch 1: 0 - 6 - 5 - 8 - 9 - 0
+Launch 2: 0 - 1 - 0
+Launch 3: 0 - 2 - 3 - 4 - 7 - 0
+Total cost: 114.35853131749468
+Time taken to run GA for MSP:  46.66721177101135
+Memory: 0.02MB
+
+HL3
+Port West
+Best individual: [10, 4, 7, 11, 3, 9, 6, 1, 5, 8, 2]
+Fitness: 9.998137403794548e-08
+Launch 1: 0 - 4 - 7 - 0
+Launch 2: 0 - 3 - 9 - 6 - 1 - 5 - 8 - 2 - 0
+Total cost: 10001862.943196544
+Time taken to run GA for West:  44.62593102455139
+Memory: 0.02MB
+
+Port MSP
+Best individual: [3, 4, 1, 10, 9, 5, 6, 2, 8, 7, 11]
+Fitness: 9.998662189580771e-08
+Launch 1: 0 - 3 - 4 - 1 - 0
+Launch 2: 0 - 9 - 5 - 6 - 2 - 8 - 7 - 0
+Total cost: 10001337.989416847
+Time taken to run GA for MSP:  41.13868165016174
+Memory: 0.02MB
+
+HR1
+Port West
+Best individual: [8, 3, 10, 9, 5, 1, 6, 2, 4, 11, 7]
+Fitness: 9.998212938206563e-08
+Launch 1: 0 - 8 - 3 - 0
+Launch 2: 0 - 9 - 5 - 1 - 6 - 2 - 4 - 0
+Launch 3: 0 - 7 - 0
+Total cost: 10001787.381209504
+Time taken to run GA for West:  55.07801795005798
+Memory: 0.02MB
+
+Port MSP
+Best individual: [10, 2, 7, 5, 3, 9, 1, 6, 4, 8]
+Fitness: 0.0014001349935769177
+Launch 1: 0 - 2 - 7 - 5 - 3 - 0
+Launch 2: 0 - 1 - 6 - 4 - 8 - 0
+Total cost: 714.2168466522683
+Time taken to run GA for MSP:  75.33688426017761
+Memory: 0.02MB
+
+HR2
+Port West
+Best individual: [9, 5, 4, 7, 10, 3, 1, 6, 2, 8]
+Fitness: 9.999047044816694e-08
+Launch 1: 0 - 5 - 4 - 7 - 0
+Launch 2: 0 - 3 - 1 - 6 - 2 - 8 - 0
+Total cost: 10000953.04600432
+Time taken to run GA for West:  95.9465742111206
+Memory: 0.02MB
+
+Port MSP
+Best individual: [2, 5, 9, 10, 8, 4, 6, 11, 1, 7, 3]
+Fitness: 0.0017971753682171666
+Launch 1: 0 - 2 - 5 - 9 - 0
+Launch 2: 0 - 8 - 4 - 6 - 0
+Launch 3: 0 - 1 - 7 - 3 - 0
+Total cost: 556.428725701944
+Time taken to run GA for MSP:  51.0586953163147
+Memory: 0.02MB
+
+HR3
+Port West
+Best individual: [2, 9, 7, 6, 1, 4, 3, 5, 10, 8, 11]
+Fitness: 9.997740881967032e-08
+Launch 1: 0 - 2 - 9 - 7 - 6 - 1 - 4 - 3 - 5 - 0
+Launch 2: 0 - 8 - 0
+Total cost: 10002259.628509719
+Time taken to run GA for West:  49.94991087913513
+Memory: 0.02MB
+
+Port MSP
+Best individual: [11, 1, 4, 7, 6, 5, 9, 3, 10, 8, 2]
+Fitness: 9.998084543857363e-08
+Launch 1: 0 - 1 - 4 - 7 - 6 - 5 - 9 - 3 - 0
+Launch 2: 0 - 8 - 2 - 0
+Total cost: 10001915.823110152
+Time taken to run GA for MSP:  47.0375862121582
+Memory: 0.02MB
+
+
+
+
+

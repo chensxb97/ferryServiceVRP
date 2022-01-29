@@ -148,7 +148,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='HT4', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)')
     args = argparser.parse_args()
@@ -205,8 +205,6 @@ def main():
         print('Objective function cost: ', cost2)
         print('Time taken to solve: ', running_time2)
         drawSolution(solutionSet_MSP, df_MSP, ax)
-
-    print('\nTotal time taken: ', elapsed_time)
 
     plt.show()
     fig.savefig(outputPlot)

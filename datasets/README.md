@@ -22,10 +22,12 @@ The second alphabet represents the type of time window.
 
 *Large(L) -> 30 min time windows*
 
-The digit is a unique label per dataset category.
-There are 3 datasets per category, hence, a total of 27 datasets for 9 different categories.
+*Random(R) -> 5, 15 or 30 min time window*
 
-H1.csv is a dataset characterised with a High number of orders per depot with Large time windows.
+The digit is a unique label per dataset category.
+There are 3 datasets per category, hence, a total of 36 datasets for 12 different categories.
+
+HL1.csv is one of three datasets characterised with a High number of orders per depot with Large time windows.
 
 ## Structure of dataset
 

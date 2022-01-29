@@ -42,6 +42,7 @@ def evaluate(individual, df):
                 initial_load += df.iloc[i, 3] # Add delivery load to initial load
         subRoute_load = initial_load # Total delivery load
         
+
         # Customer_id: Zone
         for customer_id in subRoute:
             # Calculate travelling distance between zones
@@ -58,7 +59,7 @@ def evaluate(individual, df):
             
             # # Compute penalty costs
             if ready_time > subRoute_time: # Launch is able to arrive at the ready time
-                subRoute_time = ready_time-10
+                subRoute_time = ready_time
             else:
                 subRoute_penalty_cost += \
                 max(load*wait_cost*(ready_time-subRoute_time),0) + max(load*delay_cost*(subRoute_time-due_time), 0)
@@ -112,7 +113,7 @@ def printOptimalRoute(best_route):
         
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LM2', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath(__file__))
@@ -126,6 +127,7 @@ def main():
     df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
 
     # Evaluate minimum cost for West
+    print(file)
     print('Port West')
     list1 = [i for i in range(1, df_West.shape[0]+fleetsize_West)]
     perm1 = permutations(list1)
@@ -133,6 +135,7 @@ def main():
     cost1 = 10000 , 10000 , 10000
     best_route1 = []
     all_routes = list(perm1)
+    print(len(all_routes))
     for i in all_routes:
         cost, dist, penalty, route = evaluate(i,df_West)
         if cost < cost1[0]:

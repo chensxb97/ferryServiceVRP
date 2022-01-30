@@ -148,7 +148,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='HR2', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='HL1', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)')
     args = argparser.parse_args()

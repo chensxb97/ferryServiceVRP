@@ -51,71 +51,82 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
     route = ind2Route(individual, df)
     tourStart = df.iloc[0, 4]
     tourEnd = df.iloc[0,5]
-
+    
     # Each subRoute is a route that is served by a launch
     for subRoute in route:
-        subRoute_distance = 0
-        subRoute_time = tourStart # Start time of tour
-        subRoute_penalty_cost = 0
-        lastCustomer_id = 0
         initial_load = 0
+        possibleCases = []
+        heuristic = True
 
         for i in range(len(subRoute)):
             if df.iloc[i, 1]==2:
                 initial_load += df.iloc[i, 3] # Add delivery load to initial load
-        subRoute_load = initial_load # Total delivery load
         
-        # Customer_id: Zone
-        for customer_id in subRoute:
-            # Calculate travelling distance between zones
-            distance = distMatrix[lastCustomer_id][customer_id]
+        # Consider different cases
+        for i in range(2): 
+            subRoute_time = tourStart # Start time of tour
+            subRoute_distance = 0
+            subRoute_penalty_cost = 0
+            lastCustomer_id = 0
+            subRoute_load = initial_load # Total delivery load
 
-            # Update sub-route distance and time
-            subRoute_distance += distance
-            subRoute_time += distance/0.463
+            for customer_id in subRoute: # Customer_id: Zone
+                # Calculate travelling distance between zones
+                distance = distMatrix[lastCustomer_id][customer_id]
 
-            # Time windows
-            load = serv_time = df.iloc[customer_id,3]
-            ready_time = df.iloc[customer_id, 4]
-            due_time = df.iloc[customer_id, 5]
+                # Update sub-route distance and time
+                subRoute_distance += distance
+                subRoute_time += distance/0.463
+
+                # Time windows
+                load = serv_time = df.iloc[customer_id,3]
+                ready_time = df.iloc[customer_id, 4]
+                due_time = df.iloc[customer_id, 5]
+                
+                if heuristic:
+                    # Compute penalty costs
+                    if ready_time > subRoute_time: # Launch is able to arrive at the ready time
+                        subRoute_time = ready_time
+                    else:
+                        subRoute_penalty_cost += \
+                        max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
+                else:
+                    subRoute_penalty_cost += max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
+                
+                # Update load
+                if df.iloc[customer_id, 1]==1:
+                    subRoute_load += load # pickup
+                else:
+                    subRoute_load -= load # delivery
+
+                # Update subRoute time after serving customer
+                subRoute_time += serv_time
+
+                # Capacity constraint
+                if subRoute_load > Capacity: 
+                    subRoute_distance += 1000000 # 7th digit
+                
+                # Update last customer ID
+                lastCustomer_id = customer_id
+
+            # Total distance and time computed after returning to the depot
+            returnToDepot = distMatrix[lastCustomer_id][0]
+            subRoute_distance += returnToDepot
+            subRoute_time += returnToDepot/0.463
+
+            # Tour duration balance constraint
+            if subRoute_time > tourEnd: # End time of tour
+                subRoute_distance += 10000000 # 8th digit
+
+            possibleCases.append(subRoute_distance+subRoute_penalty_cost)
             
-            # Compute penalty costs
-            if ready_time > subRoute_time: # Launch is able to arrive at the ready time
-                subRoute_time = ready_time
-            else:
-                subRoute_penalty_cost += \
-                max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
-
-            # subRoute_penalty_cost += max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
+            # Change to no heuristic
+            if heuristic:
+                heuristic = False 
+        
+        # Update total cost with the minimum value between the two cases
+        total_cost = total_cost + min(possibleCases)
             
-            # Update load
-            if df.iloc[customer_id, 1]==1:
-                subRoute_load += load # pickup
-            else:
-                subRoute_load -= load # delivery
-
-            # Update subRoute time after serving customer
-            subRoute_time += serv_time
-
-            # Capacity constraint
-            if subRoute_load > Capacity: 
-                subRoute_distance += 1000000 # 7th digit
-            
-            # Update last customer ID
-            lastCustomer_id = customer_id
-
-        # Total distance and time computed after returning to the depot
-        returnToDepot = distMatrix[lastCustomer_id][0]
-        subRoute_distance += returnToDepot
-        subRoute_time += returnToDepot/0.463
-
-        # Update total cost
-        total_cost = total_cost + subRoute_distance + subRoute_penalty_cost
-
-        # Tour duration balance constraint
-        if subRoute_time > tourEnd: # End time of tour
-            total_cost += 10000000 # 8th digit
-    
     # Maximum number of active launches cannot be more than assigned fleetsize
     if len(route) <= fleetsize:
         fitness = 1.0 / total_cost

@@ -462,7 +462,7 @@ Total cost: 10001332.437149027
 Time taken to run GA for MSP:  23.686439275741577
 Memory: 0.02MB
 
-HT1
+HT1*
 Port West
 Best individual: [7, 10, 2, 11, 9, 3, 8, 4, 6, 5, 1]
 Fitness: 9.997613670024964e-08
@@ -482,7 +482,7 @@ Total cost: 10001475.325269978
 Time taken to run GA for MSP:  45.41190719604492
 Memory: 0.02MB
 
-HT2
+HT2*
 Port West
 Best individual: [3, 4, 9, 8, 2, 6, 1, 5, 7, 10]
 Fitness: 9.997773230733794e-08
@@ -502,7 +502,7 @@ Total cost: 573.6641468682515
 Time taken to run GA for MSP:  46.76682782173157
 Memory: 0.02MB
 
-HT3
+HT3*
 Port West
 Best individual: [2, 9, 3, 5, 1, 4, 11, 8, 7, 10, 6]
 Fitness: 9.99819462534867e-08
@@ -522,7 +522,7 @@ Total cost: 10002210.735205185
 Time taken to run GA for MSP:  42.32433533668518
 Memory: 0.02MB
 
-HM1
+HM1*
 Port West
 Best individual: [2, 1, 8, 10, 11, 6, 4, 3, 5, 7, 9]
 Fitness: 9.998228690483191e-08
@@ -541,7 +541,7 @@ Total cost: 10001260.929805616
 Time taken to run GA for MSP:  44.24900698661804
 Memory: 0.02MB
 
-HM2
+HM2*
 Port West
 Best individual: [7, 6, 2, 8, 5, 1, 9, 4, 3, 10]
 Fitness: 9.998111013481895e-08
@@ -561,7 +561,7 @@ Total cost: 359.26609071274294
 Time taken to run GA for MSP:  37.10078454017639
 Memory: 0.02MB
 
-HM3
+HM3*
 Port West
 Best individual: [5, 6, 3, 8, 9, 10, 7, 4, 2, 11, 1]
 Fitness: 9.998816421743797e-08
@@ -581,7 +581,7 @@ Total cost: 10002072.129805615
 Time taken to run GA for MSP:  40.61063361167908
 Memory: 0.02MB
 
-HL1
+HL1*
 Port West
 Best individual: [4, 1, 11, 6, 5, 8, 9, 10, 3, 2, 7]
 Fitness: 9.999124322476164e-08
@@ -601,7 +601,7 @@ Total cost: 10000791.178185744
 Time taken to run GA for MSP:  33.31651759147644
 Memory: 0.02MB
 
-HL2
+HL2*
 Port West
 Best individual: [2, 3, 8, 7, 4, 5, 6, 10, 9, 1]
 Fitness: 9.998639416461441e-08
@@ -621,7 +621,7 @@ Total cost: 114.35853131749468
 Time taken to run GA for MSP:  46.66721177101135
 Memory: 0.02MB
 
-HL3
+HL3*
 Port West
 Best individual: [10, 4, 7, 11, 3, 9, 6, 1, 5, 8, 2]
 Fitness: 9.998137403794548e-08

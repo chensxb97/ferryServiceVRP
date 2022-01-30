@@ -611,8 +611,8 @@ Launch 1 : 0 - 5 - 1 - 8 - 9 - 0
 Launch 2 : 0 - 4 - 0
 Launch 3 : 0 - 3 - 2 - 6 - 7 - 0
 Objective function cost:  341.19999999999936
-Time taken to solve:  60.04
-Memory: 14.18MB
+Time taken to solve:  47.49
+Memory: 14.81MB
 
 Port MSP
 Solution set: 
@@ -620,6 +620,7 @@ Solution set:
 Launch 1 : 0 - 3 - 2 - 4 - 5 - 7 - 0
 Launch 2 : 0 - 1 - 6 - 8 - 0
 Objective function cost:  193.20000000000002
+Time taken to solve:  3.05
 Memory: 0.02MB
 
 HL2

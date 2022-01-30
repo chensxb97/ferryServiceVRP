@@ -207,7 +207,7 @@ def main():
         drawSolution(solutionSet_MSP, df_MSP, ax)
 
     plt.show()
-    fig.savefig(outputPlot)
+    # fig.savefig(outputPlot)
 
 if __name__ == '__main__':
 

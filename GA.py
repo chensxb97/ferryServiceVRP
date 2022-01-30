@@ -11,7 +11,6 @@ import time
 
 from deap import base, creator, tools
 from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
-# from memory_profiler import profile
 from utils import Edges, separateTasks
 
 MUT_PROB = 0.1
@@ -131,7 +130,7 @@ def summaryGA(best_ind,df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LT2', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='MT1', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath('__file__'))
@@ -190,7 +189,7 @@ def main():
     print('Total runtime: ', total_runtime)
     
     plt.show()
-    # fig.savefig(outputPlot)
+    fig.savefig(outputPlot)
 
 if __name__ == '__main__':
     try:

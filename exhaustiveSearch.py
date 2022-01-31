@@ -97,7 +97,7 @@ def evaluate(individual, df,fleetsize):
             
             # Change to no heuristic
             if heuristic:
-                heuristic = False 
+                heuristic = False
         
         # Update total cost with the minimum value between the two cases
         total_cost = total_cost + min(possibleCases)
@@ -119,51 +119,58 @@ def printOptimalRoute(best_route):
         
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LL3', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
+    argparser.add_argument('--batch', metavar='b', default=True, help='Run all test cases from directory')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath(__file__))
-    file = args.file
-    fileName = os.path.join(dirName, 'datasets', file + '.csv')
-    fleet = int(args.fleetsize)
-    order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
-    order_df = order_df.sort_values(by=['Start_TW','End_TW'])
+    testFile = args.file
+    batch = args.batch
+    if batch:
+        files = ['ML3', 'MR1', 'MR2', 'MR3','HT1', 'HT2', 'HT3','HM1','HM2','HM3', 'HL1', 'HL2', 'HL3', 'HR1', 'HR2', 'HR3']
+    else:
+        files = [testFile]
+    for file in files:
+        fileName = os.path.join(dirName, 'datasets', file + '.csv')
+        fleet = int(args.fleetsize)
+        order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
+        order_df = order_df.sort_values(by=['Start_TW','End_TW'])
 
-    # Pre-optimistion step
-    df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
+        # Pre-optimistion step
+        df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
 
-    # Evaluate minimum cost for West
-    print(file)
-    print('Port West')
-    list1 = [i for i in range(1, df_West.shape[0]+fleetsize_West)]
-    perm1 = permutations(list1)
-    cost1 = 100000
-    best_route1 = []
-    all_routes = list(perm1)
-    for i in all_routes:
-        cost, route = evaluate(i,df_West,fleetsize_West)
-        if cost < cost1:
-            cost1 = cost
-            best_route1 = route
-    print('Optimal routes:')
-    printOptimalRoute(best_route1)
-    print('Minimum cost:', cost1)
+        # Evaluate minimum cost for West
+        print(file)
+        print('Port West')
+        list1 = [i for i in range(1, df_West.shape[0]+fleetsize_West)]
+        perm1 = permutations(list1)
+        cost1 = 100000
+        best_route1 = []
+        all_routes = list(perm1)
+        for i in all_routes:
+            cost, route = evaluate(i,df_West,fleetsize_West)
+            if cost < cost1:
+                cost1 = cost
+                best_route1 = route
+        print('Optimal routes:')
+        printOptimalRoute(best_route1)
+        print('Minimum cost:', cost1)
 
-    # Evaluate minimum cost for MSP 
-    print('\nPort MSP')
-    list2 = [i for i in range(1, df_MSP.shape[0]+fleetsize_MSP)]
-    perm2 = permutations(list2)
-    cost2 = 100000
-    best_route2 = []
-    all_routes = list(perm2)
-    for i in all_routes:
-        cost, route = evaluate(i,df_MSP,fleetsize_MSP)
-        if cost < cost2:
-            cost2 = cost
-            best_route2 = route
-    print('Optimal routes: ')
-    printOptimalRoute(best_route2)
-    print('Minimum cost:', cost2)
+        # Evaluate minimum cost for MSP 
+        print('\nPort MSP')
+        list2 = [i for i in range(1, df_MSP.shape[0]+fleetsize_MSP)]
+        perm2 = permutations(list2)
+        cost2 = 100000
+        best_route2 = []
+        all_routes = list(perm2)
+        for i in all_routes:
+            cost, route = evaluate(i,df_MSP,fleetsize_MSP)
+            if cost < cost2:
+                cost2 = cost
+                best_route2 = route
+        print('Optimal routes: ')
+        printOptimalRoute(best_route2)
+        print('Minimum cost:', cost2)
     
 
 if __name__ == '__main__':

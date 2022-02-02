@@ -20,6 +20,8 @@ def evaluate(individual, df,fleetsize):
 
     # Initialise cost counter and inputs
     total_cost = 0
+    total_fuel_cost = 0
+    total_penalty_cost = 0
     wait_cost = 1
     delay_cost = 1
     distMatrix =computeDistMatrix(df, MapGraph)
@@ -93,20 +95,24 @@ def evaluate(individual, df,fleetsize):
             if subRoute_time > tourEnd: # End time of tour
                 subRoute_distance += 10000000 # 8th digit
 
-            possibleCases.append(subRoute_distance+subRoute_penalty_cost)
+            possibleCases.append((subRoute_distance+subRoute_penalty_cost,subRoute_distance,subRoute_penalty_cost))
             
             # Change to no heuristic
             if heuristic:
                 heuristic = False
         
         # Update total cost with the minimum value between the two cases
-        total_cost = total_cost + min(possibleCases)
+        min_val = min(possibleCases, key = lambda t: t[0])
+        total_cost += min_val[0]
+        total_fuel_cost += min_val[1]
+        total_penalty_cost += min_val[2]
 
     # Maximum number of active launches cannot be more than assigned fleetsize
     if len(route) > fleetsize:
         total_cost = 100000000 # 9th digit
-
-    return total_cost, route
+        total_fuel_cost = 100000000
+        total_penalty_cost = 0
+    return total_cost, total_fuel_cost, total_penalty_cost, route
 
 def printOptimalRoute(best_route):
     for launch, launchRoute in enumerate(best_route,1):
@@ -144,13 +150,13 @@ def main():
         print('Port West')
         list1 = [i for i in range(1, df_West.shape[0]+fleetsize_West)]
         perm1 = permutations(list1)
-        cost1 = 100000
+        cost1 = 100000, 100000, 0
         best_route1 = []
         all_routes = list(perm1)
         for i in all_routes:
-            cost, route = evaluate(i,df_West,fleetsize_West)
-            if cost < cost1:
-                cost1 = cost
+            cost, fCost, pCost, route = evaluate(i,df_West,fleetsize_West)
+            if cost < cost1[0]:
+                cost1 = cost, fCost, pCost
                 best_route1 = route
         print('Optimal routes:')
         printOptimalRoute(best_route1)
@@ -160,13 +166,13 @@ def main():
         print('\nPort MSP')
         list2 = [i for i in range(1, df_MSP.shape[0]+fleetsize_MSP)]
         perm2 = permutations(list2)
-        cost2 = 100000
+        cost2 = 100000, 100000, 0
         best_route2 = []
         all_routes = list(perm2)
         for i in all_routes:
-            cost, route = evaluate(i,df_MSP,fleetsize_MSP)
-            if cost < cost2:
-                cost2 = cost
+            cost, fCost, pCost, route = evaluate(i,df_MSP,fleetsize_MSP)
+            if cost < cost2[0]:
+                cost2 = cost, fCost, pCost
                 best_route2 = route
         print('Optimal routes: ')
         printOptimalRoute(best_route2)

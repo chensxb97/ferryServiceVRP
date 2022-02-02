@@ -83,8 +83,8 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
                 ready_time = df.iloc[customer_id, 4]
                 due_time = df.iloc[customer_id, 5]
                 
+                # Compute penalty costs
                 if heuristic:
-                    # Compute penalty costs
                     if ready_time > subRoute_time: # Launch is able to arrive at the ready time
                         subRoute_time = ready_time
                     else:

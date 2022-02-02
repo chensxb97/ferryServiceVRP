@@ -120,8 +120,13 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     mdl.add_constraints(mdl.sum(x[i, j, v] for i in Cc for j in C) <= 5 for v in numOfVehicles)
 
     # Objective function
-    obj_function = mdl.sum(travDist[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i!=j) \
-        + mdl.sum((servTime[i])*mdl.max(waitCost*(readyTime[i]-t[i,v]),0,delayCost*(t[i,v]-dueTime[i])) for i in C for v in numOfVehicles)
+    fuelCost = mdl.sum(travDist[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i!=j)
+    penaltyCost = mdl.sum((servTime[i])*mdl.max(waitCost*(readyTime[i]-t[i,v]),0,delayCost*(t[i,v]-dueTime[i])) for i in C for v in numOfVehicles)
+    mdl.add_kpi(fuelCost, publish_name="KPI.FuelCost")
+    mdl.add_kpi(penaltyCost, publish_name="KPI.PenaltyCost")
+    obj_function = fuelCost + penaltyCost
+    # obj_function = mdl.sum(travDist[i, j] * x[i, j, v] for i in Cc for j in Cc for v in numOfVehicles if i!=j) \
+        # + mdl.sum((servTime[i])*mdl.max(waitCost*(readyTime[i]-t[i,v]),0,delayCost*(t[i,v]-dueTime[i])) for i in C for v in numOfVehicles)
     
     # Set time limit
     mdl.parameters.timelimit.set(60)
@@ -129,7 +134,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     # Solve objective function
     mdl.minimize(obj_function)
     time_solve = timer.time()
-    solution = mdl.solve(log_output=True)
+    solution = mdl.solve(log_output=False)
     time_end = timer.time()
     running_time = round(time_end - time_solve, 2)
     elapsed_time = round(time_end - time_start, 2)
@@ -141,73 +146,87 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
         for k in numOfVehicles:
             if x[0, 0, k].solution_value == 0:
                 actualVehicle_usage+=1
-        return route, set, actualVehicle_usage, obj_function.solution_value, running_time, elapsed_time
+        return route, set, actualVehicle_usage, solution.model.kpi_value_by_name("KPI.FuelCost"), solution.model.kpi_value_by_name("KPI.PenaltyCost"), obj_function.solution_value, running_time, elapsed_time
     else:
         print('no feasible solution')
-        return None, None, None, None, None, None
+        return None, None, None, None, None, None, None, None
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='MM1', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
+    argparser.add_argument('--batch', metavar='b', default=True, help='Run all test cases from directory')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)')
     args = argparser.parse_args()
 
     dirName = os.path.dirname(os.path.abspath('__file__'))
-    file = args.file
-    fileName = os.path.join(dirName, 'datasets', file + '.csv')
-
-    outputsDir = os.path.join(dirName, 'outputs')
-    outputsPlotsDir = os.path.join(outputsDir, 'plots', 'lpModel')
-    if not os.path.exists(outputsPlotsDir):
-        os.mkdir(outputsPlotsDir)
-    outputPlot = os.path.join(outputsPlotsDir,file+ '.png')
-    
-    order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
-    order_df = order_df.sort_values(by=['Start_TW','End_TW'])
-    fleet = int(args.fleetsize)
-    
-    # Visualisation map
-    img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
-    fig, ax = plt.subplots()
-    ax.imshow(img)
-
-    # Pre-optimisation step
-    df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
-
-    # Run LP Model
-    route1, solutionSet_West, _, cost1, running_time1, _ = calculateRoute(len(df_West)-1, fleetsize_West, df_West)
-    route2, solutionSet_MSP, _, cost2, running_time2, elapsed_time = calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
-    
-    # Results
-    print('\n')
-    print(file)
-    print('Port West')
-    if route1 == None:
-        print('No solution found')
+    datasetsDir = os.path.join(dirName, 'datasets')
+    testFile = args.file
+    batch = args.batch
+    if batch:
+        # files = [] # List of test cases
+        testFiles = [f for f in os.listdir(datasetsDir) if f.endswith('.csv') and f != 'order.csv']
+        files = testFiles
     else:
-        # print(df_West)
-        print('Solution set: ')
-        print(solutionSet_West)
-        printRoutes(solutionSet_West)
-        print('Objective function cost: ', cost1)
-        print('Time taken to solve: ', running_time1)
-        drawSolution(solutionSet_West, df_West, ax)
+        testFile+= '.csv'
+        files = [testFile] # Single test case
 
-    print('\nPort MSP')
-    if route2 == None:
-        print('No solution found')
-    else:
-        # print(df_MSP)
-        print('Solution set: ')
-        print(solutionSet_MSP)
-        printRoutes(solutionSet_MSP)
-        print('Objective function cost: ', cost2)
-        print('Time taken to solve: ', running_time2)
-        drawSolution(solutionSet_MSP, df_MSP, ax)
+    for file in files:
+        fileName = os.path.join(datasetsDir, file)
 
-    plt.show()
-    # fig.savefig(outputPlot)
+        outputsDir = os.path.join(dirName, 'outputs')
+        outputsPlotsDir = os.path.join(outputsDir, 'plots', 'lpModel')
+        if not os.path.exists(outputsPlotsDir):
+            os.mkdir(outputsPlotsDir)
+        outputPlot = os.path.join(outputsPlotsDir,file+ '.png')
+        
+        order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
+        order_df = order_df.sort_values(by=['Start_TW','End_TW'])
+        fleet = int(args.fleetsize)
+        
+        # Visualisation map
+        img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
+        fig, ax = plt.subplots()
+        ax.imshow(img)
+
+        # Pre-optimisation step
+        df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
+
+        # Run LP Model
+        route1, solutionSet_West, _, fc1, pc1, cost1, running_time1, _ = calculateRoute(len(df_West)-1, fleetsize_West, df_West)
+        route2, solutionSet_MSP, _, fc2, pc2, cost2, running_time2, _ = calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
+        
+        # Results
+        print('\n')
+        print(file)
+        print('Port West')
+        if route1 == None:
+            print('No solution found')
+        else:
+            # print(df_West)
+            print('Solution set: ')
+            print(solutionSet_West)
+            printRoutes(solutionSet_West)
+            print('Objective function cost ( Fuel , Penalty ): ')
+            print( cost1, '(', fc1,',', pc1, ')' )
+            print('Time taken to solve: ', running_time1)
+            drawSolution(solutionSet_West, df_West, ax)
+
+        print('\nPort MSP')
+        if route2 == None:
+            print('No solution found')
+        else:
+            # print(df_MSP)
+            print('Solution set: ')
+            print(solutionSet_MSP)
+            printRoutes(solutionSet_MSP)
+            print('Objective function cost ( Fuel , Penalty ): ')
+            print( cost2, '(', fc2,',', pc2, ')' )
+            print('Time taken to solve: ', running_time2)
+            drawSolution(solutionSet_MSP, df_MSP, ax)
+
+        # plt.show()
+        # fig.savefig(outputPlot)
 
 if __name__ == '__main__':
 

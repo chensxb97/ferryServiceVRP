@@ -1,152 +1,285 @@
-LT1
+HL1.csv
 Port West
 Solution set:
-[[0, 0, 3], [0, 2, 1], [0, 3, 2], [1, 0, 1], [2, 1, 1], [3, 4, 2], [4, 0, 2]]
-Launch 1 : 0 - 2 - 1 - 0
-Launch 2 : 0 - 3 - 4 - 0
-Launch 3 : 0 - 0
-Objective function cost:  191.60000000000002
-Time taken to solve:  0.16
-Memory: 0.01MB
+[[0, 3, 3], [0, 4, 2], [0, 5, 1], [1, 8, 1], [2, 6, 3], [3, 2, 3], [4, 0, 2], [5, 1, 1], [6, 7, 3], [7, 0, 3], [8, 9, 1], [9, 0, 1]]
+Launch 1 : 0 - 5 - 1 - 8 - 9 - 0
+Launch 2 : 0 - 4 - 0
+Launch 3 : 0 - 3 - 2 - 6 - 7 - 0
+Objective function cost (Fuel, Penalty):
+341.19999999999936 ( 146.20000000000002 , 194.99999999999932 )
+Time taken to solve:  46.33
 
 Port MSP
 Solution set:
-[[0, 2, 2], [0, 3, 1], [1, 0, 2], [2, 1, 2], [3, 0, 1]]
-Launch 1 : 0 - 3 - 0
-Launch 2 : 0 - 2 - 1 - 0
-Objective function cost:  396.2
-Time taken to solve:  0.09
-Memory: 0.01MB
+[[0, 1, 2], [0, 3, 1], [1, 6, 2], [2, 4, 1], [3, 2, 1], [4, 5, 1], [5, 7, 1], [6, 8, 2], [7, 0, 1], [8, 0, 2]]
+Launch 1 : 0 - 3 - 2 - 4 - 5 - 7 - 0
+Launch 2 : 0 - 1 - 6 - 8 - 0
+Objective function cost(Fuel, Penalty):
+193.20000000000002 ( 98.20000000000002 , 95.0 )
+Time taken to solve:  2.87
 
-LT2
+
+HL2.csv
 Port West
 Solution set:
-[[0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 3, 1], [3, 0, 1]]
-Launch 1 : 0 - 2 - 3 - 0
-Launch 2 : 0 - 1 - 0
-Objective function cost:  225.4
-Time taken to solve:  0.05
-Memory: 0.01MB
+[[0, 1, 1], [0, 3, 2], [1, 4, 1], [2, 0, 2], [3, 5, 2], [4, 6, 1], [5, 2, 2], [6, 8, 1], [7, 0, 1], [8, 7, 1]]
+Launch 1 : 0 - 1 - 4 - 6 - 8 - 7 - 0
+Launch 2 : 0 - 3 - 5 - 2 - 0
+Objective function cost (Fuel, Penalty):
+266.5 ( 126.50000000000001 , 140.0 )
+Time taken to solve:  1.82
 
 Port MSP
 Solution set:
-[[0, 0, 3], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 3, 1], [3, 4, 1], [4, 0, 1]]
-Launch 1 : 0 - 2 - 3 - 4 - 0
-Launch 2 : 0 - 1 - 0
-Launch 3 : 0 - 0
-Objective function cost:  92.6
-Time taken to solve:  0.12
-Memory: 0.01MB
+[[0, 0, 2], [0, 1, 1], [0, 6, 3], [1, 3, 1], [2, 4, 1], [3, 2, 1], [4, 9, 1], [5, 7, 3], [6, 5, 3], [7, 8, 3], [8, 0, 3], [9, 0, 1]]
+Launch 1 : 0 - 1 - 3 - 2 - 4 - 9 - 0
+Launch 2 : 0 - 0
+Launch 3 : 0 - 6 - 5 - 7 - 8 - 0
+Objective function cost(Fuel, Penalty):
+93.50000000000001 ( 79.50000000000001 , 14.0 )
+Time taken to solve:  1.57
 
-LT3
+
+HL3.csv
 Port West
 Solution set:
-[[0, 1, 3], [0, 2, 1], [0, 3, 2], [1, 0, 3], [2, 0, 1], [3, 0, 2]]
-Launch 1 : 0 - 2 - 0
-Launch 2 : 0 - 3 - 0
+[[0, 3, 3], [0, 4, 1], [0, 5, 2], [1, 2, 3], [2, 0, 3], [3, 1, 3], [4, 6, 1], [5, 0, 2], [6, 8, 1], [7, 9, 1], [8, 7, 1], [9, 0, 1]]       
+Launch 1 : 0 - 4 - 6 - 8 - 7 - 9 - 0
+Launch 2 : 0 - 5 - 0
+Launch 3 : 0 - 3 - 1 - 2 - 0
+Objective function cost (Fuel, Penalty):
+375.79999999999046 ( 147.8 , 227.99999999999045 )
+Time taken to solve:  19.89
+
+Port MSP
+Solution set:
+[[0, 3, 2], [0, 5, 1], [1, 6, 1], [2, 8, 2], [3, 4, 2], [4, 2, 2], [5, 1, 1], [6, 7, 1], [7, 0, 1], [8, 9, 2], [9, 0, 2]]
+Launch 1 : 0 - 5 - 1 - 6 - 7 - 0
+Launch 2 : 0 - 3 - 4 - 2 - 8 - 9 - 0
+Objective function cost(Fuel, Penalty):
+136.1 ( 88.1 , 48.0 )
+Time taken to solve:  1.43
+
+
+HM1.csv
+Port West
+Solution set:
+[[0, 0, 3], [0, 2, 2], [0, 3, 1], [1, 4, 2], [2, 1, 2], [3, 5, 1], [4, 8, 2], [5, 6, 1], [6, 7, 1], [7, 9, 1], [8, 0, 2], [9, 0, 1]]       
+Launch 1 : 0 - 3 - 5 - 6 - 7 - 9 - 0
+Launch 2 : 0 - 2 - 1 - 4 - 8 - 0
+Launch 3 : 0 - 0
+Objective function cost (Fuel, Penalty):
+389.50000000001114 ( 128.5 , 261.00000000001114 )
+Time taken to solve:  26.06
+
+Port MSP
+Solution set:
+[[0, 1, 2], [0, 4, 1], [1, 2, 2], [2, 3, 2], [3, 8, 2], [4, 5, 1], [5, 7, 1], [6, 0, 2], [7, 0, 1], [8, 6, 2]]
+Launch 1 : 0 - 4 - 5 - 7 - 0
+Launch 2 : 0 - 1 - 2 - 3 - 8 - 6 - 0
+Objective function cost(Fuel, Penalty):
+118.19999999999999 ( 102.19999999999999 , 16.0 )
+Time taken to solve:  0.95
+
+
+HM2.csv
+Port West
+Solution set:
+[[0, 1, 1], [0, 2, 2], [1, 5, 1], [2, 4, 2], [3, 7, 1], [4, 6, 2], [5, 3, 1], [6, 0, 2], [7, 8, 1], [8, 0, 1]]
+Launch 1 : 0 - 1 - 5 - 3 - 7 - 8 - 0
+Launch 2 : 0 - 2 - 4 - 6 - 0
+Objective function cost (Fuel, Penalty):
+573.9000000000001 ( 112.90000000000002 , 461.0 )
+Time taken to solve:  6.61
+
+Port MSP
+Solution set:
+[[0, 1, 2], [0, 2, 1], [0, 3, 3], [1, 5, 2], [2, 6, 1], [3, 0, 3], [4, 7, 2], [5, 4, 2], [6, 9, 1], [7, 0, 2], [8, 0, 1], [9, 8, 1]]       
+Launch 1 : 0 - 2 - 6 - 9 - 8 - 0
+Launch 2 : 0 - 1 - 5 - 4 - 7 - 0
+Launch 3 : 0 - 3 - 0
+Objective function cost(Fuel, Penalty):
+104.2 ( 84.2 , 20.0 )
+Time taken to solve:  2.84
+
+
+HM3.csv
+Port West
+Solution set:
+[[0, 1, 2], [0, 2, 1], [0, 3, 3], [1, 6, 2], [2, 4, 1], [3, 7, 3], [4, 5, 1], [5, 9, 1], [6, 8, 2], [7, 0, 3], [8, 0, 2], [9, 0, 1]]       
+Launch 1 : 0 - 2 - 4 - 5 - 9 - 0
+Launch 2 : 0 - 1 - 6 - 8 - 0
+Launch 3 : 0 - 3 - 7 - 0
+Objective function cost (Fuel, Penalty):
+279.5000000000168 ( 151.5 , 128.00000000001683 )
+Time taken to solve:  16.37
+
+Port MSP
+Solution set:
+[[0, 2, 2], [0, 3, 1], [1, 5, 1], [2, 4, 2], [3, 7, 1], [4, 6, 2], [5, 9, 1], [6, 8, 2], [7, 1, 1], [8, 0, 2], [9, 0, 1]]
+Launch 1 : 0 - 3 - 7 - 1 - 5 - 9 - 0
+Launch 2 : 0 - 2 - 4 - 6 - 8 - 0
+Objective function cost(Fuel, Penalty):
+256.9 ( 93.9 , 163.0 )
+Time taken to solve:  5.82
+
+
+HR1.csv
+Port West
+Solution set:
+[[0, 0, 2], [0, 1, 3], [0, 4, 1], [1, 3, 3], [2, 6, 1], [3, 7, 3], [4, 5, 1], [5, 2, 1], [6, 0, 1], [7, 8, 3], [8, 9, 3], [9, 0, 3]]       
+Launch 1 : 0 - 4 - 5 - 2 - 6 - 0
+Launch 2 : 0 - 0
+Launch 3 : 0 - 1 - 3 - 7 - 8 - 9 - 0
+Objective function cost (Fuel, Penalty):
+227.39999999999915 ( 129.4 , 97.99999999999915 )
+Time taken to solve:  14.97
+
+Port MSP
+Solution set:
+[[0, 3, 1], [0, 6, 2], [1, 7, 2], [2, 4, 1], [3, 2, 1], [4, 5, 1], [5, 8, 1], [6, 1, 2], [7, 0, 2], [8, 0, 1]]
+Launch 1 : 0 - 3 - 2 - 4 - 5 - 8 - 0
+Launch 2 : 0 - 6 - 1 - 7 - 0
+Objective function cost(Fuel, Penalty):
+317.2 ( 102.19999999999999 , 215.0 )
+Time taken to solve:  4.6
+
+
+HR2.csv
+Port West
+Solution set:
+[[0, 5, 1], [0, 6, 2], [1, 0, 2], [2, 7, 1], [3, 1, 2], [4, 2, 1], [5, 4, 1], [6, 3, 2], [7, 8, 1], [8, 0, 1]]
+Launch 1 : 0 - 5 - 4 - 2 - 7 - 8 - 0
+Launch 2 : 0 - 6 - 3 - 1 - 0
+Objective function cost (Fuel, Penalty):
+600.9000000000001 ( 112.90000000000002 , 488.0 )
+Time taken to solve:  4.45
+
+Port MSP
+Solution set:
+[[0, 1, 3], [0, 2, 1], [0, 3, 2], [1, 5, 3], [2, 4, 1], [3, 7, 2], [4, 0, 1], [5, 6, 3], [6, 8, 3], [7, 9, 2], [8, 0, 3], [9, 0, 2]]
+Launch 1 : 0 - 2 - 4 - 0
+Launch 2 : 0 - 3 - 7 - 9 - 0
+Launch 3 : 0 - 1 - 5 - 6 - 8 - 0
+Objective function cost(Fuel, Penalty):
+241.8 ( 106.80000000000001 , 135.0 )
+Time taken to solve:  5.09
+
+
+HR3.csv
+Port West
+Solution set:
+[[0, 1, 3], [0, 4, 2], [0, 5, 1], [1, 0, 3], [2, 3, 1], [3, 0, 1], [4, 7, 2], [5, 2, 1], [6, 8, 2], [7, 6, 2], [8, 9, 2], [9, 0, 2]]       
+Launch 1 : 0 - 5 - 2 - 3 - 0
+Launch 2 : 0 - 4 - 7 - 6 - 8 - 9 - 0
 Launch 3 : 0 - 1 - 0
-Objective function cost:  337.6
-Time taken to solve:  0.08
-Memory: 0.01MB
+Objective function cost (Fuel, Penalty):
+353.80000000000115 ( 144.8 , 209.00000000000114 )
+Time taken to solve:  8.28
 
 Port MSP
 Solution set:
-[[0, 2, 1], [0, 3, 2], [1, 0, 1], [2, 1, 1], [3, 0, 2]]
-Launch 1 : 0 - 2 - 1 - 0
-Launch 2 : 0 - 3 - 0
-Objective function cost:  120.69999999999999
-Time taken to solve:  0.07
-Memory: 0.01MB
+[[0, 2, 1], [0, 5, 2], [1, 4, 2], [2, 3, 1], [3, 7, 1], [4, 8, 2], [5, 1, 2], [6, 0, 1], [7, 6, 1], [8, 9, 2], [9, 0, 2]]
+Launch 1 : 0 - 2 - 3 - 7 - 6 - 0
+Launch 2 : 0 - 5 - 1 - 4 - 8 - 9 - 0
+Objective function cost(Fuel, Penalty):
+272.70000000000135 ( 93.69999999999999 , 179.00000000000136 )
+Time taken to solve:  5.76
 
-LM1
+
+HT1.csv
 Port West
 Solution set:
-[[0, 1, 2], [0, 2, 1], [0, 3, 3], [1, 0, 2], [2, 0, 1], [3, 4, 3], [4, 0, 3]]
-Launch 1 : 0 - 2 - 0
-Launch 2 : 0 - 1 - 0
-Launch 3 : 0 - 3 - 4 - 0
-Objective function cost:  327.40000000000003
-Time taken to solve:  0.09
-Memory: 0.01MB
-
-Port MSP
-Solution set:
-[[0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 3, 1], [3, 0, 1]]
-Launch 1 : 0 - 2 - 3 - 0
-Launch 2 : 0 - 1 - 0
-Objective function cost:  118.2
-Time taken to solve:  0.05
-Memory: 0.01MB
-
-LM2
-Port West
-Solution set:
-[[0, 1, 1], [0, 2, 2], [1, 0, 1], [2, 3, 2], [3, 0, 2]]
-Launch 1 : 0 - 1 - 0
-Launch 2 : 0 - 2 - 3 - 0
-Objective function cost:  147.4
-Time taken to solve:  0.06
-Memory: 0.01MB
-
-Port MSP
-Solution set:
-[[0, 0, 3], [0, 1, 2], [0, 2, 1], [1, 4, 2], [2, 3, 1], [3, 0, 1], [4, 0, 2]]
-Launch 1 : 0 - 2 - 3 - 0
-Launch 2 : 0 - 1 - 4 - 0
+[[0, 0, 3], [0, 1, 1], [0, 5, 2], [1, 3, 1], [2, 9, 2], [3, 7, 1], [4, 8, 1], [5, 6, 2], [6, 2, 2], [7, 4, 1], [8, 0, 1], [9, 0, 2]]       
+Launch 1 : 0 - 1 - 3 - 7 - 4 - 8 - 0
+Launch 2 : 0 - 5 - 6 - 2 - 9 - 0
 Launch 3 : 0 - 0
-Objective function cost:  120.60000000000001
-Time taken to solve:  0.09
-Memory: 0.01MB
-
-LM3
-Port West
-Solution set:
-[[0, 0, 3], [0, 1, 1], [0, 2, 2], [1, 3, 1], [2, 0, 2], [3, 0, 1]]
-Launch 1 : 0 - 1 - 3 - 0
-Launch 2 : 0 - 2 - 0
-Launch 3 : 0 - 0
-Objective function cost:  109.20000000000002
-Time taken to solve:  0.09
-Memory: 0.01MB
+Objective function cost (Fuel, Penalty):
+268.6 ( 112.60000000000001 , 156.0 )
+Time taken to solve:  15.49
 
 Port MSP
 Solution set:
-[[0, 1, 1], [0, 3, 2], [1, 2, 1], [2, 0, 1], [3, 0, 2]]
-Launch 1 : 0 - 1 - 2 - 0
-Launch 2 : 0 - 3 - 0
-Objective function cost:  73.7
-Time taken to solve:  0.08
-Memory: 0.01MB
+[[0, 2, 2], [0, 3, 1], [1, 8, 1], [2, 4, 2], [3, 5, 1], [4, 6, 2], [5, 1, 1], [6, 7, 2], [7, 0, 2], [8, 0, 1]]
+Launch 1 : 0 - 3 - 5 - 1 - 8 - 0
+Launch 2 : 0 - 2 - 4 - 6 - 7 - 0
+Objective function cost(Fuel, Penalty):
+172.2 ( 101.19999999999999 , 71.0 )
+Time taken to solve:  0.43
 
-LL1
+
+HT2.csv
+Port West
+Solution set:
+[[0, 2, 1], [0, 5, 2], [1, 0, 2], [2, 3, 1], [3, 4, 1], [4, 8, 1], [5, 6, 2], [6, 1, 2], [7, 0, 1], [8, 7, 1]]
+Launch 1 : 0 - 2 - 3 - 4 - 8 - 7 - 0
+Launch 2 : 0 - 5 - 6 - 1 - 0
+Objective function cost (Fuel, Penalty):
+489.7 ( 117.7 , 372.0 )
+Time taken to solve:  5.13
+
+Port MSP
+Solution set:
+[[0, 1, 1], [0, 2, 3], [0, 3, 2], [1, 6, 1], [2, 4, 3], [3, 5, 2], [4, 0, 3], [5, 7, 2], [6, 8, 1], [7, 9, 2], [8, 0, 1], [9, 0, 2]]       
+Launch 1 : 0 - 1 - 6 - 8 - 0
+Launch 2 : 0 - 3 - 5 - 7 - 9 - 0
+Launch 3 : 0 - 2 - 4 - 0
+Objective function cost(Fuel, Penalty):
+249.79999999999933 ( 105.8 , 143.99999999999932 )
+Time taken to solve:  6.25
+
+
+HT3.csv
+Port West
+Solution set:
+[[0, 1, 1], [0, 2, 3], [0, 8, 2], [1, 5, 1], [2, 3, 3], [3, 4, 3], [4, 0, 3], [5, 6, 1], [6, 7, 1], [7, 9, 1], [8, 0, 2], [9, 0, 1]]       
+Launch 1 : 0 - 1 - 5 - 6 - 7 - 9 - 0
+Launch 2 : 0 - 8 - 0
+Launch 3 : 0 - 2 - 3 - 4 - 0
+Objective function cost (Fuel, Penalty):
+283.9 ( 149.9 , 134.0 )
+Time taken to solve:  51.13
+
+Port MSP
+Solution set:
+[[0, 4, 2], [0, 6, 1], [1, 2, 1], [2, 0, 1], [3, 1, 1], [4, 5, 2], [5, 7, 2], [6, 8, 1], [7, 9, 2], [8, 3, 1], [9, 0, 2]]
+Launch 1 : 0 - 6 - 8 - 3 - 1 - 2 - 0
+Launch 2 : 0 - 4 - 5 - 7 - 9 - 0
+Objective function cost(Fuel, Penalty):
+497.5 ( 92.49999999999999 , 405.0 )
+Time taken to solve:  12.59
+
+
+LL1.csv
 Port West
 Solution set:
 [[0, 0, 3], [0, 1, 2], [0, 3, 1], [1, 2, 2], [2, 0, 2], [3, 4, 1], [4, 0, 1]]
 Launch 1 : 0 - 3 - 4 - 0
 Launch 2 : 0 - 1 - 2 - 0
 Launch 3 : 0 - 0
-Objective function cost:  136.60000000000002
-Time taken to solve:  0.11
-Memory: 0.01MB
+Objective function cost (Fuel, Penalty):
+136.60000000000002 ( 101.60000000000001 , 35.0 )
+Time taken to solve:  0.12
 
 Port MSP
-Solution set:
+Solution set: 
 [[0, 1, 2], [0, 3, 1], [1, 2, 2], [2, 0, 2], [3, 0, 1]]
 Launch 1 : 0 - 3 - 0
 Launch 2 : 0 - 1 - 2 - 0
-Objective function cost:  79.2
-Time taken to solve:  0.05
-Memory: 0.01MB
+Objective function cost(Fuel, Penalty):
+79.2 ( 79.2 , 0 )
+Time taken to solve:  0.02
 
-LL2
+
+LL2.csv
 Port West
 Solution set:
 [[0, 1, 2], [0, 2, 1], [1, 3, 2], [2, 0, 1], [3, 0, 2]]
 Launch 1 : 0 - 2 - 0
 Launch 2 : 0 - 1 - 3 - 0
-Objective function cost:  108.4
-Time taken to solve:  0.11
-Memory: 0.01MB
+Objective function cost (Fuel, Penalty):
+108.4 ( 108.4 , 0 )
+Time taken to solve:  0.03
 
 Port MSP
 Solution set:
@@ -154,59 +287,125 @@ Solution set:
 Launch 1 : 0 - 3 - 0
 Launch 2 : 0 - 0
 Launch 3 : 0 - 1 - 2 - 4 - 0
-Objective function cost:  62.89999999999999
-Time taken to solve:  0.13
-Memory: 0.01MB
+Objective function cost(Fuel, Penalty):
+62.89999999999999 ( 62.89999999999999 , 0 )
+Time taken to solve:  0.03
 
-LL3
+
+LL3.csv
 Port West
 Solution set:
 [[0, 0, 3], [0, 1, 2], [0, 3, 1], [1, 2, 2], [2, 0, 2], [3, 0, 1]]
 Launch 1 : 0 - 3 - 0
 Launch 2 : 0 - 1 - 2 - 0
 Launch 3 : 0 - 0
-Objective function cost:  97.70000000000002
-Time taken to solve:  0.1
-Memory: 0.01MB
+Objective function cost (Fuel, Penalty):
+97.70000000000002 ( 97.70000000000002 , 0 )
+Time taken to solve:  0.03
 
 Port MSP
 Solution set:
 [[0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 3, 1], [3, 0, 1]]
 Launch 1 : 0 - 2 - 3 - 0
 Launch 2 : 0 - 1 - 0
-Objective function cost:  189.59999999999997
-Time taken to solve:  0.05
-Memory: 0.01MB
+Objective function cost(Fuel, Penalty):
+189.59999999999997 ( 98.59999999999998 , 91.0 )
+Time taken to solve:  0.02
 
-LR1
+
+LM1.csv
+Port West
+Solution set:
+[[0, 1, 2], [0, 2, 1], [0, 3, 3], [1, 0, 2], [2, 0, 1], [3, 4, 3], [4, 0, 3]]
+Launch 1 : 0 - 2 - 0
+Launch 2 : 0 - 1 - 0
+Launch 3 : 0 - 3 - 4 - 0
+Objective function cost (Fuel, Penalty):
+327.40000000000003 ( 157.40000000000003 , 170.0 )
+Time taken to solve:  0.06
+
+Port MSP
+Solution set:
+[[0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 3, 1], [3, 0, 1]]
+Launch 1 : 0 - 2 - 3 - 0
+Launch 2 : 0 - 1 - 0
+Objective function cost(Fuel, Penalty):
+118.2 ( 93.2 , 25.0 )
+Time taken to solve:  0.03
+
+
+LM2.csv
+Port West
+Solution set:
+[[0, 1, 1], [0, 2, 2], [1, 0, 1], [2, 3, 2], [3, 0, 2]]
+Launch 1 : 0 - 1 - 0
+Launch 2 : 0 - 2 - 3 - 0
+Objective function cost (Fuel, Penalty):
+147.4 ( 108.4 , 39.0 )
+Time taken to solve:  0.05
+
+Port MSP
+Solution set:
+[[0, 0, 3], [0, 1, 2], [0, 2, 1], [1, 4, 2], [2, 3, 1], [3, 0, 1], [4, 0, 2]]
+Launch 1 : 0 - 2 - 3 - 0
+Launch 2 : 0 - 1 - 4 - 0
+Launch 3 : 0 - 0
+Objective function cost(Fuel, Penalty):
+120.60000000000001 ( 88.60000000000001 , 32.0 )
+Time taken to solve:  0.06
+
+
+LM3.csv
+Port West
+Solution set:
+[[0, 0, 3], [0, 1, 1], [0, 2, 2], [1, 3, 1], [2, 0, 2], [3, 0, 1]]
+Launch 1 : 0 - 1 - 3 - 0
+Launch 2 : 0 - 2 - 0
+Launch 3 : 0 - 0
+Objective function cost (Fuel, Penalty):
+109.20000000000002 ( 103.20000000000002 , 6.0 )
+Time taken to solve:  0.03
+
+Port MSP
+Solution set:
+[[0, 1, 1], [0, 3, 2], [1, 2, 1], [2, 0, 1], [3, 0, 2]]
+Launch 1 : 0 - 1 - 2 - 0
+Launch 2 : 0 - 3 - 0
+Objective function cost(Fuel, Penalty):
+73.7 ( 73.7 , 0 )
+Time taken to solve:  0.02
+
+
+LR1.csv
 Port West
 Solution set:
 [[0, 0, 3], [0, 1, 2], [0, 3, 1], [1, 2, 2], [2, 0, 2], [3, 4, 1], [4, 0, 1]]
 Launch 1 : 0 - 3 - 4 - 0
 Launch 2 : 0 - 1 - 2 - 0
 Launch 3 : 0 - 0
-Objective function cost:  286.6
-Time taken to solve:  0.1
-Memory: 0.02MB
+Objective function cost (Fuel, Penalty):
+286.6 ( 101.60000000000001 , 185.0 )
+Time taken to solve:  0.07
 
 Port MSP
-Solution set:
+Solution set: 
 [[0, 1, 1], [0, 2, 2], [1, 3, 1], [2, 0, 2], [3, 0, 1]]
 Launch 1 : 0 - 1 - 3 - 0
 Launch 2 : 0 - 2 - 0
-Objective function cost:  255.20000000000002
-Time taken to solve:  0.09
-Memory: 0.02MB
+Objective function cost(Fuel, Penalty):
+255.20000000000002 ( 93.20000000000002 , 162.0 )
+Time taken to solve:  0.03
 
-LR2
+
+LR2.csv
 Port West
 Solution set:
 [[0, 1, 1], [0, 2, 2], [1, 0, 1], [2, 3, 2], [3, 0, 2]]
 Launch 1 : 0 - 1 - 0
 Launch 2 : 0 - 2 - 3 - 0
-Objective function cost:  177.4
-Time taken to solve:  0.05
-Memory: 0.01MB
+Objective function cost (Fuel, Penalty):
+177.4 ( 108.4 , 69.0 )
+Time taken to solve:  0.04
 
 Port MSP
 Solution set:
@@ -214,179 +413,124 @@ Solution set:
 Launch 1 : 0 - 1 - 3 - 0
 Launch 2 : 0 - 2 - 4 - 0
 Launch 3 : 0 - 0
-Objective function cost:  88.60000000000001
-Time taken to solve:  0.06
-Memory: 0.01MB
+Objective function cost(Fuel, Penalty):
+88.60000000000001 ( 88.60000000000001 , 0 )
+Time taken to solve:  0.04
 
-LR3
+LR3.csv
 Port West
 Solution set:
 [[0, 1, 1], [0, 2, 2], [0, 3, 3], [1, 0, 1], [2, 0, 2], [3, 0, 3]]
 Launch 1 : 0 - 1 - 0
 Launch 2 : 0 - 2 - 0
 Launch 3 : 0 - 3 - 0
-Objective function cost:  460.8
-Time taken to solve:  0.05
-Memory: 0.01MB
+Objective function cost (Fuel, Penalty):
+460.8 ( 154.8 , 306.0 )
+Time taken to solve:  0.03
 
 Port MSP
 Solution set:
 [[0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 3, 1], [3, 0, 1]]
 Launch 1 : 0 - 2 - 3 - 0
 Launch 2 : 0 - 1 - 0
-Objective function cost:  329.59999999999997
-Time taken to solve:  0.06
-Memory: 0.01MB
+Objective function cost(Fuel, Penalty):
+329.59999999999997 ( 98.59999999999998 , 231.0 )
+Time taken to solve:  0.02
 
-MT1
+
+LT1.csv
 Port West
 Solution set:
-[[0, 2, 3], [0, 4, 1], [0, 6, 2], [1, 0, 3], [2, 3, 3], [3, 1, 3], [4, 5, 1], [5, 0, 1], [6, 0, 2]]
-Launch 1 : 0 - 4 - 5 - 0
-Launch 2 : 0 - 6 - 0
-Launch 3 : 0 - 2 - 3 - 1 - 0
-Objective function cost:  365.1
-Time taken to solve:  0.36
-Memory: 0.02MB
-
-Port MSP
-Solution set:
-[[0, 1, 2], [0, 3, 1], [1, 2, 2], [2, 5, 2], [3, 4, 1], [4, 0, 1], [5, 0, 2]]
-Launch 1 : 0 - 3 - 4 - 0
-Launch 2 : 0 - 1 - 2 - 5 - 0
-Objective function cost:  166.2
-Time taken to solve:  0.11
-Memory: 0.02MB
-
-MT2
-Port West
-Solution set:
-[[0, 2, 1], [0, 3, 2], [1, 0, 1], [2, 1, 1], [3, 4, 2], [4, 5, 2], [5, 0, 2]]
+[[0, 0, 3], [0, 2, 1], [0, 3, 2], [1, 0, 1], [2, 1, 1], [3, 4, 2], [4, 0, 2]]
 Launch 1 : 0 - 2 - 1 - 0
-Launch 2 : 0 - 3 - 4 - 5 - 0
-Objective function cost:  390.70000000000005
-Time taken to solve:  0.11
-Memory: 0.02MB
-
-Port MSP
-Solution set:
-[[0, 1, 1], [0, 2, 2], [0, 5, 3], [1, 4, 1], [2, 3, 2], [3, 0, 2], [4, 0, 1], [5, 6, 3], [6, 0, 3]]
-Launch 1 : 0 - 1 - 4 - 0
-Launch 2 : 0 - 2 - 3 - 0
-Launch 3 : 0 - 5 - 6 - 0
-Objective function cost:  270.8
-Time taken to solve:  0.32
-Memory: 0.02MB
-
-MT3
-Port West
-Solution set:
-[[0, 0, 3], [0, 1, 2], [0, 2, 1], [1, 4, 2], [2, 3, 1], [3, 0, 1], [4, 5, 2], [5, 6, 2], [6, 0, 2]]
-Launch 1 : 0 - 2 - 3 - 0
-Launch 2 : 0 - 1 - 4 - 5 - 6 - 0
+Launch 2 : 0 - 3 - 4 - 0
 Launch 3 : 0 - 0
-Objective function cost:  110.69999999999999
-Time taken to solve:  0.28
-Memory: 0.02MB
+Objective function cost (Fuel, Penalty):
+191.60000000000002 ( 101.60000000000001 , 90.0 )
+Time taken to solve:  0.04
 
 Port MSP
 Solution set:
-[[0, 1, 1], [0, 2, 2], [1, 4, 1], [2, 6, 2], [3, 5, 1], [4, 3, 1], [5, 0, 1], [6, 0, 2]]
-Launch 1 : 0 - 1 - 4 - 3 - 5 - 0
-Launch 2 : 0 - 2 - 6 - 0
-Objective function cost:  205.1
-Time taken to solve:  0.27
-Memory: 0.02MB
+[[0, 2, 2], [0, 3, 1], [1, 0, 2], [2, 1, 2], [3, 0, 1]]
+Launch 1 : 0 - 3 - 0
+Launch 2 : 0 - 2 - 1 - 0
+Objective function cost(Fuel, Penalty):
+396.2 ( 79.2 , 317.0 )
+Time taken to solve:  0.02
 
-MM1
+
+LT2.csv
 Port West
 Solution set:
-[[0, 1, 1], [0, 3, 2], [0, 4, 3], [1, 2, 1], [2, 5, 1], [3, 0, 2], [4, 6, 3], [5, 0, 1], [6, 0, 3]]
-Launch 1 : 0 - 1 - 2 - 5 - 0
+[[0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 3, 1], [3, 0, 1]]
+Launch 1 : 0 - 2 - 3 - 0
+Launch 2 : 0 - 1 - 0
+Objective function cost (Fuel, Penalty):
+225.4 ( 108.4 , 117.0 )
+Time taken to solve:  0.02
+
+Port MSP
+Solution set:
+[[0, 0, 3], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 3, 1], [3, 4, 1], [4, 0, 1]]
+Launch 1 : 0 - 2 - 3 - 4 - 0
+Launch 2 : 0 - 1 - 0
+Launch 3 : 0 - 0
+Objective function cost(Fuel, Penalty):
+92.6 ( 84.6 , 8.0 )
+Time taken to solve:  0.04
+
+
+LT3.csv
+Port West
+Solution set:
+[[0, 1, 3], [0, 2, 1], [0, 3, 2], [1, 0, 3], [2, 0, 1], [3, 0, 2]]
+Launch 1 : 0 - 2 - 0
 Launch 2 : 0 - 3 - 0
-Launch 3 : 0 - 4 - 6 - 0
-Objective function cost:  438.1
-Time taken to solve:  0.37
-Memory: 0.02MB
+Launch 3 : 0 - 1 - 0
+Objective function cost (Fuel, Penalty):
+337.6 ( 127.6 , 210.0 )
+Time taken to solve:  0.02
 
 Port MSP
 Solution set:
-[[0, 1, 2], [0, 2, 1], [1, 3, 2], [2, 4, 1], [3, 0, 2], [4, 5, 1], [5, 0, 1]]
-Launch 1 : 0 - 2 - 4 - 5 - 0
-Launch 2 : 0 - 1 - 3 - 0
-Objective function cost:  211.2
-Time taken to solve:  0.15
-Memory: 0.02MB
+[[0, 2, 1], [0, 3, 2], [1, 0, 1], [2, 1, 1], [3, 0, 2]]
+Launch 1 : 0 - 2 - 1 - 0
+Launch 2 : 0 - 3 - 0
+Objective function cost(Fuel, Penalty):
+120.69999999999999 ( 73.69999999999999 , 47.0 )
+Time taken to solve:  0.03
 
-MM2
-Port West
-Solution set:
-[[0, 2, 1], [0, 3, 2], [1, 0, 2], [2, 4, 1], [3, 1, 2], [4, 5, 1], [5, 0, 1]]
-Launch 1 : 0 - 2 - 4 - 5 - 0
-Launch 2 : 0 - 3 - 1 - 0
-Objective function cost:  266.70000000000005
-Time taken to solve:  0.09
-Memory: 0.02MB
 
-Port MSP
-Solution set:
-[[0, 0, 2], [0, 1, 3], [0, 4, 1], [1, 2, 3], [2, 3, 3], [3, 5, 3], [4, 6, 1], [5, 0, 3], [6, 0, 1]]
-Launch 1 : 0 - 4 - 6 - 0
-Launch 2 : 0 - 0
-Launch 3 : 0 - 1 - 2 - 3 - 5 - 0
-Objective function cost:  89.3
-Time taken to solve:  0.18
-Memory: 0.02MB
-
-MM3
-Port West
-Solution set:
-[[0, 0, 2], [0, 1, 1], [0, 2, 3], [1, 5, 1], [2, 3, 3], [3, 4, 3], [4, 6, 3], [5, 0, 1], [6, 0, 3]]
-Launch 1 : 0 - 1 - 5 - 0
-Launch 2 : 0 - 0
-Launch 3 : 0 - 2 - 3 - 4 - 6 - 0
-Objective function cost:  110.69999999999999
-Time taken to solve:  0.28
-Memory: 0.02MB
-
-Port MSP
-Solution set:
-[[0, 1, 1], [0, 2, 2], [1, 3, 1], [2, 6, 2], [3, 4, 1], [4, 5, 1], [5, 0, 1], [6, 0, 2]]
-Launch 1 : 0 - 1 - 3 - 4 - 5 - 0
-Launch 2 : 0 - 2 - 6 - 0
-Objective function cost:  318.09999999999997
-Time taken to solve:  0.24
-Memory: 0.02MB
-
-ML1
+ML1.csv
 Port West
 Solution set:
 [[0, 0, 2], [0, 1, 3], [0, 4, 1], [1, 2, 3], [2, 3, 3], [3, 0, 3], [4, 5, 1], [5, 6, 1], [6, 0, 1]]
 Launch 1 : 0 - 4 - 5 - 6 - 0
 Launch 2 : 0 - 0
 Launch 3 : 0 - 1 - 2 - 3 - 0
-Objective function cost:  189.60000000000002
-Time taken to solve:  0.33
-Memory: 0.02MB
+Objective function cost (Fuel, Penalty):
+189.60000000000002 ( 112.60000000000001 , 77.0 )
+Time taken to solve:  0.25
 
 Port MSP
 Solution set:
 [[0, 2, 2], [0, 4, 1], [1, 0, 2], [2, 1, 2], [3, 5, 1], [4, 3, 1], [5, 0, 1]]
 Launch 1 : 0 - 4 - 3 - 5 - 0
 Launch 2 : 0 - 2 - 1 - 0
-Objective function cost:  145.2
-Time taken to solve:  0.09
-Memory: 0.02MB
+Objective function cost(Fuel, Penalty):
+145.2 ( 97.2 , 48.0 )
+Time taken to solve:  0.26
 
-ML2
+
+ML2.csv
 Port West
 Solution set:
 [[0, 1, 2], [0, 3, 1], [1, 0, 2], [2, 5, 1], [3, 4, 1], [4, 2, 1], [5, 0, 1]]
 Launch 1 : 0 - 3 - 4 - 2 - 5 - 0
 Launch 2 : 0 - 1 - 0
-Objective function cost:  137.5
-Time taken to solve:  0.23
-Memory: 0.02MB
+Objective function cost (Fuel, Penalty):
+137.5 ( 104.5 , 33.0 )
+Time taken to solve:  0.09
 
 Port MSP
 Solution set:
@@ -394,59 +538,124 @@ Solution set:
 Launch 1 : 0 - 1 - 4 - 6 - 0
 Launch 2 : 0 - 2 - 0
 Launch 3 : 0 - 3 - 5 - 0
-Objective function cost:  209.8
-Time taken to solve:  0.52
-Memory: 0.02MB
+Objective function cost(Fuel, Penalty):
+209.8 ( 101.8 , 108.0 )
+Time taken to solve:  0.56
 
-ML3
+ML3.csv
 Port West
 Solution set:
 [[0, 0, 3], [0, 1, 2], [0, 2, 1], [1, 3, 2], [2, 4, 1], [3, 5, 2], [4, 0, 1], [5, 6, 2], [6, 0, 2]]
 Launch 1 : 0 - 2 - 4 - 0
 Launch 2 : 0 - 1 - 3 - 5 - 6 - 0
 Launch 3 : 0 - 0
-Objective function cost:  154.1
-Time taken to solve:  0.31
-Memory: 0.02MB
+Objective function cost (Fuel, Penalty):
+154.1 ( 94.1 , 60.0 )
+Time taken to solve:  0.23
 
 Port MSP
 Solution set:
 [[0, 1, 2], [0, 3, 1], [1, 2, 2], [2, 4, 2], [3, 6, 1], [4, 5, 2], [5, 0, 2], [6, 0, 1]]
 Launch 1 : 0 - 3 - 6 - 0
 Launch 2 : 0 - 1 - 2 - 4 - 5 - 0
-Objective function cost:  84.09999999999998
-Time taken to solve:  0.2
-Memory: 0.02MB
+Objective function cost(Fuel, Penalty):
+84.09999999999998 ( 83.09999999999998 , 1.0 )
+Time taken to solve:  0.09
 
-MR1
+
+MM1.csv
+Port West
+Solution set:
+[[0, 1, 1], [0, 3, 2], [0, 4, 3], [1, 2, 1], [2, 5, 1], [3, 0, 2], [4, 6, 3], [5, 0, 1], [6, 0, 3]]
+Launch 1 : 0 - 1 - 2 - 5 - 0
+Launch 2 : 0 - 3 - 0
+Launch 3 : 0 - 4 - 6 - 0
+Objective function cost (Fuel, Penalty):
+438.1 ( 140.1 , 298.0 )
+Time taken to solve:  0.32
+
+Port MSP
+Solution set:
+[[0, 1, 2], [0, 2, 1], [1, 3, 2], [2, 4, 1], [3, 0, 2], [4, 5, 1], [5, 0, 1]]
+Launch 1 : 0 - 2 - 4 - 5 - 0
+Launch 2 : 0 - 1 - 3 - 0
+Objective function cost(Fuel, Penalty):
+211.2 ( 97.2 , 114.0 )
+Time taken to solve:  0.14
+
+
+MM2.csv
+Port West
+Solution set:
+[[0, 2, 1], [0, 3, 2], [1, 0, 2], [2, 4, 1], [3, 1, 2], [4, 5, 1], [5, 0, 1]]
+Launch 1 : 0 - 2 - 4 - 5 - 0
+Launch 2 : 0 - 3 - 1 - 0
+Objective function cost (Fuel, Penalty):
+266.70000000000005 ( 104.70000000000002 , 162.0 )
+Time taken to solve:  0.06
+
+Port MSP
+Solution set:
+[[0, 0, 2], [0, 1, 3], [0, 4, 1], [1, 2, 3], [2, 3, 3], [3, 5, 3], [4, 6, 1], [5, 0, 3], [6, 0, 1]]
+Launch 1 : 0 - 4 - 6 - 0
+Launch 2 : 0 - 0
+Launch 3 : 0 - 1 - 2 - 3 - 5 - 0
+Objective function cost(Fuel, Penalty):
+89.3 ( 69.3 , 20.0 )
+Time taken to solve:  0.15
+
+
+MM3.csv
+Port West
+Solution set:
+[[0, 0, 2], [0, 1, 1], [0, 2, 3], [1, 5, 1], [2, 3, 3], [3, 4, 3], [4, 6, 3], [5, 0, 1], [6, 0, 3]]
+Launch 1 : 0 - 1 - 5 - 0
+Launch 2 : 0 - 0
+Launch 3 : 0 - 2 - 3 - 4 - 6 - 0
+Objective function cost (Fuel, Penalty):
+110.69999999999999 ( 85.69999999999999 , 25.0 )
+Time taken to solve:  0.23
+
+Port MSP
+Solution set:
+[[0, 1, 1], [0, 2, 2], [1, 3, 1], [2, 6, 2], [3, 4, 1], [4, 5, 1], [5, 0, 1], [6, 0, 2]]
+Launch 1 : 0 - 1 - 3 - 4 - 5 - 0
+Launch 2 : 0 - 2 - 6 - 0
+Objective function cost(Fuel, Penalty):
+318.09999999999997 ( 83.09999999999998 , 235.0 )
+Time taken to solve:  0.24
+
+
+MR1.csv
 Port West
 Solution set:
 [[0, 0, 1], [0, 1, 3], [0, 3, 2], [1, 2, 3], [2, 4, 3], [3, 5, 2], [4, 0, 3], [5, 6, 2], [6, 0, 2]]
 Launch 1 : 0 - 0
 Launch 2 : 0 - 3 - 5 - 6 - 0
 Launch 3 : 0 - 1 - 2 - 4 - 0
-Objective function cost:  289.6
-Time taken to solve:  0.37
-Memory: 0.02MB
+Objective function cost (Fuel, Penalty):
+289.6 ( 112.60000000000001 , 177.0 )
+Time taken to solve:  0.52
 
 Port MSP
 Solution set:
 [[0, 1, 2], [0, 2, 1], [1, 4, 2], [2, 3, 1], [3, 5, 1], [4, 0, 2], [5, 0, 1]]
 Launch 1 : 0 - 2 - 3 - 5 - 0
 Launch 2 : 0 - 1 - 4 - 0
-Objective function cost:  297.2
-Time taken to solve:  0.12
-Memory: 0.02MB
+Objective function cost(Fuel, Penalty):
+297.2 ( 97.2 , 200.0 )
+Time taken to solve:  0.22
 
-MR2
+
+MR2.csv
 Port West
 Solution set:
 [[0, 2, 1], [0, 3, 2], [1, 0, 1], [2, 1, 1], [3, 4, 2], [4, 5, 2], [5, 0, 2]]
 Launch 1 : 0 - 2 - 1 - 0
 Launch 2 : 0 - 3 - 4 - 5 - 0
-Objective function cost:  378.70000000000005
-Time taken to solve:  0.17
-Memory: 0.02MB
+Objective function cost (Fuel, Penalty):
+378.70000000000005 ( 104.70000000000002 , 274.0 )
+Time taken to solve:  0.21
 
 Port MSP
 Solution set:
@@ -454,275 +663,90 @@ Solution set:
 Launch 1 : 0 - 2 - 3 - 6 - 0
 Launch 2 : 0 - 1 - 5 - 4 - 0
 Launch 3 : 0 - 0
-Objective function cost:  201.2
-Time taken to solve:  0.32
-Memory: 0.02MB
+Objective function cost(Fuel, Penalty):
+201.2 ( 95.2 , 106.0 )
+Time taken to solve:  0.52
 
-MR3
+
+MR3.csv
 Port West
 Solution set:
 [[0, 0, 3], [0, 1, 1], [0, 3, 2], [1, 2, 1], [2, 5, 1], [3, 4, 2], [4, 0, 2], [5, 6, 1], [6, 0, 1]]
 Launch 1 : 0 - 1 - 2 - 5 - 6 - 0
 Launch 2 : 0 - 3 - 4 - 0
 Launch 3 : 0 - 0
-Objective function cost:  93.3
-Time taken to solve:  0.11
-Memory: 0.02MB
+Objective function cost (Fuel, Penalty):
+93.3 ( 93.3 , 0 )
+Time taken to solve:  0.22
 
 Port MSP
 Solution set:
 [[0, 1, 2], [0, 2, 1], [1, 3, 2], [2, 6, 1], [3, 4, 2], [4, 5, 2], [5, 0, 2], [6, 0, 1]]
 Launch 1 : 0 - 2 - 6 - 0
 Launch 2 : 0 - 1 - 3 - 4 - 5 - 0
-Objective function cost:  238.09999999999997
-Time taken to solve:  0.15
-Memory: 0.02MB
+Objective function cost(Fuel, Penalty):
+238.09999999999997 ( 83.09999999999998 , 155.0 )
+Time taken to solve:  0.22
 
-HT1
+
+MT1.csv
 Port West
 Solution set:
-[[0, 0, 3], [0, 1, 1], [0, 5, 2], [1, 3, 1], [2, 9, 2], [3, 7, 1], [4, 8, 1], [5, 6, 2], [6, 2, 2], [7, 4, 1], [8, 0, 1], 
-[9, 0, 2]]
-Launch 1 : 0 - 1 - 3 - 7 - 4 - 8 - 0
-Launch 2 : 0 - 5 - 6 - 2 - 9 - 0
+[[0, 2, 3], [0, 4, 1], [0, 6, 2], [1, 0, 3], [2, 3, 3], [3, 1, 3], [4, 5, 1], [5, 0, 1], [6, 0, 2]]
+Launch 1 : 0 - 4 - 5 - 0
+Launch 2 : 0 - 6 - 0
+Launch 3 : 0 - 2 - 3 - 1 - 0
+Objective function cost (Fuel, Penalty):
+365.1 ( 142.10000000000002 , 223.0 )
+Time taken to solve:  0.63
+
+Port MSP
+Solution set:
+[[0, 1, 2], [0, 3, 1], [1, 2, 2], [2, 5, 2], [3, 4, 1], [4, 0, 1], [5, 0, 2]]
+Launch 1 : 0 - 3 - 4 - 0
+Launch 2 : 0 - 1 - 2 - 5 - 0
+Objective function cost(Fuel, Penalty):
+166.2 ( 97.19999999999999 , 69.0 )
+Time taken to solve:  0.2
+
+
+MT2.csv
+Port West
+Solution set:
+[[0, 2, 1], [0, 3, 2], [1, 0, 1], [2, 1, 1], [3, 4, 2], [4, 5, 2], [5, 0, 2]]
+Launch 1 : 0 - 2 - 1 - 0
+Launch 2 : 0 - 3 - 4 - 5 - 0
+Objective function cost (Fuel, Penalty):
+390.70000000000005 ( 104.70000000000002 , 286.0 )
+Time taken to solve:  0.17
+
+Port MSP
+Solution set:
+[[0, 1, 1], [0, 2, 2], [0, 5, 3], [1, 4, 1], [2, 3, 2], [3, 0, 2], [4, 0, 1], [5, 6, 3], [6, 0, 3]]
+Launch 1 : 0 - 1 - 4 - 0
+Launch 2 : 0 - 2 - 3 - 0
+Launch 3 : 0 - 5 - 6 - 0
+Objective function cost(Fuel, Penalty):
+270.8 ( 102.8 , 168.0 )
+Time taken to solve:  0.57
+
+
+MT3.csv
+Port West
+Solution set:
+[[0, 0, 3], [0, 1, 2], [0, 2, 1], [1, 4, 2], [2, 3, 1], [3, 0, 1], [4, 5, 2], [5, 6, 2], [6, 0, 2]]
+Launch 1 : 0 - 2 - 3 - 0
+Launch 2 : 0 - 1 - 4 - 5 - 6 - 0
 Launch 3 : 0 - 0
-Objective function cost:  268.6
-Time taken to solve:  9.95
-Memory: 2.59MB
+Objective function cost (Fuel, Penalty):
+110.69999999999999 ( 85.69999999999999 , 25.0 )
+Time taken to solve:  0.39
 
 Port MSP
 Solution set:
-[[0, 2, 2], [0, 3, 1], [1, 8, 1], [2, 4, 2], [3, 5, 1], [4, 6, 2], [5, 1, 1], [6, 7, 2], [7, 0, 2], [8, 0, 1]]
-Launch 1 : 0 - 3 - 5 - 1 - 8 - 0
-Launch 2 : 0 - 2 - 4 - 6 - 7 - 0
-Objective function cost:  172.2
-Time taken to solve:  0.46
-Memory: 0.02MB
-
-HT2
-Port West
-Solution set:
-[[0, 2, 1], [0, 5, 2], [1, 0, 2], [2, 3, 1], [3, 4, 1], [4, 8, 1], [5, 6, 2], [6, 1, 2], [7, 0, 1], [8, 7, 1]]
-Launch 1 : 0 - 2 - 3 - 4 - 8 - 7 - 0
-Launch 2 : 0 - 5 - 6 - 1 - 0
-Objective function cost:  489.7
-Time taken to solve:  3.89
-Memory: 0.02MB
-
-Port MSP
-Solution set:
-[[0, 1, 1], [0, 2, 3], [0, 3, 2], [1, 6, 1], [2, 4, 3], [3, 5, 2], [4, 0, 3], [5, 7, 2], [6, 8, 1], [7, 9, 2], [8, 0, 1], 
-[9, 0, 2]]
-Launch 1 : 0 - 1 - 6 - 8 - 0
-Launch 2 : 0 - 3 - 5 - 7 - 9 - 0
-Launch 3 : 0 - 2 - 4 - 0
-Objective function cost:  249.79999999999933
-Time taken to solve:  3.78
-Memory: 0.02MB
-
-HT3
-Port West
-Solution set:
-[[0, 1, 1], [0, 2, 3], [0, 8, 2], [1, 5, 1], [2, 3, 3], [3, 4, 3], [4, 0, 3], [5, 6, 1], [6, 7, 1], [7, 9, 1], [8, 0, 2], [9, 0, 1]]       
-Launch 1 : 0 - 1 - 5 - 6 - 7 - 9 - 0
-Launch 2 : 0 - 8 - 0
-Launch 3 : 0 - 2 - 3 - 4 - 0
-Objective function cost:  283.9
-Time taken to solve:  56.54
-Memory: 15.64MB
-
-Port MSP
-Solution set:
-[[0, 4, 2], [0, 6, 1], [1, 2, 1], [2, 0, 1], [3, 1, 1], [4, 5, 2], [5, 7, 2], [6, 8, 1], [7, 9, 2], [8, 3, 1], [9, 0, 2]]
-Launch 1 : 0 - 6 - 8 - 3 - 1 - 2 - 0
-Launch 2 : 0 - 4 - 5 - 7 - 9 - 0
-Objective function cost:  497.5
-Time taken to solve:  16.14
-Memory: 0.02MB
-
-HM1
-Port West
-Solution set:
-[[0, 0, 3], [0, 2, 2], [0, 3, 1], [1, 4, 2], [2, 1, 2], [3, 5, 1], [4, 8, 2], [5, 6, 1], [6, 7, 1], [7, 9, 1], [8, 0, 2], 
-[9, 0, 1]]
-Launch 1 : 0 - 3 - 5 - 6 - 7 - 9 - 0
-Launch 2 : 0 - 2 - 1 - 4 - 8 - 0
-Launch 3 : 0 - 0
-Objective function cost:  389.50000000001114
-Time taken to solve:  19.6
-Memory: 5.18MB
-
-Port MSP
-Solution set:
-[[0, 1, 2], [0, 4, 1], [1, 2, 2], [2, 3, 2], [3, 8, 2], [4, 5, 1], [5, 7, 1], [6, 0, 2], [7, 0, 1], [8, 6, 2]]
-Launch 1 : 0 - 4 - 5 - 7 - 0
-Launch 2 : 0 - 1 - 2 - 3 - 8 - 6 - 0
-Objective function cost:  118.19999999999999
-Time taken to solve:  1.88
-Memory: 0.02MB
-
-HM2
-Port West
-Solution set:
-[[0, 1, 1], [0, 2, 2], [1, 5, 1], [2, 4, 2], [3, 7, 1], [4, 6, 2], [5, 3, 1], [6, 0, 2], [7, 8, 1], [8, 0, 1]]
-Launch 1 : 0 - 1 - 5 - 3 - 7 - 8 - 0
-Launch 2 : 0 - 2 - 4 - 6 - 0
-Objective function cost:  573.9000000000001
-Time taken to solve:  5.1
-Memory: 0.02MB
-
-Port MSP
-Solution set:
-[[0, 1, 2], [0, 2, 1], [0, 3, 3], [1, 5, 2], [2, 6, 1], [3, 0, 3], [4, 7, 2], [5, 4, 2], [6, 9, 1], [7, 0, 2], [8, 0, 1], 
-[9, 8, 1]]
-Launch 1 : 0 - 2 - 6 - 9 - 8 - 0
-Launch 2 : 0 - 1 - 5 - 4 - 7 - 0
-Launch 3 : 0 - 3 - 0
-Objective function cost:  104.2
-Time taken to solve:  2.13
-Memory: 0.02MB
-
-HM3
-Port West
-Solution set:
-[[0, 1, 2], [0, 2, 1], [0, 3, 3], [1, 6, 2], [2, 4, 1], [3, 7, 3], [4, 5, 1], [5, 9, 1], [6, 8, 2], [7, 0, 3], [8, 0, 2], [9, 0, 1]]       
-Launch 1 : 0 - 2 - 4 - 5 - 9 - 0
-Launch 2 : 0 - 1 - 6 - 8 - 0
-Launch 3 : 0 - 3 - 7 - 0
-Objective function cost:  279.5000000000168
-Time taken to solve:  12.88
-Memory: 2.71MB
-
-Port MSP
-Solution set:
-[[0, 2, 2], [0, 3, 1], [1, 5, 1], [2, 4, 2], [3, 7, 1], [4, 6, 2], [5, 9, 1], [6, 8, 2], [7, 1, 1], [8, 0, 2], [9, 0, 1]]
-Launch 1 : 0 - 3 - 7 - 1 - 5 - 9 - 0
-Launch 2 : 0 - 2 - 4 - 6 - 8 - 0
-Objective function cost:  256.9
-Time taken to solve:  5.09
-Memory: 0.02MB
-
-HL1
-Port West
-Solution set:
-[[0, 3, 3], [0, 4, 2], [0, 5, 1], [1, 8, 1], [2, 6, 3], [3, 2, 3], [4, 0, 2], [5, 1, 1], [6, 7, 3], [7, 0, 3], [8, 9, 1], 
-[9, 0, 1]]
-Launch 1 : 0 - 5 - 1 - 8 - 9 - 0
-Launch 2 : 0 - 4 - 0
-Launch 3 : 0 - 3 - 2 - 6 - 7 - 0
-Objective function cost:  341.19999999999936
-Time taken to solve:  47.49
-Memory: 14.81MB
-
-Port MSP
-Solution set: 
-[[0, 1, 2], [0, 3, 1], [1, 6, 2], [2, 4, 1], [3, 2, 1], [4, 5, 1], [5, 7, 1], [6, 8, 2], [7, 0, 1], [8, 0, 2]]
-Launch 1 : 0 - 3 - 2 - 4 - 5 - 7 - 0
-Launch 2 : 0 - 1 - 6 - 8 - 0
-Objective function cost:  193.20000000000002
-Time taken to solve:  3.05
-Memory: 0.02MB
-
-HL2
-Port West
-Solution set:
-[[0, 1, 1], [0, 3, 2], [1, 4, 1], [2, 0, 2], [3, 5, 2], [4, 6, 1], [5, 2, 2], [6, 8, 1], [7, 0, 1], [8, 7, 1]]
-Launch 1 : 0 - 1 - 4 - 6 - 8 - 7 - 0
-Launch 2 : 0 - 3 - 5 - 2 - 0
-Objective function cost:  266.5
-Time taken to solve:  1.75
-Memory: 0.02MB
-
-Port MSP
-Solution set:
-[[0, 0, 2], [0, 1, 1], [0, 6, 3], [1, 3, 1], [2, 4, 1], [3, 2, 1], [4, 9, 1], [5, 7, 3], [6, 5, 3], [7, 8, 3], [8, 0, 3], 
-[9, 0, 1]]
-Launch 1 : 0 - 1 - 3 - 2 - 4 - 9 - 0
-Launch 2 : 0 - 0
-Launch 3 : 0 - 6 - 5 - 7 - 8 - 0
-Objective function cost:  93.50000000000001
-Time taken to solve:  1.42
-Memory: 0.02MB
-
-HL3
-Port West
-Solution set:
-[[0, 3, 3], [0, 4, 1], [0, 5, 2], [1, 2, 3], [2, 0, 3], [3, 1, 3], [4, 6, 1], [5, 0, 2], [6, 8, 1], [7, 9, 1], [8, 7, 1], [9, 0, 1]]       
-Launch 1 : 0 - 4 - 6 - 8 - 7 - 9 - 0
-Launch 2 : 0 - 5 - 0
-Launch 3 : 0 - 3 - 1 - 2 - 0
-Objective function cost:  375.79999999999046
-Time taken to solve:  27.87
-Memory: 6.17MB
-
-Port MSP
-Solution set:
-[[0, 3, 2], [0, 5, 1], [1, 6, 1], [2, 8, 2], [3, 4, 2], [4, 2, 2], [5, 1, 1], [6, 7, 1], [7, 0, 1], [8, 9, 2], [9, 0, 2]]
-Launch 1 : 0 - 5 - 1 - 6 - 7 - 0
-Launch 2 : 0 - 3 - 4 - 2 - 8 - 9 - 0
-Objective function cost:  136.1
-Time taken to solve:  2.35
-Memory: 0.02MB
-
-HR1
-Port West
-Solution set:
-[[0, 0, 2], [0, 1, 3], [0, 4, 1], [1, 3, 3], [2, 6, 1], [3, 7, 3], [4, 5, 1], [5, 2, 1], [6, 0, 1], [7, 8, 3], [8, 9, 3], 
-[9, 0, 3]]
-Launch 1 : 0 - 4 - 5 - 2 - 6 - 0
-Launch 2 : 0 - 0
-Launch 3 : 0 - 1 - 3 - 7 - 8 - 9 - 0
-Objective function cost:  227.39999999999915
-Time taken to solve:  7.53
-Memory: 0.89MB
-
-Port MSP
-Solution set:
-[[0, 3, 1], [0, 6, 2], [1, 7, 2], [2, 4, 1], [3, 2, 1], [4, 5, 1], [5, 8, 1], [6, 1, 2], [7, 0, 2], [8, 0, 1]]
-Launch 1 : 0 - 3 - 2 - 4 - 5 - 8 - 0
-Launch 2 : 0 - 6 - 1 - 7 - 0
-Objective function cost:  317.2
-Time taken to solve:  3.53
-Memory: 0.02MB
-
-HR2
-Port West
-Solution set:
-[[0, 5, 1], [0, 6, 2], [1, 0, 2], [2, 7, 1], [3, 1, 2], [4, 2, 1], [5, 4, 1], [6, 3, 2], [7, 8, 1], [8, 0, 1]]
-Launch 1 : 0 - 5 - 4 - 2 - 7 - 8 - 0
-Launch 2 : 0 - 6 - 3 - 1 - 0
-Objective function cost:  600.9000000000001
-Time taken to solve:  4.94
-Memory: 0.02MB
-
-Port MSP
-Solution set:
-[[0, 1, 3], [0, 2, 1], [0, 3, 2], [1, 5, 3], [2, 4, 1], [3, 7, 2], [4, 0, 1], [5, 6, 3], [6, 8, 3], [7, 9, 2], [8, 0, 3], 
-[9, 0, 2]]
-Launch 1 : 0 - 2 - 4 - 0
-Launch 2 : 0 - 3 - 7 - 9 - 0
-Launch 3 : 0 - 1 - 5 - 6 - 8 - 0
-Objective function cost:  241.8
-Time taken to solve:  4.69
-Memory: 0.02MB
-
-HR3
-Port West
-Solution set:
-[[0, 1, 3], [0, 4, 2], [0, 5, 1], [1, 0, 3], [2, 3, 1], [3, 0, 1], [4, 7, 2], [5, 2, 1], [6, 8, 2], [7, 6, 2], [8, 9, 2], [9, 0, 2]]
-Launch 1 : 0 - 5 - 2 - 3 - 0
-Launch 2 : 0 - 4 - 7 - 6 - 8 - 9 - 0
-Launch 3 : 0 - 1 - 0
-Objective function cost:  353.80000000000115
-Time taken to solve:  5.69
-Memory: 0.02MB
-
-Port MSP
-Solution set:
-[[0, 2, 1], [0, 5, 2], [1, 4, 2], [2, 3, 1], [3, 7, 1], [4, 8, 2], [5, 1, 2], [6, 0, 1], [7, 6, 1], [8, 9, 2], [9, 0, 2]]
-Launch 1 : 0 - 2 - 3 - 7 - 6 - 0
-Launch 2 : 0 - 5 - 1 - 4 - 8 - 9 - 0
-Objective function cost:  272.70000000000135
-Time taken to solve:  3.46
-Memory: 0.02MB
-
+[[0, 1, 1], [0, 2, 2], [1, 4, 1], [2, 6, 2], [3, 5, 1], [4, 3, 1], [5, 0, 1], [6, 0, 2]]
+Launch 1 : 0 - 1 - 4 - 3 - 5 - 0
+Launch 2 : 0 - 2 - 6 - 0
+Objective function cost(Fuel, Penalty):
+205.1 ( 83.1 , 122.0 )
+Time taken to solve:  0.31

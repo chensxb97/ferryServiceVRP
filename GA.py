@@ -130,7 +130,7 @@ def summaryGA(best_ind,df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='HM3', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     dirName = os.path.dirname(os.path.abspath('__file__'))
@@ -184,12 +184,12 @@ def main():
     drawGaSolution(route1, df_West, ax)
     drawGaSolution(route2, df_MSP, ax)
 
-    total_runtime = final_time -initial_time
+    total_runtime = final_time - initial_time
     
     print('Total runtime: ', total_runtime)
     
     plt.show()
-    fig.savefig(outputPlot)
+    # fig.savefig(outputPlot) 
 
 if __name__ == '__main__':
     try:

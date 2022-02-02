@@ -57,7 +57,6 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
         initial_load = 0
         possibleCases = []
         heuristic = True
-
         for i in range(len(subRoute)):
             if df.iloc[i, 1]==2:
                 initial_load += df.iloc[i, 3] # Add delivery load to initial load

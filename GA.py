@@ -51,7 +51,7 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
     # Storing results prior to exporting as csv files
     csv_data = []
 
-    print('Start of evolution')
+    # print('Start of evolution')
 
     # Evaluate the entire population
     fitnesses = list(map(toolbox.evaluate, pop))
@@ -116,7 +116,7 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
         genHistory.append(gen)
 
     # plt.scatter(genHistory, fitnessHist)
-    print('-- End of (successful) evolution --')
+    # print('-- End of (successful) evolution --')
     best_ind = tools.selBest(pop, 1)[0]
     # summaryGA(best_ind,df)
 
@@ -148,7 +148,10 @@ def main():
     img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
     
     if batch:
-        testFiles = [f for f in os.listdir(datasetsDir) if f.endswith('.csv') and f != 'order.csv']
+        # testFiles = [f for f in os.listdir(datasetsDir) if f.endswith('.csv') and f != 'order.csv']
+        testFiles = ['LT1.csv','LT2.csv','LT3.csv','LM1.csv','LM2.csv','LM3.csv','LL1.csv','LL2.csv','LL3.csv','LR1.csv','LR2.csv','LR3.csv', \
+        'MT1.csv','MT2.csv','MT3.csv','MM1.csv','MM2.csv','MM3.csv','ML1.csv','ML2.csv','ML3.csv','MR1.csv','MR2.csv','MR3.csv',\
+        'HT1.csv','HT2.csv','HT3.csv','HM1.csv','HM2.csv','HM3.csv','HL1.csv','HL2.csv','HL3.csv','HR1.csv','HR2.csv','HR3.csv']
         files = testFiles # All possible test cases
     else:
         testFile+= '.csv'
@@ -189,7 +192,6 @@ def main():
         print('\nPort MSP')
         summaryGA(best_ind2,df_MSP)
         print('Time taken to run GA: ', final_time - mid_time)
-        print('\n')
 
         # Visualise solutions
         route1 = ind2Route(best_ind1, df_West)
@@ -199,7 +201,7 @@ def main():
 
         # End time
         total_runtime = final_time - initial_time
-        print('Total runtime: ', total_runtime)
+        # print('Total runtime: ', total_runtime)
         
         # plt.show()
         outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')

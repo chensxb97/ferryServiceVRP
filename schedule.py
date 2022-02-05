@@ -22,7 +22,7 @@ MapGraph.add_weighted_edges_from(Edges)
 time_start = timer.time()
 
 # Results csv file
-f = open('outputs/result_schedule.csv', 'w+')
+f = open('outputs/logs/schedule.csv', 'w+')
 f.write('L1,,L2,,L3,,L4,,L5\n')
 
 ##############################################################################################
@@ -125,7 +125,7 @@ def main():
     
     # Outputs directory
     outputsDir = os.path.join(dirName, 'outputs')
-    outputsPlotsDir = os.path.join(outputsDir, 'plots')
+    outputsPlotsDir = os.path.join(outputsDir, 'plots','schedule')
     if not os.path.exists(outputsPlotsDir):
         os.mkdir(outputsPlotsDir)
 

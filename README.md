@@ -40,7 +40,7 @@ Change line 2 for the following python scripts to your CPLEX directory: 'yourCpl
 - lpModel.py
 - schedule.py
 
-#### 2. Test python scripts
+#### 2. Test python scripts on a sample dataset: LT1.csv, by default.
 
 Exhaustive search
 ```python
@@ -57,7 +57,7 @@ Genetic Algorithm
 python ga.py
 ```
 
-#### 3. Run scheduling system, which runs optimises the sets of routes for the following test case.
+#### 3. Run scheduling system, which optimises the sets of routes for the following test case.
 
 Dataset: SampleDataset/order.csv,
 

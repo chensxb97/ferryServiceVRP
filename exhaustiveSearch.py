@@ -136,7 +136,9 @@ def main():
     datasetsDir = os.path.join(dirName, 'datasets')
 
     if batch:
-        testFiles = [f for f in os.listdir(datasetsDir) if f.endswith('.csv') and f != 'order.csv']
+        # testFiles = [f for f in os.listdir(datasetsDir) if f.endswith('.csv') and f != 'order.csv']
+        testFiles = ['LT1.csv','LT2.csv','LT3.csv','LM1.csv','LM2.csv','LM3.csv','LL1.csv','LL2.csv','LL3.csv','LR1.csv','LR2.csv','LR3.csv', \
+            'MT1.csv','MT2.csv','MT3.csv','MM1.csv','MM2.csv','MM3.csv','ML1.csv','ML2.csv','ML3.csv','MR1.csv','MR2.csv','MR3.csv',]
         files = testFiles # All possible test cases
     else:
         testFile+= '.csv'

@@ -47,6 +47,8 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
 
     # Initialise cost counter and inputs
     total_cost = 0
+    total_distance = 0
+    total_penalty_cost = 0
     distMatrix =computeDistMatrix(df, MapGraph)
     route = ind2Route(individual, df)
     tourStart = df.iloc[0, 4]
@@ -117,22 +119,27 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
             if subRoute_time > tourEnd: # End time of tour
                 subRoute_distance += 10000000 # 8th digit
 
-            possibleCases.append(subRoute_distance+subRoute_penalty_cost)
+            possibleCases.append((subRoute_distance+subRoute_penalty_cost,subRoute_distance, subRoute_penalty_cost))
             
             # Change to no heuristic
             if heuristic:
                 heuristic = False 
         
         # Update total cost with the minimum value between the two cases
-        total_cost = total_cost + min(possibleCases)
+        min_val = min(possibleCases, key = lambda t: t[0])
+        total_cost += min_val[0]
+        total_distance += min_val[1]
+        total_penalty_cost += min_val[2]
             
     # Maximum number of active launches cannot be more than assigned fleetsize
     if len(route) <= fleetsize:
         fitness = 1.0 / total_cost
     else:
         fitness = 0.000000001 # 9th digit
+        total_distance = 100000000
+        total_penalty_cost = 0
 
-    return (fitness, )
+    return (fitness, total_distance, total_penalty_cost)
 
 # Generate route from individual
 def ind2Route(individual, df):

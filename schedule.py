@@ -114,22 +114,28 @@ def main():
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--file', metavar='f', default='order', help='File name of the order book')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
-    argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)') #0900 = 60*9 = 540
+    # argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)') #0900 = 60*9 = 540
     args = argparser.parse_args()
-
-    dirName = os.path.dirname(os.path.abspath(__file__))
     file = args.file
+    fleet = int(args.fleetsize)
+
+    # Directory and Filename
+    dirName = os.path.dirname(os.path.abspath(__file__))
     fileName = os.path.join(dirName, 'datasets', file + '.csv')
     
+    # Outputs directory
     outputsDir = os.path.join(dirName, 'outputs')
     outputsPlotsDir = os.path.join(outputsDir, 'plots')
     if not os.path.exists(outputsPlotsDir):
         os.mkdir(outputsPlotsDir)
 
+    # Orders dataset
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])
-    fleet = int(args.fleetsize)
 
+    # Anchorage map
+    img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
+    
     # New 'Port' column
     port = []
     for i in range(len(order_df)):
@@ -150,9 +156,6 @@ def main():
         if not df.empty: # Store tour
             df_tours.append((tour,df)) 
     
-    imgPath = os.path.join(dirName, 'Port_Of_Singapore_Anchorages_Chartlet.png')
-    img = plt.imread(imgPath)
-
     for i in range(len(df_tours)):
         fig, ax = plt.subplots()
         ax.imshow(img)
@@ -161,7 +164,7 @@ def main():
         df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df_tours[i], fleet)
 
         # Perform LP
-        route1, solutionSet_West, _, _, _, _ = calculateRoute(len(df_West)-1, fleetsize_West, df_West) 
+        route1, solutionSet_West, _, _, _, _, _,_ = calculateRoute(len(df_West)-1, fleetsize_West, df_West) 
 
         # If no solution is found using LP, run GA
         # After solution is drawn, we generate a timetable for each route
@@ -173,7 +176,7 @@ def main():
             drawSolution(solutionSet_West, df_West, ax)
             table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West)
 
-        route2, solutionSet_MSP, _, _, _, _= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
+        route2, solutionSet_MSP, _, _, _, _, _, _= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
         if route2 == None:
             while solution2_GA != None:
                 solution2_GA = runGA(df_MSP, 1, 0, len(df_MSP)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)

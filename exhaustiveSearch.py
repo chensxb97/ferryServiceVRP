@@ -20,7 +20,7 @@ def evaluate(individual, df,fleetsize):
 
     # Initialise cost counter and inputs
     total_cost = 0
-    total_fuel_cost = 0
+    total_distance = 0
     total_penalty_cost = 0
     wait_cost = 1
     delay_cost = 1
@@ -104,15 +104,15 @@ def evaluate(individual, df,fleetsize):
         # Update total cost with the minimum value between the two cases
         min_val = min(possibleCases, key = lambda t: t[0])
         total_cost += min_val[0]
-        total_fuel_cost += min_val[1]
+        total_distance += min_val[1]
         total_penalty_cost += min_val[2]
 
     # Maximum number of active launches cannot be more than assigned fleetsize
     if len(route) > fleetsize:
         total_cost = 100000000 # 9th digit
-        total_fuel_cost = 100000000
+        total_distance = 100000000
         total_penalty_cost = 0
-    return total_cost, total_fuel_cost, total_penalty_cost, route
+    return total_cost, total_distance, total_penalty_cost, route
 
 def printOptimalRoute(best_route):
     for launch, launchRoute in enumerate(best_route,1):
@@ -129,20 +129,26 @@ def main():
     argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
-    dirName = os.path.dirname(os.path.abspath(__file__))
     testFile = args.file
     batch = args.batch
+    fleet = int(args.fleetsize)
+    dirName = os.path.dirname(os.path.abspath(__file__))
+    datasetsDir = os.path.join(dirName, 'datasets')
+
     if batch:
-        files = [] # List of test cases
+        testFiles = [f for f in os.listdir(datasetsDir) if f.endswith('.csv') and f != 'order.csv']
+        files = testFiles # All possible test cases
     else:
+        testFile+= '.csv'
         files = [testFile] # Single test case
+
     for file in files:
-        fileName = os.path.join(dirName, 'datasets', file + '.csv')
-        fleet = int(args.fleetsize)
+        fileName = os.path.join(datasetsDir, file)
+        
         order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
         order_df = order_df.sort_values(by=['Start_TW','End_TW'])
 
-        # Pre-optimistion step
+        # Pre-optimisation step
         df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(order_df, fleet)
 
         # Evaluate minimum cost for West
@@ -160,7 +166,7 @@ def main():
                 best_route1 = route
         print('Optimal routes:')
         printOptimalRoute(best_route1)
-        print('Minimum cost:', cost1)
+        print(f'Minimum costs (Total, Fuel, Penalty): {cost1[0]}, {cost1[1]}, {cost1[2]}')
 
         # Evaluate minimum cost for MSP 
         print('\nPort MSP')
@@ -176,7 +182,7 @@ def main():
                 best_route2 = route
         print('Optimal routes: ')
         printOptimalRoute(best_route2)
-        print('Minimum cost:', cost2)
+        print(f'Minimum costs (Total, Fuel, Penalty): {cost2[0]}, {cost2[1]}, {cost2[2]}')
 
         print('\n')
 

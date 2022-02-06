@@ -119,7 +119,7 @@ def main():
     file = args.file
     fleet = int(args.fleetsize)
 
-    # Directory and Filename
+    # Directory and File name
     dirName = os.path.dirname(os.path.abspath(__file__))
     fileName = os.path.join(dirName, 'datasets', file + '.csv')
     

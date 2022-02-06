@@ -126,7 +126,7 @@ def printOptimalRoute(best_route):
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
-    argparser.add_argument('--batch', metavar='b', default=True, help='Run all test cases from directory')
+    argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     testFile = args.file
@@ -136,10 +136,9 @@ def main():
     datasetsDir = os.path.join(dirName, 'datasets')
 
     if batch:
-        # testFiles = [f for f in os.listdir(datasetsDir) if f.endswith('.csv') and f != 'order.csv']
         testFiles = ['LT1.csv','LT2.csv','LT3.csv','LM1.csv','LM2.csv','LM3.csv','LL1.csv','LL2.csv','LL3.csv','LR1.csv','LR2.csv','LR3.csv', \
-            'MT1.csv','MT2.csv','MT3.csv','MM1.csv','MM2.csv','MM3.csv','ML1.csv','ML2.csv','ML3.csv','MR1.csv','MR2.csv','MR3.csv']
-            #  'HT1.csv','HT2.csv','HT3.csv','HM1.csv','HM2.csv','HM3.csv','HL1.csv','HL2.csv','HL3.csv','HR1.csv','HR2.csv','HR3.csv']
+        'MM1.csv','MM2.csv','MM3.csv','ML1.csv','ML2.csv','ML3.csv','MR1.csv','MR2.csv','MR3.csv', \
+        'HT1.csv','HT2.csv','HT3.csv','HM1.csv','HM2.csv','HM3.csv','HL1.csv','HL2.csv','HL3.csv','HR1.csv','HR2.csv','HR3.csv']
         files = testFiles # All possible test cases
     else:
         testFile+= '.csv'
@@ -148,6 +147,7 @@ def main():
     for file in files:
         fileName = os.path.join(datasetsDir, file)
         
+        # Dataset
         order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
         order_df = order_df.sort_values(by=['Start_TW','End_TW'])
 

@@ -51,18 +51,18 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
     # Storing results prior to exporting as csv files
     csv_data = []
 
-    # print('Start of evolution')
+    print('Start of evolution')
 
     # Evaluate the entire population
     fitnesses = list(map(toolbox.evaluate, pop))
     for ind, (fit,fuel,penalty) in zip(pop, fitnesses):
         ind.fitness.values = (fit, fuel, penalty)
 
-    # print(f'  Evaluated {len(pop)} individuals')
+    print(f'  Evaluated {len(pop)} individuals')
 
     # Begin the evolution
     for gen in range(n_gen):
-        # print(f'-- Generation {gen} --')
+        print(f'-- Generation {gen} --')
 
         # Select the next generation individuals
         offspring = toolbox.select(pop, len(pop))
@@ -96,10 +96,10 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
         mean = sum(fits) / length
         sum2 = sum(x*x for x in fits)
         std = abs(sum2 / length - mean**2)**0.5
-        # print(f'  Min {min(fits)}')
-        # print(f'  Max {max(fits)}')
-        # print(f'  Avg {mean}')
-        # print(f'  Std {std}')
+        print(f'  Min {min(fits)}')
+        print(f'  Max {max(fits)}')
+        print(f'  Avg {mean}')
+        print(f'  Std {std}')
 
         # Write results to csv variables prior to exporting as csv files
         if export_csv:
@@ -116,9 +116,9 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
         genHistory.append(gen)
 
     # plt.scatter(genHistory, fitnessHist)
-    # print('-- End of (successful) evolution --')
+    print('-- End of (successful) evolution --')
     best_ind = tools.selBest(pop, 1)[0]
-    # summaryGA(best_ind,df)
+    summaryGA(best_ind,df)
 
     return best_ind
 
@@ -137,6 +137,8 @@ def main():
     testFile = args.file
     batch = args.batch
     fleet = int(args.fleetsize)
+
+    # Directories
     dirName = os.path.dirname(os.path.abspath('__file__'))
     datasetsDir = os.path.join(dirName, 'datasets')
     outputsDir = os.path.join(dirName, 'outputs')
@@ -148,7 +150,6 @@ def main():
     img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
     
     if batch:
-        # testFiles = [f for f in os.listdir(datasetsDir) if f.endswith('.csv') and f != 'order.csv']
         testFiles = ['LT1.csv','LT2.csv','LT3.csv','LM1.csv','LM2.csv','LM3.csv','LL1.csv','LL2.csv','LL3.csv','LR1.csv','LR2.csv','LR3.csv', \
         'MT1.csv','MT2.csv','MT3.csv','MM1.csv','MM2.csv','MM3.csv','ML1.csv','ML2.csv','ML3.csv','MR1.csv','MR2.csv','MR3.csv',\
         'HT1.csv','HT2.csv','HT3.csv','HM1.csv','HM2.csv','HM3.csv','HL1.csv','HL2.csv','HL3.csv','HR1.csv','HR2.csv','HR3.csv']
@@ -201,7 +202,7 @@ def main():
 
         # End time
         total_runtime = final_time - initial_time
-        # print('Total runtime: ', total_runtime)
+        print('Total runtime: ', total_runtime)
         
         # plt.show()
         outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')

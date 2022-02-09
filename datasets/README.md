@@ -1,10 +1,16 @@
 # Datasets
 
-This folder contains sample datasets that represent test cases for the optimisation problem.
+To verify the correctness of the outputs from the optimisation models, it is necessary to run test cases. This folder contains 32 sample datasets to be tested on the optimisation models.
 
 ## Dataset naming convention
 
-Example of a dataset: *HL1.csv*
+The datasets are divided into two categories: Randomised and Clustered.
+
+# Randomised
+Randomised datasets are those where the zones of interest are equally dispersed across the map. 
+For example, orders from zones 1, 10 and 15 are almost equally separated from each other, no distinguishable cluster can be observed.
+
+Example of a randomised dataset: *HL1*
 
 The first alphabet represents the busyness of the depots.
 
@@ -18,14 +24,26 @@ The second alphabet represents the type of time window.
 
 *Tight(T) -> 5 min time windows*
 
-*Moderate(M) -> 15 min time windows*
-
 *Large(L) -> 30 min time windows*
 
 The digit is a unique label per dataset category.
-There are 3 datasets per category, hence, a total of 27 datasets for 9 different categories.
 
-HL1.csv is one of three datasets characterised with a High number of orders per depot with Large time windows.
+There are 2 datasets for each of the 6 unique categories, hence, a total of 12 randomised dataset.
+
+# Clustered
+Clustered datasets are those where the zones of interest are so close to each other that possible clusters can be formed across the map. 
+
+Example of a randomised dataset: *C1*
+
+C1-C2 features zones that form 2 distinguishable clusters that are far from each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 14-15).
+C3-C8 features zones that form 2 distinguishable clusters that are close to each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 8-9).
+C9-C10 features zones that form 3 distinguishable clusters.
+C11-C14 features zones that form 1 distinguishable cluster. For example, Cluster (Zones 1-2-3-4-5).
+
+C1, C3, C5, C7, C9, C11 and C13 comprises of zones with large time windows (30min) whereas
+C2, C4, C6, C8, C10, C12 and C14 comprises of zones with tight time windows (5min).
+
+There are a total of 14 datasets for this category.
 
 ## Structure of dataset
 

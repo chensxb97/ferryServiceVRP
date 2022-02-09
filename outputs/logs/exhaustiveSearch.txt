@@ -39,46 +39,6 @@ Launch 1 : 0 - 2 - 1 - 0
 Launch 2 : 0 - 3 - 0
 Minimum costs (Total, Fuel, Penalty): 120.08660907127427, 73.69999999999999, 46.38660907127428
 
-LM1.csv
-Port West
-Optimal routes:
-Launch 1 : 0 - 2 - 0
-Launch 2 : 0 - 3 - 0
-Launch 3 : 0 - 1 - 4 - 0
-Minimum costs (Total, Fuel, Penalty): 319.0673866090709, 157.4, 161.66738660907095
-
-Port MSP
-Optimal routes: 
-Launch 1 : 0 - 1 - 0
-Launch 2 : 0 - 2 - 3 - 0
-Minimum costs (Total, Fuel, Penalty): 117.58660907127428, 93.19999999999999, 24.38660907127428
-
-LM2.csv
-Port West
-Optimal routes:
-Launch 1 : 0 - 1 - 0
-Launch 2 : 0 - 2 - 3 - 0
-Minimum costs (Total, Fuel, Penalty): 146.85572354211675, 108.4, 38.45572354211674
-
-Port MSP
-Optimal routes: 
-Launch 1 : 0 - 1 - 4 - 0
-Launch 2 : 0 - 2 - 3 - 0
-Minimum costs (Total, Fuel, Penalty): 119.47688984881242, 88.6, 30.876889848812425
-
-LM3.csv
-Port West
-Optimal routes:
-Launch 1 : 0 - 1 - 3 - 0
-Launch 2 : 0 - 2 - 0
-Minimum costs (Total, Fuel, Penalty): 108.71619870410377, 103.2, 5.516198704103772
-
-Port MSP
-Optimal routes: 
-Launch 1 : 0 - 1 - 2 - 0
-Launch 2 : 0 - 3 - 0
-Minimum costs (Total, Fuel, Penalty): 73.69999999999999, 73.69999999999999, 0
-
 LL1.csv
 Port West
 Optimal routes:
@@ -159,46 +119,6 @@ Optimal routes:
 Launch 1 : 0 - 2 - 1 - 6 - 0
 Launch 2 : 0 - 4 - 3 - 5 - 0
 Minimum costs (Total, Fuel, Penalty): 265.355075593952, 101.80000000000001, 163.55507559395198
-
-MM1.csv
-Port West
-Optimal routes:
-Launch 1 : 0 - 2 - 5 - 0
-Launch 2 : 0 - 3 - 1 - 0
-Launch 3 : 0 - 4 - 6 - 0
-Minimum costs (Total, Fuel, Penalty): 518.2030237580991, 166.0, 352.2030237580991
-
-Port MSP
-Optimal routes: 
-Launch 1 : 0 - 1 - 3 - 0
-Launch 2 : 0 - 2 - 4 - 5 - 0
-Minimum costs (Total, Fuel, Penalty): 203.79179265658712, 97.19999999999999, 106.59179265658713
-
-MM2.csv
-Port West
-Optimal routes:
-Launch 1 : 0 - 2 - 4 - 5 - 0
-Launch 2 : 0 - 3 - 1 - 0
-Minimum costs (Total, Fuel, Penalty): 263.2075593952483, 104.7, 158.50755939524834
-
-Port MSP
-Optimal routes: 
-Launch 1 : 0 - 1 - 2 - 3 - 5 - 0
-Launch 2 : 0 - 4 - 6 - 0
-Minimum costs (Total, Fuel, Penalty): 91.2956803455725, 69.3, 21.99568034557251
-
-MM3.csv
-Port West
-Optimal routes:
-Launch 1 : 0 - 1 - 5 - 0
-Launch 2 : 0 - 2 - 3 - 4 - 6 - 0
-Minimum costs (Total, Fuel, Penalty): 106.56393088552937, 85.69999999999999, 20.863930885529385
-
-Port MSP
-Optimal routes: 
-Launch 1 : 0 - 2 - 1 - 6 - 0
-Launch 2 : 0 - 3 - 4 - 5 - 0
-Minimum costs (Total, Fuel, Penalty): 328.6077753779694, 101.80000000000001, 226.8077753779694
 
 ML1.csv
 Port West

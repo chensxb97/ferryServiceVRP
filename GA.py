@@ -58,11 +58,11 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
     for ind, (fit,fuel,penalty) in zip(pop, fitnesses):
         ind.fitness.values = (fit, fuel, penalty)
 
-    print(f'  Evaluated {len(pop)} individuals')
+    # print(f'  Evaluated {len(pop)} individuals')
 
     # Begin the evolution
     for gen in range(n_gen):
-        print(f'-- Generation {gen} --')
+        # print(f'-- Generation {gen} --')
 
         # Select the next generation individuals
         offspring = toolbox.select(pop, len(pop))
@@ -96,10 +96,10 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
         mean = sum(fits) / length
         sum2 = sum(x*x for x in fits)
         std = abs(sum2 / length - mean**2)**0.5
-        print(f'  Min {min(fits)}')
-        print(f'  Max {max(fits)}')
-        print(f'  Avg {mean}')
-        print(f'  Std {std}')
+        # print(f'  Min {min(fits)}')
+        # print(f'  Max {max(fits)}')
+        # print(f'  Avg {mean}')
+        # print(f'  Std {std}')
 
         # Write results to csv variables prior to exporting as csv files
         if export_csv:
@@ -130,8 +130,8 @@ def summaryGA(best_ind,df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
-    argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory')
+    argparser.add_argument('--file', metavar='f', default='C1', help='File name of test case')
+    argparser.add_argument('--batch', metavar='b', default=True, help='Run all test cases from directory')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     testFile = args.file
@@ -150,9 +150,8 @@ def main():
     img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
     
     if batch:
-        testFiles = ['LT1.csv','LT2.csv','LT3.csv','LM1.csv','LM2.csv','LM3.csv','LL1.csv','LL2.csv','LL3.csv','LR1.csv','LR2.csv','LR3.csv', \
-        'MT1.csv','MT2.csv','MT3.csv','MM1.csv','MM2.csv','MM3.csv','ML1.csv','ML2.csv','ML3.csv','MR1.csv','MR2.csv','MR3.csv',\
-        'HT1.csv','HT2.csv','HT3.csv','HM1.csv','HM2.csv','HM3.csv','HL1.csv','HL2.csv','HL3.csv','HR1.csv','HR2.csv','HR3.csv']
+        testFiles = ['C1.csv','C2.csv','C3.csv','C4.csv','C5.csv','C6.csv', 'C7.csv', \
+            'C8.csv','C9.csv','C10.csv','C11.csv','C12.csv', 'C13.csv', 'C14.csv']
         files = testFiles # All possible test cases
     else:
         testFile+= '.csv'

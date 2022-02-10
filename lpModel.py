@@ -132,7 +132,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     # Solve objective function
     mdl.minimize(obj_function)
     time_solve = timer.time()
-    solution = mdl.solve(log_output=False)
+    solution = mdl.solve(log_output=True)
     time_end = timer.time()
     running_time = round(time_end - time_solve, 2)
     elapsed_time = round(time_end - time_start, 2)
@@ -152,9 +152,8 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--file', metavar='f', default='C1', help='File name of test case')
-    argparser.add_argument('--batch', metavar='b', default=True, help='Run all test cases from directory')
+    argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
-    # argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)')
     args = argparser.parse_args()
     testFile = args.file
     batch = args.batch
@@ -172,7 +171,7 @@ def main():
     img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
     
     if batch:
-        testFiles = ['C1.csv','C2.csv', 'C3.csv', 'C4.csv', 'C5.csv', 'C6.csv', 'C7.csv', \
+        testFiles = ['C1.csv','C2.csv', 'C3.csv', 'C4.csv', 'C5.csv', 'C6.csv', 'C7.csv',\
             'C8.csv', 'C9.csv', 'C10.csv', 'C11.csv', 'C12.csv', 'C13.csv', 'C14.csv']
         files = testFiles # All possible test cases
     else:
@@ -221,9 +220,9 @@ def main():
             print('Time taken to solve: ', running_time2)
             drawSolution(solutionSet_MSP, df_MSP, ax)
 
-        # plt.show()
-        outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
-        fig.savefig(outputPlot)
+        plt.show()
+        # outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
+        # fig.savefig(outputPlot)
         print('\n')
 
 if __name__ == '__main__':

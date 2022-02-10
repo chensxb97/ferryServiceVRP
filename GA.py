@@ -58,11 +58,11 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
     for ind, (fit,fuel,penalty) in zip(pop, fitnesses):
         ind.fitness.values = (fit, fuel, penalty)
 
-    # print(f'  Evaluated {len(pop)} individuals')
+    print(f'  Evaluated {len(pop)} individuals')
 
     # Begin the evolution
     for gen in range(n_gen):
-        # print(f'-- Generation {gen} --')
+        print(f'-- Generation {gen} --')
 
         # Select the next generation individuals
         offspring = toolbox.select(pop, len(pop))
@@ -96,10 +96,10 @@ def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
         mean = sum(fits) / length
         sum2 = sum(x*x for x in fits)
         std = abs(sum2 / length - mean**2)**0.5
-        # print(f'  Min {min(fits)}')
-        # print(f'  Max {max(fits)}')
-        # print(f'  Avg {mean}')
-        # print(f'  Std {std}')
+        print(f'  Min {min(fits)}')
+        print(f'  Max {max(fits)}')
+        print(f'  Avg {mean}')
+        print(f'  Std {std}')
 
         # Write results to csv variables prior to exporting as csv files
         if export_csv:
@@ -131,7 +131,7 @@ def summaryGA(best_ind,df):
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--file', metavar='f', default='C1', help='File name of test case')
-    argparser.add_argument('--batch', metavar='b', default=True, help='Run all test cases from directory')
+    argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     testFile = args.file
@@ -203,9 +203,9 @@ def main():
         total_runtime = final_time - initial_time
         print('Total runtime: ', total_runtime)
         
-        # plt.show()
-        outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
-        fig.savefig(outputPlot)
+        plt.show()
+        # outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
+        # fig.savefig(outputPlot)
         print('\n')
 
 if __name__ == '__main__':

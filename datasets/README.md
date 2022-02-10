@@ -28,7 +28,7 @@ The second alphabet represents the type of time window.
 
 The digit is a unique label per dataset category.
 
-There are 2 datasets for each of the 6 unique categories, hence, a total of 12 randomised dataset.
+There are 3 datasets for each of the 6 unique categories, hence, a total of 18 randomised datasets.
 
 # Clustered
 Clustered datasets are those where the zones of interest are so close to each other that possible clusters can be formed across the map. 

@@ -35,10 +35,10 @@ Clustered datasets are those where the zones of interest are so close to each ot
 
 Example of a randomised dataset: *C1*
 
-C1-C2 features zones that form 2 distinguishable clusters that are far from each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 14-15).
-C3-C8 features zones that form 2 distinguishable clusters that are close to each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 8-9).
-C9-C10 features zones that form 3 distinguishable clusters.
-C11-C14 features zones that form 1 distinguishable cluster. For example, Cluster (Zones 1-2-3-4-5).
+C1-C2 features 5 zones that form 2 distinguishable clusters that are far from each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 14-15).
+C3-C8 features 5 zones that form 2 distinguishable clusters that are close to each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 8-9).
+C9-C10 features 5-7 zones that form 3 distinguishable clusters.
+C11-C14 features 5 zones that form 1 distinguishable cluster. For example, Cluster (Zones 1-2-3-4-5).
 
 C1, C3, C5, C7, C9, C11 and C13 comprises of zones with large time windows (30min) whereas
 C2, C4, C6, C8, C10, C12 and C14 comprises of zones with tight time windows (5min).

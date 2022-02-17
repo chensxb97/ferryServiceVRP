@@ -19,42 +19,23 @@ Memory: 0.01MB
 
 LT2.csv
 Port West
-Best individual: [4, 2, 3, 5, 1]
+Best individual: [2, 3, 5, 1, 4]
 Fitness: 0.004458860034168538
 Launch 1: 0 - 2 - 3 - 0
 Launch 2: 0 - 1 - 0
 Minimum costs (Total, Fuel, Penalty): 224.27257019438468, 108.4, 115.8725701943847
-Time taken to run GA:  16.699277877807617
+Time taken to run GA:  22.669869899749756
 Memory: 0.01MB
 
 Port MSP
-Best individual: [1, 5, 3, 6, 2, 4]
-Fitness: 0.010266940451745381
-Launch 1: 0 - 1 - 0
-Launch 2: 0 - 3 - 0
-Launch 3: 0 - 2 - 4 - 0
-Minimum costs (Total, Fuel, Penalty): 97.39999999999999, 97.39999999999999, 0.0
-Time taken to run GA:  19.936540365219116
-Memory: 0.01MB
-
-LT3.csv
-Port West
-Best individual: [2, 5, 1, 4, 3]
-Fitness: 0.003003240645845929
+Best individual: [2, 6, 1, 5, 3, 4]
+Fitness: 0.009861932938856016
 Launch 1: 0 - 2 - 0
 Launch 2: 0 - 1 - 0
-Launch 3: 0 - 3 - 0
-Minimum costs (Total, Fuel, Penalty): 332.9736501079912, 127.60000000000001, 205.37365010799124
-Time taken to run GA:  17.20544934272766
-Memory: 0.01MB
-
-Port MSP
-Best individual: [2, 1, 4, 5, 3]
-Fitness: 0.00832732315229649
-Launch 1: 0 - 2 - 1 - 0
-Launch 2: 0 - 3 - 0
-Minimum costs (Total, Fuel, Penalty): 120.08660907127427, 73.69999999999999, 46.38660907127428
-Time taken to run GA:  24.161933422088623
+Launch 3: 0 - 3 - 4 - 0
+Minimum costs (Total, Fuel, Penalty): 101.4, 101.39999999999999, 0.0
+Time taken to run GA:  27.703251123428345
+Total runtime:  50.3731210231781
 Memory: 0.01MB
 
 LL1.csv
@@ -93,25 +74,6 @@ Launch 1: 0 - 4 - 3 - 0
 Launch 2: 0 - 1 - 2 - 0
 Minimum costs (Total, Fuel, Penalty): 68.9, 68.9, 0.0
 Time taken to run GA:  26.070387601852417
-Memory: 0.01MB
-
-LL3.csv
-Port West
-Best individual: [5, 3, 4, 1, 2]
-Fitness: 0.010235414534288638
-Launch 1: 0 - 3 - 0
-Launch 2: 0 - 1 - 2 - 0
-Minimum costs (Total, Fuel, Penalty): 97.70000000000002, 97.7, 0.0
-Time taken to run GA:  24.519144296646118
-Memory: 0.01MB
-
-Port MSP
-Best individual: [5, 1, 4, 2, 3]
-Fitness: 0.005389875415881864
-Launch 1: 0 - 1 - 0
-Launch 2: 0 - 2 - 3 - 0
-Minimum costs (Total, Fuel, Penalty): 185.5330453563712, 98.6, 86.93304535637117
-Time taken to run GA:  24.376195669174194
 Memory: 0.01MB
 
 MT1.csv
@@ -154,26 +116,6 @@ Minimum costs (Total, Fuel, Penalty): 374.50215982721403, 111.5, 263.00215982721
 Time taken to run GA:  37.6228141784668
 Memory: 0.01MB
 
-MT3.csv
-Port West
-Best individual: [2, 3, 8, 4, 7, 1, 5, 6]
-Fitness: 0.001885273570296884
-Launch 1: 0 - 2 - 3 - 0
-Launch 2: 0 - 4 - 0
-Launch 3: 0 - 1 - 5 - 6 - 0
-Minimum costs (Total, Fuel, Penalty): 530.4269978401727, 122.9, 407.5269978401727
-Time taken to run GA:  48.52586507797241
-Memory: 0.01MB
-
-Port MSP
-Best individual: [6, 4, 2, 8, 7, 1, 3, 5]
-Fitness: 9.99902884529523e-08
-Launch 1: 0 - 6 - 4 - 2 - 0
-Launch 2: 0 - 1 - 3 - 5 - 0
-Minimum costs (Total, Fuel, Penalty): 10000971.249028077, 10000121.1, 850.1490280777541
-Time taken to run GA:  57.959105253219604
-Memory: 0.02MB
-
 ML1.csv
 Port West
 Best individual: [2, 1, 7, 3, 8, 4, 6, 5]
@@ -214,26 +156,6 @@ Minimum costs (Total, Fuel, Penalty): 222.1576673866093, 102.99999999999999, 119
 Time taken to run GA:  31.654180765151978
 Memory: 0.01MB
 
-ML3.csv
-Port West
-Best individual: [3, 5, 6, 8, 1, 4, 7, 2]
-Fitness: 0.005607370240244923
-Launch 1: 0 - 3 - 5 - 6 - 0
-Launch 2: 0 - 1 - 4 - 0
-Launch 3: 0 - 2 - 0
-Minimum costs (Total, Fuel, Penalty): 178.33671706263527, 123.30000000000001, 55.03671706263526
-Time taken to run GA:  42.66986036300659
-Memory: 0.01MB
-
-Port MSP
-Best individual: [8, 6, 2, 1, 7, 3, 4, 5]
-Fitness: 0.0013268859477046455
-Launch 1: 0 - 6 - 2 - 1 - 0
-Launch 2: 0 - 3 - 4 - 5 - 0
-Minimum costs (Total, Fuel, Penalty): 753.644276457883, 128.1, 625.5442764578831
-Time taken to run GA:  52.22339391708374
-Memory: 0.01MB
-
 HT1.csv
 Port West
 Best individual: [8, 4, 6, 2, 9, 7, 1, 5, 11, 3, 10]
@@ -270,26 +192,6 @@ Launch 1: 0 - 4 - 1 - 3 - 5 - 0
 Launch 2: 0 - 2 - 6 - 7 - 9 - 8 - 0
 Minimum costs (Total, Fuel, Penalty): 550.0412526997848, 98.69999999999999, 451.3412526997847
 Time taken to run GA:  77.77444577217102
-Memory: 0.02MB
-
-HT3.csv
-Port West
-Best individual: [8, 9, 5, 7, 11, 4, 3, 2, 1, 10, 6]
-Fitness: 9.999134054906191e-08
-Launch 1: 0 - 8 - 9 - 5 - 7 - 0
-Launch 2: 0 - 4 - 3 - 2 - 1 - 0
-Launch 3: 0 - 6 - 0
-Minimum costs (Total, Fuel, Penalty): 10000866.020086393, 10000178.1, 687.9200863930884
-Time taken to run GA:  62.325149059295654
-Memory: 0.02MB
-
-Port MSP
-Best individual: [4, 7, 6, 3, 2, 8, 9, 11, 10, 5, 1]
-Fitness: 9.998805009555943e-08
-Launch 1: 0 - 4 - 7 - 6 - 3 - 2 - 8 - 9 - 0
-Launch 2: 0 - 5 - 1 - 0
-Minimum costs (Total, Fuel, Penalty): 10001195.13326134, 10000151.9, 1043.233261339093 
-Time taken to run GA:  77.47112894058228
 Memory: 0.02MB
 
 HL1.csv
@@ -330,24 +232,93 @@ Minimum costs (Total, Fuel, Penalty): 573.8641468682515, 114.70000000000002, 459
 Time taken to run GA:  80.43426036834717
 Memory: 0.02MB
 
-HL3.csv
+ET1.csv
 Port West
-Best individual: [6, 4, 10, 1, 2, 7, 5, 3, 11, 8, 9]
-Fitness: 9.998852687371274e-08
-Launch 1: 0 - 6 - 4 - 0
-Launch 2: 0 - 1 - 2 - 7 - 5 - 3 - 0
-Launch 3: 0 - 8 - 9 - 0
-Minimum costs (Total, Fuel, Penalty): 10001147.444276458, 10000200.899999999, 946.5442764578829
-Time taken to run GA:  86.29947304725647
+Best individual: [8, 15, 4, 12, 16, 3, 7, 17, 14, 5, 2, 13, 11, 1, 10, 6, 9]
+Fitness: 8.330882892597375e-08
+Launch 1: 0 - 8 - 15 - 4 - 12 - 0
+Launch 2: 0 - 3 - 7 - 0
+Launch 3: 0 - 14 - 5 - 2 - 13 - 11 - 1 - 10 - 6 - 9 - 0
+Minimum costs (Total, Fuel, Penalty): 12003529.672570193, 12000279.799999999, 3249.8725701943827
+Time taken to run GA:  121.71136951446533
 Memory: 0.02MB
 
 Port MSP
-Best individual: [10, 1, 8, 4, 2, 3, 11, 5, 7, 9, 6]
-Fitness: 9.999365354102991e-08
-Launch 1: 0 - 1 - 8 - 4 - 2 - 3 - 0
-Launch 2: 0 - 5 - 7 - 9 - 6 - 0
-Minimum costs (Total, Fuel, Penalty): 10000634.686177107, 10000128.9, 505.78617710583217
-Time taken to run GA:  71.3914692401886
+Best individual: [3, 5, 4, 7, 6, 9, 2, 1, 11, 8, 10, 12]
+Fitness: 9.998240965198323e-08
+Launch 1: 0 - 3 - 5 - 4 - 7 - 6 - 9 - 2 - 1 - 0
+Launch 2: 0 - 8 - 10 - 0
+Minimum costs (Total, Fuel, Penalty): 10001759.344276458, 10000193.8, 1565.5442764578831
+Time taken to run GA:  61.530781984329224
+Total runtime:  183.24215149879456
+Memory: 0.02MB
+
+ET2.csv
+Port West
+Best individual: [3, 5, 12, 2, 1, 10, 4, 6, 7, 9, 8, 11]
+Fitness: 9.99799227898525e-08
+Launch 1: 0 - 3 - 5 - 0
+Launch 2: 0 - 2 - 1 - 10 - 4 - 6 - 7 - 9 - 8 - 0
+Minimum costs (Total, Fuel, Penalty): 10002008.124190064, 10000200.5, 
+1807.6241900647947
+Time taken to run GA:  68.69962525367737
+Memory: 0.02MB
+
+Port MSP
+Best individual: [11, 6, 1, 5, 15, 12, 13, 16, 7, 10, 3, 4, 14, 17, 8, 2, 9]
+Fitness: 9.997067965982001e-08
+Launch 1: 0 - 11 - 6 - 1 - 5 - 15 - 12 - 13 - 0
+Launch 2: 0 - 7 - 10 - 3 - 4 - 14 - 0
+Launch 3: 0 - 8 - 2 - 9 - 0
+Minimum costs (Total, Fuel, Penalty): 10002932.893952483, 10000276.3, 
+2656.5939524838004
+Time taken to run GA:  85.40742230415344
+Total runtime:  154.1070475578308
+Memory: 0.02MB
+
+EL1.csv
+Port West
+Best individual: [6, 1, 12, 11, 8, 13, 9, 7, 15, 16, 2, 3, 14, 17, 4, 
+10, 5]
+Fitness: 9.998477529019309e-08
+Launch 1: 0 - 6 - 1 - 12 - 11 - 8 - 13 - 9 - 7 - 15 - 0
+Launch 2: 0 - 2 - 3 - 14 - 0
+Launch 3: 0 - 4 - 10 - 5 - 0
+Minimum costs (Total, Fuel, Penalty): 10001522.702807775, 10000243.8, 
+1278.902807775379
+Time taken to run GA:  115.19425535202026
+Memory: 0.02MB
+
+Port MSP
+Best individual: [12, 8, 4, 2, 11, 10, 3, 6, 1, 7, 9, 5]
+Fitness: 9.999124719598846e-08
+Launch 1: 0 - 8 - 4 - 2 - 0
+Launch 2: 0 - 10 - 3 - 6 - 1 - 7 - 9 - 5 - 0
+Minimum costs (Total, Fuel, Penalty): 10000875.357019437, 10000144.1, 
+731.2570194384451
+Time taken to run GA:  55.77766942977905
+Total runtime:  170.97192478179932
+Memory: 0.02MB
+
+EL2.csv
+Port West
+Best individual: [10, 3, 11, 12, 6, 9, 4, 5, 7, 2, 8, 1]
+Fitness: 9.99767376027152e-08
+Launch 1: 0 - 10 - 3 - 0
+Launch 2: 0 - 6 - 9 - 4 - 5 - 7 - 2 - 8 - 1 - 0
+Minimum costs (Total, Fuel, Penalty): 10002326.78099352, 10000219.2, 2107.580993520518
+Time taken to run GA:  74.16371536254883
+Memory: 0.02MB
+
+Port MSP
+Best individual: [7, 10, 14, 15, 1, 11, 3, 13, 16, 5, 2, 9, 17, 12, 8, 6, 4]
+Fitness: 9.998834174159778e-08
+Launch 1: 0 - 7 - 10 - 14 - 15 - 1 - 11 - 3 - 13 - 0
+Launch 2: 0 - 5 - 2 - 9 - 0
+Launch 3: 0 - 12 - 8 - 6 - 4 - 0
+Minimum costs (Total, Fuel, Penalty): 10001165.961771058, 10000196.1, 969.8617710583155
+Time taken to run GA:  115.16916251182556
+Total runtime:  189.3328778743744
 Memory: 0.02MB
 
 C1.csv

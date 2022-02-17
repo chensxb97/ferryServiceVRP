@@ -14,13 +14,13 @@ Example of a randomised dataset: *HL1*
 
 The first alphabet represents the busyness of the depots.
 
-*Sparse(S) -> 3-4 orders per Depot*
+*Low(L) -> 3-4 orders per Depot*
 
-*Low(L) -> 5-6 orders per Depot*
+*Medium(M) -> 5-6 orders per Depot*
 
-*Medium(M) -> 8-9 orders per Depot*
+*High(H) -> 8-9 orders per Depot*
 
-*High(H) -> 10-12 orders per Depot*
+*Extreme(E) -> 10-12 orders per Depot*
 
 The second alphabet represents the type of time window.
 

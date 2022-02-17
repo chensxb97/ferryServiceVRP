@@ -20,7 +20,7 @@ The first alphabet represents the busyness of the depots.
 
 *High(H) -> 8-9 orders per Depot*
 
-*Extreme(E) -> 10-12 orders per Depot*
+*Extreme(E) -> 10-15 orders per Depot*
 
 The second alphabet represents the type of time window.
 

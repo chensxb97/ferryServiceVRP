@@ -14,11 +14,13 @@ Example of a randomised dataset: *HL1*
 
 The first alphabet represents the busyness of the depots.
 
-*Low(L) -> 3-4 orders per Depot*
+*Sparse(S) -> 3-4 orders per Depot*
 
-*Medium(M) -> 5-6 orders per Depot*
+*Low(L) -> 5-6 orders per Depot*
 
-*High(H) -> 8-9 orders per Depot*
+*Medium(M) -> 8-9 orders per Depot*
+
+*High(H) -> 10-12 orders per Depot*
 
 The second alphabet represents the type of time window.
 
@@ -28,10 +30,10 @@ The second alphabet represents the type of time window.
 
 The digit is a unique label per dataset category.
 
-There are 3 datasets for each of the 6 unique categories, hence, a total of 18 randomised datasets.
+There are 2 datasets for each of the 8 unique categories, hence, a total of 16 randomised datasets.
 
 # Clustered
-Clustered datasets are those where the zones of interest are so close to each other that possible clusters can be formed across the map. 
+Clustered datasets are those where the zones of interest are sufficiently close to each other such that possible clusters can be formed across the map. 
 
 Example of a randomised dataset: *C1*
 

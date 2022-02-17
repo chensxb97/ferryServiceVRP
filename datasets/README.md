@@ -20,6 +20,8 @@ The first alphabet represents the busyness of the depots.
 
 *High(H) -> 8-9 orders per Depot*
 
+*Extreme(E) -> 10-15 orders per Depot*
+
 The second alphabet represents the type of time window.
 
 *Tight(T) -> 5 min time windows*
@@ -28,10 +30,10 @@ The second alphabet represents the type of time window.
 
 The digit is a unique label per dataset category.
 
-There are 3 datasets for each of the 6 unique categories, hence, a total of 18 randomised datasets.
+There are 2 datasets for each of the 8 unique categories, hence, a total of 16 randomised datasets.
 
 # Clustered
-Clustered datasets are those where the zones of interest are so close to each other that possible clusters can be formed across the map. 
+Clustered datasets are those where the zones of interest are sufficiently close to each other such that possible clusters can be formed across the map. 
 
 Example of a randomised dataset: *C1*
 

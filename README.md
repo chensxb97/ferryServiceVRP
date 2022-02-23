@@ -1,7 +1,7 @@
 # FYP Project C035
 
 ## Summary
-This project aims to study and model the ferry service operations optimisation problem as a Vehicle Routing Problem with Time Windows and Simultaneous Delivery and Pickup (VRPTW-SDP).
+This project aims to study and model the ferry service operations optimisation problem as a Vehicle Routing Problem with Backhauls and Time Windows (VRPBTW).
 
 The objective of this repository is to develop an optimal scheduling system that can generate an optimal set of routes and schedules that best maximises the ability of ferry service operations to meet its daily demands. The following methods were employed to tackle this optimisation problem.
 

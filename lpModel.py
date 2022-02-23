@@ -221,8 +221,8 @@ def main():
             drawSolution(solutionSet_MSP, df_MSP, ax)
 
         plt.show()
-        outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
-        fig.savefig(outputPlot)
+        # outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
+        # fig.savefig(outputPlot)
         print('\n')
 
 if __name__ == '__main__':

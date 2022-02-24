@@ -63,7 +63,7 @@ Order_ID: *Unique label per booking record*
 
 Request_Type: *Pickup(1), Delivery(2)*
 
-Zone: *location(Port West, Port MSP, Z1 - Z30)*
+Zone: *Location(Port West, Port MSP, Z1 - Z30)*
 
 Demand: *Number of passengers per request*
 

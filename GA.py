@@ -130,7 +130,7 @@ def summaryGA(best_ind,df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='EL2', help='File name of test case')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
     argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
@@ -204,8 +204,8 @@ def main():
         print('Total runtime: ', total_runtime)
         
         plt.show()
-        outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
-        fig.savefig(outputPlot)
+        # outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
+        # fig.savefig(outputPlot)
         print('\n')
 
 if __name__ == '__main__':

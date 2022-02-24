@@ -196,21 +196,22 @@ Memory: 0.02MB
 
 HL1.csv
 Port West
-Best individual: [10, 5, 1, 9, 11, 8, 7, 2, 6, 3, 4]
-Fitness: 9.998809093678533e-08
-Launch 1: 0 - 5 - 1 - 9 - 0
-Launch 2: 0 - 8 - 7 - 2 - 6 - 3 - 4 - 0
-Minimum costs (Total, Fuel, Penalty): 10001191.048164146, 10000133.100000001, 1057.9481641468687
-Time taken to run GA:  89.90139317512512
+Best individual: [3, 4, 8, 10, 11, 2, 7, 6, 1, 5, 9]
+Fitness: 9.998091813647051e-08
+Launch 1: 0 - 3 - 4 - 8 - 0
+Launch 2: 0 - 2 - 7 - 6 - 1 - 5 - 9 - 0
+Minimum costs (Total, Fuel, Penalty): 10001908.550539957, 10000198.3, 1710.250539956803
+Time taken to run GA:  122.86359977722168
 Memory: 0.02MB
 
 Port MSP
-Best individual: [5, 4, 3, 7, 10, 9, 2, 6, 1, 8]
-Fitness: 0.0036443033949480315
-Launch 1: 0 - 5 - 4 - 3 - 7 - 0
-Launch 2: 0 - 2 - 6 - 1 - 8 - 0
-Minimum costs (Total, Fuel, Penalty): 274.4008639308858, 101.19999999999999, 173.20086393088582
-Time taken to run GA:  71.26591444015503
+Best individual: [4, 1, 3, 10, 7, 8, 5, 6, 2, 9]
+Fitness: 0.0017348205079014889
+Launch 1: 0 - 4 - 1 - 3 - 0
+Launch 2: 0 - 7 - 8 - 5 - 6 - 2 - 0
+Minimum costs (Total, Fuel, Penalty): 576.4285097192226, 123.8, 452.6285097192226
+Time taken to run GA:  99.54476928710938
+Total runtime:  222.40836906433105
 Memory: 0.02MB
 
 HL2.csv

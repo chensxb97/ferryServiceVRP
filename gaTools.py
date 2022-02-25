@@ -72,6 +72,7 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
             subRoute_load = initial_load # Total delivery load
 
             for customer_id in subRoute: # Customer_id: Zone
+                
                 # Calculate travelling distance between zones
                 distance = distMatrix[lastCustomer_id][customer_id]
 

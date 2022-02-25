@@ -130,8 +130,8 @@ def summaryGA(best_ind,df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
-    argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case') # Change the filename to run a different test case
+    argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory') # Change to True to run batch of test cases
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     testFile = args.file
@@ -151,7 +151,7 @@ def main():
     
     if batch:
         testFiles = ['C1.csv','C2.csv','C3.csv','C4.csv','C5.csv','C6.csv', 'C7.csv', \
-            'C8.csv','C9.csv','C10.csv','C11.csv','C12.csv', 'C13.csv', 'C14.csv']
+            'C8.csv','C9.csv','C10.csv','C11.csv','C12.csv', 'C13.csv', 'C14.csv'] # Change the list of test cases you wish to run
         files = testFiles # All possible test cases
     else:
         testFile+= '.csv'
@@ -204,6 +204,8 @@ def main():
         print('Total runtime: ', total_runtime)
         
         plt.show()
+
+        # Uncomment the 2 lines below, to save the newly generated visualisation map
         # outputPlot = os.path.join(outputsPlotsDir, file.rsplit('.', 1)[0] + '.png')
         # fig.savefig(outputPlot)
         print('\n')

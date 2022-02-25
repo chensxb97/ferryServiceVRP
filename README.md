@@ -5,7 +5,7 @@ This project aims to study and model the ferry service operations optimisation p
 
 The objective of this repository is to develop an optimal scheduling system that can generate an optimal set of routes and schedules that best maximises the ability of ferry service operations to meet its daily demands. The following methods were employed to tackle this optimisation problem.
 
-#### 1. Exact methods - Exhaustive search, Classic Linear Programming Model
+#### 1. Exact methods - Exhaustive search, Linear Programming Model
 #### 2. Heuristic methods - Genetic Algorithm
 
 All the above methods were implemented using Python 3.7.
@@ -40,18 +40,16 @@ Change line 2 for the following python scripts to your CPLEX directory: 'yourCpl
 - lpModel.py
 - schedule.py
 
-#### 2. Test python scripts on a sample dataset: LT1.csv, by default.
+#### 2. Test python scripts on a sample dataset: LT1.csv, by default. 
 
 Exhaustive search
 ```python
 python exhaustiveSearch.py
 ```
-
-Classic Linear Programming Model
+Linear Programming Model
 ```python
 python lpModel.py
 ```
-
 Genetic Algorithm
 ```python
 python ga.py

@@ -16,7 +16,7 @@ MapGraph = nx.Graph()
 MapGraph.add_weighted_edges_from(Edges)
 
 # Computes cost for the given permutation of zones
-def evaluate(individual, df,fleetsize):
+def evaluate(individual, df, fleetsize):
 
     # Initialise cost counter and inputs
     total_cost = 0
@@ -48,6 +48,7 @@ def evaluate(individual, df,fleetsize):
             subRoute_load = initial_load # Total delivery load
 
             for customer_id in subRoute: # Customer_id: Zone
+                
                 # Calculate travelling distance between zones
                 distance = distMatrix[lastCustomer_id][customer_id]
 
@@ -112,6 +113,7 @@ def evaluate(individual, df,fleetsize):
         total_cost = 100000000 # 9th digit
         total_distance = 100000000
         total_penalty_cost = 0
+
     return total_cost, total_distance, total_penalty_cost, route
 
 def printOptimalRoute(best_route):
@@ -125,8 +127,8 @@ def printOptimalRoute(best_route):
         
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case')
-    argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory')
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case') # Change the filename to run a different test case
+    argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory') # Change to True to run batch of test cases
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
     testFile = args.file
@@ -137,7 +139,7 @@ def main():
 
     if batch:
         testFiles = ['C1.csv','C2.csv', 'C3.csv', 'C4.csv', 'C5.csv', 'C6.csv', 'C7.csv',\
-            'C8.csv', 'C9.csv', 'C10.csv', 'C11.csv', 'C12.csv', 'C13.csv', 'C14.csv']
+            'C8.csv', 'C9.csv', 'C10.csv', 'C11.csv', 'C12.csv', 'C13.csv', 'C14.csv'] # Change the list of test cases you wish to run
         files = testFiles # All possible test cases
     else:
         testFile+= '.csv'

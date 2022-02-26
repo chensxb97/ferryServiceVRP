@@ -42,7 +42,7 @@ Change line 2 for the following python scripts to your CPLEX directory: 'yourCpl
 
 #### 2. Test python scripts on a sample dataset: LT1.csv, by default. 
 
-Exhaustive search
+Exhaustive search Algorithm
 ```python
 python exhaustiveSearch.py
 ```
@@ -54,10 +54,14 @@ Genetic Algorithm
 ```python
 python ga.py
 ```
+The input datasets can be found in the folder: /datasets.
+The outputs from the above scripts can be found in folder: /outputs.
+Output logs from the lpModel.py and ga.py were manually compiled in GA.txt and lpModel.txt in folder: /datasets/logs.
+When lpModel.py and ga.py are run, they generate visualisation maps that are automatically saved in folder: /datasets/plots.
 
 #### 3. Run scheduling system, which optimises the sets of routes for the following test case.
 
-Dataset: SampleDataset/order.csv,
+Dataset: datasets/order.csv,
 
 Tours: 0900-1130, 1130-1400,
 
@@ -66,6 +70,11 @@ Fleet size: 5
 ```python
 python schedule.py
 ```
+
+When schedule.py is run, it generates a timetable, schedule.csv, which is saved in folder: /outputs/logs.
+It also generates visualisation maps that are saved in folder: /outputs/plots/schedule
+
+
 
 
 

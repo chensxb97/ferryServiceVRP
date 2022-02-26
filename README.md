@@ -36,11 +36,11 @@ pip install -r requirements.txt
 
 Change line 2 for the following python scripts to your CPLEX directory: 'yourCplexhome/python/VERSION/PLATFORM'
 
-- exhaustiveSearch.py
-- lpModel.py
-- schedule.py
+- *exhaustiveSearch.py*
+- *lpModel.py*
+- *schedule.py*
 
-#### 2. Test python scripts on a sample dataset: LT1.csv, by default. 
+#### 2. Test python scripts on a sample dataset: *LT1.csv*, by default. 
 
 Exhaustive search Algorithm
 ```python
@@ -54,14 +54,14 @@ Genetic Algorithm
 ```python
 python ga.py
 ```
-The input datasets can be found in the folder: /datasets.
-The outputs from the above scripts can be found in folder: /outputs.
-Output logs from the lpModel.py and ga.py were manually compiled in GA.txt and lpModel.txt in folder: /datasets/logs.
-When lpModel.py and ga.py are run, they generate visualisation maps that are automatically saved in folder: /datasets/plots.
+The input datasets can be found in the folder: */datasets*.
+The outputs from the above scripts can be found in folder: */outputs*.
+Output logs from the *lpModel.py* and *ga.py* were manually compiled in *GA.txt* and *lpModel.txt* in folder: */datasets/logs*.
+When *lpModel.py* and *ga.py* are run, they generate visualisation maps that are automatically saved in folder: */datasets/plots*.
 
 #### 3. Run scheduling system, which optimises the sets of routes for the following test case.
 
-Dataset: datasets/order.csv,
+Dataset: *datasets/order.csv*,
 
 Tours: 0900-1130, 1130-1400,
 
@@ -71,8 +71,8 @@ Fleet size: 5
 python schedule.py
 ```
 
-When schedule.py is run, it generates a timetable, schedule.csv, which is saved in folder: /outputs/logs.
-It also generates visualisation maps that are saved in folder: /outputs/plots/schedule
+When *schedule.py* is run, it generates a timetable, *schedule.csv*, which is saved in folder: */outputs/logs*.
+It also generates visualisation maps that are saved in folder: */outputs/plots/schedule*.
 
 ## References
 1. [Modelling and Analysis of a Vehicle Routing Problem with Time Windows in Freight Delivery (MIP Model)](https://github.com/dungtran209/Modelling-and-Analysis-of-a-Vehicle-Routing-Problem-with-Time-Windows-in-Freight-Delivery/blob/master/algorithm/VRPTW%20MIP%20Model.pdf)

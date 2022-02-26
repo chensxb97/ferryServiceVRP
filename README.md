@@ -56,7 +56,7 @@ python ga.py
 ```
 The input datasets can be found in the folder: */datasets*.
 The outputs from the above scripts can be found in folder: */outputs*.
-Output logs from the *lpModel.py* and *ga.py* were manually compiled in *GA.txt* and *lpModel.txt* in folder: */datasets/logs*.
+Output logs from *lpModel.py* and *ga.py* were manually compiled in *GA.txt* and *lpModel.txt* in folder: */datasets/logs*.
 When *lpModel.py* and *ga.py* are run, they generate visualisation maps that are automatically saved in folder: */datasets/plots*.
 
 #### 3. Run scheduling system, which optimises the sets of routes for the following test case.

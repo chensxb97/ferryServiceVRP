@@ -28,7 +28,7 @@ The second alphabet represents the type of time window.
 
 *Large(L) -> 30 min time windows*
 
-The digit is a unique label per dataset category.
+The digit represents a unique label for each permutation of alphabet pairs (1 or 2).
 
 There are a total of 16 datasets in this category.
 

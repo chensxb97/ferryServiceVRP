@@ -10,7 +10,7 @@ The datasets are divided into two categories: Randomised and Clustered.
 Randomised datasets are those where the zones of interest are equally dispersed across the map. 
 For example, orders from zones 1, 10 and 15 are almost equally separated from each other, no distinguishable cluster can be observed.
 
-Example of a randomised dataset: *HL1*
+Example of a randomised dataset: *HL1.csv*
 
 The first alphabet represents the busyness of the depots.
 
@@ -30,12 +30,12 @@ The second alphabet represents the type of time window.
 
 The digit is a unique label per dataset category.
 
-There are 2 datasets for each of the 8 unique categories, hence, a total of 16 randomised datasets.
+There are a total of 16 datasets in this category.
 
 # Clustered
 Clustered datasets are those where the zones of interest are sufficiently close to each other such that possible clusters can be formed across the map. 
 
-Example of a randomised dataset: *C1*
+Example of a randomised dataset: *C1.csv*
 
 *C1-C2* features 5 zones that form 2 distinguishable clusters that are far from each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 14-15).
 
@@ -48,7 +48,7 @@ Example of a randomised dataset: *C1*
 *C1, C3, C5, C7, C9, C11* and *C13* comprises of zones with large time windows (30min) whereas
 *C2, C4, C6, C8, C10, C12* and *C14* comprises of zones with tight time windows (5min).
 
-There are a total of 14 datasets for this category.
+There are a total of 14 datasets in this category.
 
 ## Structure of dataset
 

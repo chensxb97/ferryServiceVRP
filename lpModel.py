@@ -84,9 +84,6 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     t = mdl.integer_var_dict(T, name='t')
 
     # Constraints
-    
-    # All launches depart the depot at tour depature time
-    mdl.add_constraints(t[0, v] == df.iloc[0,4] for v in numOfVehicles)
 
     # All launches must start at the depot
     mdl.add_constraints(mdl.sum(x[0, j, v] for j in Cc) == 1 for v in numOfVehicles)
@@ -108,6 +105,9 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
 
     # Total load of each launch at any node does not exceed maximum capacity
     mdl.add_constraints(load[j, v] <= Capacity for j in Cc for v in numOfVehicles)
+
+    # All launches depart the depot at tour departure time
+    mdl.add_constraints(t[0, v] == df.iloc[0,4] for v in numOfVehicles)
 
     # Launch's travelling time balance constraint between nodes i and j
     mdl.add_constraints(t[j,v] >= t[i,v] + servTime[i] + travTime[i,j] - M *(1 - x[i,j,v]) for i in Cc for j in C for v in numOfVehicles if i != j)

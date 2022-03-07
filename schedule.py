@@ -114,7 +114,6 @@ def main():
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--file', metavar='f', default='order', help='File name of the order book')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
-    # argparser.add_argument('--time', metavar = 't', default='540', help='Starting time of optimization, stated in minutes; default at 9AM (540)') #0900 = 60*9 = 540
     args = argparser.parse_args()
     file = args.file
     fleet = int(args.fleetsize)

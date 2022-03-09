@@ -13,7 +13,7 @@ The algorithms were run and tested on a Lenovo YOGA S740 with am Intel i7 CPU an
 
 ## Installation
 
-#### 1. Clone this repository in your working directory
+#### 1. Clone this repository in your working directory (Skip this step if this folder is already downloaded in your computer)
 
 ```bash
 git clone https://github.com/chensxb97/ferryServiceVRP.git

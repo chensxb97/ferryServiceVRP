@@ -9,7 +9,7 @@ The objective of this repository is to develop an optimal scheduling system that
 #### 2. Heuristic methods - Genetic Algorithm
 
 All the above methods were implemented using Python 3.7.
-The algorithms were run and tested on a Lenovo YOGA S740 with am Intel i7 CPU and 16 GB RAM.
+The algorithms were run and tested on a Lenovo YOGA S740 with an Intel i7 CPU and 16 GB RAM.
 
 ## Installation
 

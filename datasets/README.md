@@ -1,6 +1,6 @@
 # Datasets
 
-To verify the correctness of the outputs from the optimisation models, it is necessary to run test cases. This folder contains 30 sample datasets to be tested on the optimisation models.
+To verify the correctness of the outputs from the optimisation models, it is necessary to conduct performance testing by running test cases. This folder contains 30 sample datasets to be tested on the optimisation models.
 
 ## Dataset naming convention
 

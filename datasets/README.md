@@ -39,9 +39,9 @@ Example of a randomised dataset: *C1.csv*
 
 *C1-C2* features 5 zones that form 2 distinguishable clusters that are far from each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 14-15).
 
-*C3-C8* features 5 zones that form 2 distinguishable clusters that are close to each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 8-9).
+*C3-C6* features 5 zones that form 2 distinguishable clusters that are close to each other. For example, Cluster (Zones 1-2-3) and Cluster (Zones 8-9).
 
-*C9-C10* features 5-7 zones that form 3 distinguishable clusters. For example, Cluster (Zones 1-2-3), Cluster (Zones 8-9) and Cluster (Zones 15-16).
+*C7-C10* features 5-7 zones that form 3 distinguishable clusters. For example, Cluster (Zones 1-2-3), Cluster (Zones 8-9) and Cluster (Zones 15-16).
 
 *C11-C14* features 5 zones that form 1 distinguishable cluster. For example, Cluster (Zones 1-2-3-4-5).
 

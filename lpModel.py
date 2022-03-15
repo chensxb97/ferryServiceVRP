@@ -11,14 +11,10 @@ import time as timer
 
 from docplex.mp.model import Model
 from lpTools import drawSolution, printRoutes
-from utils import Edges, computeDistMatrix, separateTasks
+from utils import MapGraph, computeDistMatrix, separateTasks
 
-# Big 'M'
-M = 1000
+M = 1000 # Arbitrary constant
 Capacity = 14
-
-MapGraph = nx.Graph()
-MapGraph.add_weighted_edges_from(Edges)
 
 time_start = timer.time()
 
@@ -30,7 +26,7 @@ time_start = timer.time()
 ################################################################################################
 
 # Linear Programming Model formulation
-def calculateRoute(numOfCustomers, numOfVehicles, df):
+def calculateRoute(numOfCustomers, numOfVehicles, df, log=True):
    
     # Initialise model
     mdl = Model('VRP')
@@ -132,7 +128,7 @@ def calculateRoute(numOfCustomers, numOfVehicles, df):
     # Solve objective function
     mdl.minimize(obj_function)
     time_solve = timer.time()
-    solution = mdl.solve(log_output=True)
+    solution = mdl.solve(log_output=log)
     time_end = timer.time()
     running_time = round(time_end - time_solve, 2)
     elapsed_time = round(time_end - time_start, 2)

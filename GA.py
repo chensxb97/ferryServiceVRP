@@ -11,20 +11,16 @@ import time
 
 from deap import base, creator, tools
 from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
-from utils import Edges, separateTasks
+from utils import MapGraph, separateTasks
 
 MUT_PROB = 0.1
-CX_PROB = 0.85
-GENERATION = 80
+CX_PROB = 0.5
+GENERATION = 40
 POPULATION_SIZE = 100
 
 Capacity = 14
 
-MapGraph = nx.Graph()
-MapGraph.add_weighted_edges_from(Edges)
-
 # GA Algorithm
-# @profile # Track memory usage
 def runGA(df, fleetsize, unit_cost, init_cost,  ind_size, pop_size, \
     cx_pb, mut_pb, n_gen, export_csv=False, customize_data=False):
     
@@ -130,7 +126,7 @@ def summaryGA(best_ind,df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case') # Change the filename to run a different test case
+    argparser.add_argument('--file', metavar='f', default='HT1', help='File name of test case') # Change the filename to run a different test case
     argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory') # Change to True to run batch of test cases
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()

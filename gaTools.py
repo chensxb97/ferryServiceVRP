@@ -5,11 +5,9 @@ sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/
 import networkx as nx
 import random
 
-from utils import Color, Edges, Locations, computeDistMatrix
+from utils import Color, MapGraph, Locations, computeDistMatrix
 
 Capacity = 14
-MapGraph = nx.Graph()
-MapGraph.add_weighted_edges_from(Edges)
 
 # PMX Technique
 def cxPartiallyMatched(ind1, ind2):
@@ -97,9 +95,9 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
                 
                 # Update load
                 if df.iloc[customer_id, 1]==1:
-                    subRoute_load += load # pickup
+                    subRoute_load += load # Pickup
                 else:
-                    subRoute_load -= load # delivery
+                    subRoute_load -= load # Delivery
 
                 # Update subRoute time after serving customer
                 subRoute_time += serv_time
@@ -116,8 +114,8 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
             subRoute_distance += returnToDepot
             subRoute_time += returnToDepot/0.463
 
-            # Tour duration balance constraint
-            if subRoute_time > tourEnd: # End time of tour
+            # Maximum number of zones per launch constraint/Tour duration balance constraint
+            if len(subRoute) > 5 or subRoute_time > tourEnd: # End time of tour
                 subRoute_distance += 10000000 # 8th digit
 
             possibleCases.append((subRoute_distance+subRoute_penalty_cost,subRoute_distance, subRoute_penalty_cost))

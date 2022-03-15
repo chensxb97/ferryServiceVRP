@@ -14,7 +14,7 @@ def drawSolution(solutionSet, df, ax):
             Locations[zone_e][0]-Locations[zone_s][0], Locations[zone_e][1]-Locations[zone_s][1], \
                 head_width=10, head_length=10, color = Color[launch_id])
 
-# Print each launch's route from solutionSet
+# Print each launch's route from solution set
 def printRoutes(solutionSet):
     graphs = {}
     solutionSet.sort(key=lambda x:x[2])

@@ -13,17 +13,10 @@ from gaTools import drawGaSolution, ind2Route
 from GA import runGA
 from lpModel import calculateRoute
 from lpTools import drawSolution
-from utils import Edges, computeDistMatrix, separateTasks
-
-MapGraph = nx.Graph()
-MapGraph.add_weighted_edges_from(Edges)
+from utils import MapGraph, computeDistMatrix, separateTasks
 
 # Start timer
 time_start = timer.time()
-
-# Results csv file
-f = open('outputs/logs/schedule.csv', 'w+')
-f.write('L1,,L2,,L3,,L4,,L5\n')
 
 ##############################################################################################
 #---------------------------------df format---------------------------------------------------
@@ -36,36 +29,50 @@ def minutes2Time(minutes):
     return str(int(minutes//60))+':'+ str(int(minutes%60))
 
 # Print table to file
-def printTable(table):
-    for i in range(5):
+def printTable(table,f):
+    for i in range(7):
         line = ''
         try:
-            for j in range(5):
+            for j in range(7):
                 try:
                     line += str(table[j][i][0])
                     line += ','
-                    line += minutes2Time(table[j][i][1])
+                    if table[j][i][1] == 'NA':
+                        line+='NA'
+                    else:
+                        line += minutes2Time(table[j][i][1])
+                    line += ','
+                    if table[j][i][2] == 'NA':
+                        line+='NA'
+                    else:
+                        line += minutes2Time(table[j][i][2])
                     line += ','
                 except IndexError or KeyError or TypeError:
-                    line += ',,'
+                    line += ',,,'
             print(line, file = f)
-            f.write(line)
         except IndexError or KeyError or TypeError:
             pass
 
 # Organise routes in a timetable
 def route2Timetable(df, fleetsize, solutionSet):
     distMatrix = computeDistMatrix(df, MapGraph)
-    route_set=[]
-    start_time = df.iloc[0,4]
+    start_time = df.iloc[0,4] # Start Time
+    route_set=[] # Set of routes
+    links = [] # List of edges in all routes
+    locations = [] # Locations column
+    arrival_time = [] # Arrival Time column
+    departure_time = [] # Departure Time column
+    timetable = [] # Timetable
+
+    # All Routes
     for i in range(fleetsize):
         temp_list = []
         for j in range(len(solutionSet)):
             if solutionSet[j][2] == i+1:
                 temp_list.append(solutionSet[j])
         route_set.append(temp_list)
-    print(route_set)
-    links = []
+
+    # All links
     for i in range(len(route_set)):
         temp_link = []
         start = 0
@@ -77,38 +84,52 @@ def route2Timetable(df, fleetsize, solutionSet):
                     start = end
                     break
         links.append(temp_link)
-    print(links)
-    print(df)
-    print(distMatrix)
-    locations = []
-    time = []
-    timetable = []
+
+    # Populate Location, Arrival and Departure columns
     for i in range(len(links)):
         temp_location = []
-        temp_time = []
+        temp_arrival = []
+        temp_departure = []
+
         if df['Port'][0]=='West':
             temp_location.append('West Coast Pier')
         else:
             temp_location.append('Marina South Pier')
-        temp_time.append(start_time)
+            
+        temp_arrival.append('NA') # Departure only (First Node)
+        temp_departure.append(start_time)
         last_time = start_time
+
+        # Tracks the location, arrival and departure times for each row
         for j in range(len(links[i])):
             if links[i][j] != 0:
                 temp_location.append(df['Zone'][links[i][j]])
                 travel_time = round(distMatrix[links[i][j]][links[i][j-1]]/0.463)
-                temp_time.append(travel_time+df['Demand'][links[i][j]]+last_time)
+                temp_arrival.append(travel_time+last_time)
+                temp_departure.append(travel_time+df['Demand'][links[i][j]]+last_time)
                 last_time += travel_time+df['Demand'][links[i][j]]
+            else:
+                if df['Port'][0]=='West':
+                    temp_location.append('West Coast Pier')
+                else:
+                    temp_location.append('Marina South Pier')       
+                travel_time = round(distMatrix[links[i][j]][links[i][j-1]]/0.463)
+                temp_arrival.append(travel_time+last_time)
+                temp_departure.append('NA') # Arrival Only (Last Node)
+                last_time += travel_time+df['Demand'][links[i][j]]
+
         locations.append(temp_location)
-        time.append(temp_time)
-    print(locations)
-    print(time)
-    temp = []
+        arrival_time.append(temp_arrival)
+        departure_time.append(temp_departure)
+
+    # Populate timetable
     for i in range(len(locations)):
         temp_table = []
         for j in range(len(locations[i])):
-            temp_table.append([locations[i][j], time[i][j]])
-        temp.append(temp_table)
-    return temp
+            temp_table.append([locations[i][j], arrival_time[i][j], departure_time[i][j]])
+        timetable.append(temp_table)
+        
+    return timetable
     
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
@@ -127,18 +148,30 @@ def main():
     outputsPlotsDir = os.path.join(outputsDir, 'plots','schedule')
     if not os.path.exists(outputsPlotsDir):
         os.mkdir(outputsPlotsDir)
+    outputsLogsDir = os.path.join(outputsDir, 'logs')
+    if not os.path.exists(outputsLogsDir):
+        os.mkdir(outputsLogsDir)
+
+    # Results csv file
+    resultsFile = os.path.join(outputsLogsDir,'schedule.csv')
+    f = open(resultsFile, 'w+')
+
+    # Headers of csv file
+    f.write('Launch 1,,,Launch 2,,,Launch 3,,,Launch 4,,,Launch 5\n')
+    f.write('Location,Arrival,Departure,Location,Arrival,Departure,Location,Arrival,Departure,Location,Arrival,Departure,Location,Arrival,Departure\n')
 
     # Orders dataset
+    print('Reading orders dataset...')
     order_df = pd.read_csv(fileName, encoding='latin1', error_bad_lines=False)
     order_df = order_df.sort_values(by=['Start_TW','End_TW'])
 
     # Anchorage map
     img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
-    
+
     # New 'Port' column
+    print('Performing data preprocessing...')
     port = []
     for i in range(len(order_df)):
-        print(order_df.iloc[i,0][11:13])
         order_df.iloc[i,0]=int(order_df.iloc[i,0][11:13]) # Truncate orderId to last 2 digits
         if int(order_df.iloc[i,2][1:3])<=16: # Index [1:3] refers to the zone number
             port.append('MSP')
@@ -154,8 +187,13 @@ def main():
         df = order_df[(order_df['Start_TW'] >= tour[0]) & (order_df['End_TW'] <= tour[1])]
         if not df.empty: # Store tour
             df_tours.append((tour,df)) 
-    
+
+    print('End of data preprocessing.\n')
+
+    # Optimise the schedule of each tour
+    print('Beginning optimisation...\n')
     for i in range(len(df_tours)):
+        print('Tour {}'.format(i+1))
         fig, ax = plt.subplots()
         ax.imshow(img)
 
@@ -163,38 +201,34 @@ def main():
         df_MSP, fleetsize_MSP, df_West, fleetsize_West = separateTasks(df_tours[i], fleet)
 
         # Perform LP
-        route1, solutionSet_West, _, _, _, _, _,_ = calculateRoute(len(df_West)-1, fleetsize_West, df_West) 
+        route1, solutionSet_West, _, _, _, _, _,_ = calculateRoute(len(df_West)-1, fleetsize_West, df_West, False) 
+        route2, solutionSet_MSP, _, _, _, _, _, _= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP, False)
 
-        # If no solution is found using LP, run GA
-        # After solution is drawn, we generate a timetable for each route
-        if route1 == None:
-            while solution1_GA != None:
-                solution1_GA = runGA(df_West, 1, 0, len(df_West)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
-                drawGaSolution(ind2Route(solution1_GA, df_West), df_West, ax)
-        else:
-            drawSolution(solutionSet_West, df_West, ax)
-            table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West)
-
-        route2, solutionSet_MSP, _, _, _, _, _, _= calculateRoute(len(df_MSP)-1, fleetsize_MSP, df_MSP)
-        if route2 == None:
-            while solution2_GA != None:
-                solution2_GA = runGA(df_MSP, 1, 0, len(df_MSP)+1, 20, 0.85, 0.1, 20, export_csv=False, customize_data=False)
-                drawGaSolution(ind2Route(solution2_GA, df_MSP), df_MSP, ax)
-        else:
-            drawSolution(solutionSet_MSP, df_MSP, ax)
-            table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP)
-        
+        # Draw and visualise solutions
+        drawSolution(solutionSet_West, df_West, ax)
+        drawSolution(solutionSet_MSP, df_MSP, ax)
+        print('Visualising solution')
         plt.show() 
-        outputPlot = os.path.join(outputsPlotsDir,file + '_' + str(i+1) + '_schedule.png')
-        fig.savefig(outputPlot)
 
+        # Save visualisations in a png file
+        outputPlot = os.path.join(outputsPlotsDir,file + '_' + 'Tour' + str(i+1) + '_schedule.png')
+        fig.savefig(outputPlot)
+        print('Saved visualisation map as {}'.format(outputPlot))
+
+        # Organise routes in timetables
+        table_West = route2Timetable(df_West, fleetsize_West, solutionSet_West)  
+        table_MSP = route2Timetable(df_MSP, fleetsize_MSP, solutionSet_MSP)
+        
         # Consolidate both West and MSP timetables
         for i in range(len(table_MSP)):
             table_West.append(table_MSP[i])
-        printTable(table_West)
-            
-    # Save timetable to csv file
+
+        # Write consolidated timetable to csv file
+        printTable(table_West,f)
+        print('Wrote timetable to {}\n'.format(resultsFile))
+    
     f.close()
+    print('Finished optimisation.')
 
 if __name__ == '__main__':
 

@@ -9,11 +9,9 @@ import pandas as pd
 
 from gaTools import ind2Route
 from itertools import permutations
-from utils import Edges, computeDistMatrix, separateTasks
+from utils import MapGraph, computeDistMatrix, separateTasks
 
 Capacity = 14
-MapGraph = nx.Graph()
-MapGraph.add_weighted_edges_from(Edges)
 
 # Computes cost for the given permutation of zones
 def evaluate(individual, df, fleetsize):
@@ -73,9 +71,9 @@ def evaluate(individual, df, fleetsize):
                 
                 # Update load
                 if df.iloc[customer_id, 1]==1:
-                    subRoute_load += load # pickup
+                    subRoute_load += load # Pickup
                 else:
-                    subRoute_load -= load # delivery
+                    subRoute_load -= load # Delivery
 
                 # Update subRoute time after serving customer
                 subRoute_time += serv_time
@@ -92,8 +90,8 @@ def evaluate(individual, df, fleetsize):
             subRoute_distance += returnToDepot
             subRoute_time += returnToDepot/0.463
 
-            # Tour duration balance constraint
-            if subRoute_time > tourEnd: # End time of tour
+            # Maximum number of zones per launch constraint/Tour duration balance constraint
+            if len(subRoute) > 5 or subRoute_time > tourEnd: # End time of tour
                 subRoute_distance += 10000000 # 8th digit
 
             possibleCases.append((subRoute_distance+subRoute_penalty_cost,subRoute_distance,subRoute_penalty_cost))

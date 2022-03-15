@@ -4,7 +4,6 @@ sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/
 
 import argparse
 import matplotlib.pyplot as plt
-import networkx as nx
 import os
 import pandas as pd
 import time as timer

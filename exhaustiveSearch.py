@@ -3,7 +3,6 @@ sys.path.append('C:/Program Files/IBM/ILOG/CPLEX_Studio201/cplex/python/3.7/x64_
 sys.path.insert(0,'C:/users/benedict/appdata/local/programs/python/python37/lib/site-packages')
 
 import argparse
-import networkx as nx
 import os
 import pandas as pd
 

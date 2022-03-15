@@ -10,11 +10,11 @@ import time
 
 from deap import base, creator, tools
 from gaTools import cxPartiallyMatched, drawGaSolution, evalVRP, ind2Route, mutInverseIndex, printRoute
-from utils import MapGraph, separateTasks
+from utils import separateTasks
 
 MUT_PROB = 0.1
-CX_PROB = 0.5
-GENERATION = 40
+CX_PROB = 0.85
+GENERATION = 80
 POPULATION_SIZE = 100
 
 Capacity = 14

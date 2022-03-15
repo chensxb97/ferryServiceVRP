@@ -9,8 +9,6 @@ import os
 import pandas as pd
 import time as timer
 
-from gaTools import drawGaSolution, ind2Route
-from GA import runGA
 from lpModel import calculateRoute
 from lpTools import drawSolution
 from utils import MapGraph, computeDistMatrix, separateTasks

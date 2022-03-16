@@ -232,7 +232,7 @@ def main():
     total_time = time_end - time_start
 
     print('Total runtime for {} tours: {}.'.format(len(df_tours), total_time))
-    print('Average runtime for 1 tour: {}'.format(total_time/len(df_tours)))
+    print('Average runtime for 1 tour: {}.'.format(total_time/len(df_tours)))
 
 if __name__ == '__main__':
 

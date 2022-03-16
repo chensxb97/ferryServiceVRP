@@ -12,9 +12,6 @@ from lpModel import calculateRoute
 from lpTools import drawSolution
 from utils import MapGraph, computeDistMatrix, separateTasks
 
-# Start timer
-time_start = timer.time()
-
 ##############################################################################################
 #---------------------------------df format---------------------------------------------------
 # | Order_ID         |     Request_Type    |    Zone   | Demand |    Start_TW   |    End_TW  | 
@@ -129,6 +126,9 @@ def route2Timetable(df, fleetsize, solutionSet):
     return timetable
     
 def main():
+    # Start timer
+    time_start = timer.time()
+
     argparser = argparse.ArgumentParser(description=__doc__)
     argparser.add_argument('--file', metavar='f', default='order', help='File name of the order book')
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
@@ -204,8 +204,8 @@ def main():
         # Draw and visualise solutions
         drawSolution(solutionSet_West, df_West, ax)
         drawSolution(solutionSet_MSP, df_MSP, ax)
-        print('Visualising solution')
-        plt.show() 
+        print('Drawing solutions')
+        # plt.show() 
 
         # Save visualisations in a png file
         outputPlot = os.path.join(outputsPlotsDir,file + '_' + 'Tour' + str(i+1) + '_schedule.png')
@@ -225,7 +225,14 @@ def main():
         print('Wrote timetable to {}\n'.format(resultsFile))
     
     f.close()
-    print('Finished optimisation.')
+    print('Finished optimisation.\n')
+
+    # End timer
+    time_end = timer.time()
+    total_time = time_end - time_start
+
+    print('Total runtime for {} tours: {}.'.format(len(df_tours), total_time))
+    print('Average runtime for 1 tour: {}'.format(total_time/len(df_tours)))
 
 if __name__ == '__main__':
 

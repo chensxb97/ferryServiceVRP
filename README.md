@@ -59,7 +59,7 @@ The outputs from the above scripts can be found in folder: */outputs*.
 Output logs from *lpModel.py* and *ga.py* were manually compiled in *GA.txt* and *lpModel.txt* in folder: */outputs/logs*.
 When running *lpModel.py* and *ga.py*, the scripts generate visualisation maps that are automatically saved in folder: */outputs/plots*.
 
-The analysis and comparison between the output logs from *lpModel.py* and *ga.py* can be found in *resultsAll.xlsx*, in folder: */outputs/logs*.
+The analysis of the output logs from *lpModel.py* and *ga.py* can be found in *resultsAll.xlsx*, in folder: */outputs/logs*.
 
 #### 3. Run scheduling system, which optimises the sets of routes for the following test case.
 

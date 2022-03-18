@@ -77,7 +77,7 @@ When *schedule.py* is run, it generates a timetable, *schedule.csv*, which is au
 It also generates visualisation maps that are automatically saved in folder: */outputs/plots/schedule*.
 
 ## References
-1. [Modelling and Analysis of a Vehicle Routing Problem with Time Windows in Freight Delivery (MIP Model)](https://github.com/dungtran209/Modelling-and-Analysis-of-a-Vehicle-Routing-Problem-with-Time-Windows-in-Freight-Delivery/blob/master/algorithm/VRPTW%20MIP%20Model.pdf)
+1. [Modelling and Analysis of a Vehicle Routing Problem with Time Windows in Freight Delivery (MIP Model)](https://github.com/dungtran209/Modelling-and-Analysis-of-a-Vehicle-Routing-Problem-with-Time-Windows-in-Freight-Delivery/)
 2. [A Python Implementation of a Genetic Algorithm-based Solution to Vehicle Routing Problem with Time Windows](https://github.com/iRB-Lab/py-ga-VRPTW/tree/c8cab16278b05e9bd641e3afe0b55a34c6c67773)
 
 

@@ -3,7 +3,7 @@
 ## Summary
 This project aims to study and model the ferry service operations optimisation problem as a Capacitated Vehicle Routing Problem with Backhauls and Time Windows (CVRPBTW).
 
-The objective of this repository is to develop an optimal scheduling system that can generate an optimal set of routes and schedules that best maximises the ability of ferry service operations to meet its daily demands. The following methods were employed to tackle this optimisation problem.
+The objective of this repository is to develop a scheduling system that can generate an optimal set of routes and schedules that best maximises the ability of ferry service operations to meet its daily demands. The following methods were employed to tackle this optimisation problem.
 
 #### 1. Exact methods - Exhaustive Search, Integer Linear Programming Model
 #### 2. Heuristic methods - Genetic Algorithm
@@ -78,7 +78,7 @@ It also generates visualisation maps that are automatically saved in folder: */o
 
 ## References
 1. [Modelling and Analysis of a Vehicle Routing Problem with Time Windows in Freight Delivery (MIP Model)](https://github.com/dungtran209/Modelling-and-Analysis-of-a-Vehicle-Routing-Problem-with-Time-Windows-in-Freight-Delivery/)
-2. [A Python Implementation of a Genetic Algorithm-based Solution to Vehicle Routing Problem with Time Windows](https://github.com/iRB-Lab/py-ga-VRPTW/tree/c8cab16278b05e9bd641e3afe0b55a34c6c67773)
+2. [A Python Implementation of a Genetic Algorithm-based Solution to Vehicle Routing Problem with Time Windows](https://github.com/iRB-Lab/py-ga-VRPTW/)
 
 
 

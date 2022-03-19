@@ -1,6 +1,6 @@
 # Datasets
 
-To verify the correctness of the outputs from the optimisation models, it is necessary to conduct performance testing by running test cases. This folder contains 30 sample datasets to be tested on the optimisation models.
+To verify the outputs from the optimisation models, it is necessary to conduct performance testing. This folder contains 30 datasets, each of which featuring a specific booking scenario, that will be tested on the optimisation models.
 
 ## Dataset naming convention
 
@@ -12,7 +12,7 @@ For example, orders from zones 1, 10 and 15 are almost equally separated from ea
 
 Example of a randomised dataset: *HL1.csv*
 
-The first alphabet represents the busyness of the depots.
+The first alphabet represents the booking volume, i.e. the busyness of each depot.
 
 *Low(L) -> 3-4 orders per Depot*
 
@@ -22,13 +22,13 @@ The first alphabet represents the busyness of the depots.
 
 *Extreme(E) -> 10-15 orders per Depot*
 
-The second alphabet represents the type of time window.
+The second alphabet represents the size of time window.
 
 *Tight(T) -> 5 min time windows*
 
 *Large(L) -> 30 min time windows*
 
-The digit represents a unique label for each permutation of alphabet pairs(1,2). For example, with 2 datasets that are of *HL* type, each dataset is named *HL1.csv* and *HL2.csv* respectively.
+The digit represents a unique label for each permutation of alphabet pairs(1,2). For example, with 2 datasets that are of *HL* type, each will be named *HL1.csv* and *HL2.csv* respectively.
 
 There are a total of 16 datasets in this category.
 

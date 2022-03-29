@@ -166,8 +166,10 @@ def main():
     img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
     
     if batch:
-        testFiles = ['C1.csv','C2.csv', 'C3.csv', 'C4.csv', 'C5.csv', 'C6.csv', 'C7.csv',\
-            'C8.csv', 'C9.csv', 'C10.csv', 'C11.csv', 'C12.csv', 'C13.csv', 'C14.csv'] # Change the list of test cases you wish to run
+        testFiles = ['LT1.csv', 'LT2.csv', 'LL1.csv', 'LL2.csv', 'MT1.csv', 'MT2.csv', 'ML1.csv', 'ML2.csv',\
+            'HT1.csv', 'HT2.csv', 'HL1.csv', 'HL2.csv', 'ET1.csv', 'ET2.csv', 'EL1.csv', 'EL2.csv',\
+            'C1.csv','C2.csv','C3.csv','C4.csv','C5.csv','C6.csv', 'C7.csv','C8.csv',\
+            'C9.csv','C10.csv','C11.csv','C12.csv', 'C13.csv', 'C14.csv'] # Full list of test cases
         files = testFiles # All possible test cases
     else:
         testFile+= '.csv'

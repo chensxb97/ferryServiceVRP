@@ -66,8 +66,9 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
             subRoute_penalty_cost = 0
             lastCustomer_id = 0
             subRoute_load = initial_load # Total delivery load
+            subRoute_length = len(subRoute)
 
-            for customer_id in subRoute: # Customer_id: Zone
+            for customer_position, customer_id in enumerate(subRoute): # Customer_id: Zone
                 
                 # Calculate travelling distance between zones
                 distance = distMatrix[lastCustomer_id][customer_id]
@@ -84,12 +85,20 @@ def evalVRP(individual, df, fleetsize, unit_cost=1.0, init_cost=0, wait_cost=1, 
                 # Compute penalty costs
                 if heuristic:
                     if ready_time > subRoute_time: # Launch is able to arrive at the ready time
-                        subRoute_time = ready_time
-                    else:
-                        subRoute_penalty_cost += \
-                        max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
-                else:
-                    subRoute_penalty_cost += max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
+                        if customer_position < subRoute_length-1: # Current service location is not the last location
+                            cur_penalty_cost = load*wait_cost*(ready_time-subRoute_time) # Penalty cost if the launch arrived early
+                            next_load = df.iloc[subRoute[customer_position+1],3]
+                            next_ready_time = df.iloc[subRoute[customer_position+1],4]
+                            next_due_time = df.iloc[subRoute[customer_position+1],5]
+                            next_penalty_cost = \
+                                max(next_load*wait_cost*(ready_time+serv_time-next_ready_time),0,\
+                                    next_load*delay_cost*(ready_time+serv_time-next_due_time)) # Penalty cost at the next service location if the launch arrived at the ready time
+                            if cur_penalty_cost > next_penalty_cost: # Compares the penalty costs between the 2 service locations
+                                subRoute_time = ready_time
+                        else:
+                            subRoute_time = ready_time
+                
+                subRoute_penalty_cost += max(load*wait_cost*(ready_time-subRoute_time),0,load*delay_cost*(subRoute_time-due_time))
                 
                 # Update load
                 if df.iloc[customer_id, 1]==1:

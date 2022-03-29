@@ -125,7 +125,7 @@ def summaryGA(best_ind,df):
 
 def main():
     argparser = argparse.ArgumentParser(description=__doc__)
-    argparser.add_argument('--file', metavar='f', default='HT1', help='File name of test case') # Change the filename to run a different test case
+    argparser.add_argument('--file', metavar='f', default='LT1', help='File name of test case') # Change the filename to run a different test case
     argparser.add_argument('--batch', metavar='b', default=False, help='Run all test cases from directory') # Change to True to run batch of test cases
     argparser.add_argument('--fleetsize', metavar='l', default='5', help='Total number of launches available')
     args = argparser.parse_args()
@@ -145,8 +145,10 @@ def main():
     img = plt.imread("Port_Of_Singapore_Anchorages_Chartlet.png")
     
     if batch:
-        testFiles = ['C1.csv','C2.csv','C3.csv','C4.csv','C5.csv','C6.csv', 'C7.csv', \
-            'C8.csv','C9.csv','C10.csv','C11.csv','C12.csv', 'C13.csv', 'C14.csv'] # Change the list of test cases you wish to run
+        testFiles = ['LT1.csv', 'LT2.csv', 'LL1.csv', 'LL2.csv', 'MT1.csv', 'MT2.csv', 'ML1.csv', 'ML2.csv',\
+            'HT1.csv', 'HT2.csv', 'HL1.csv', 'HL2.csv', 'ET1.csv', 'ET2.csv', 'EL1.csv', 'EL2.csv',\
+            'C1.csv','C2.csv','C3.csv','C4.csv','C5.csv','C6.csv', 'C7.csv','C8.csv',\
+            'C9.csv','C10.csv','C11.csv','C12.csv', 'C13.csv', 'C14.csv'] # Full list of test cases
         files = testFiles # All possible test cases
     else:
         testFile+= '.csv'
